@@ -84,12 +84,10 @@ body
     margin: 0 auto;
 }
 
-
 #carousel-example-generic
 {
     border: 5px solid aliceblue;
 }
-
 
 /* unvisited link */
 a:link {
