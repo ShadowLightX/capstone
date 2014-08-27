@@ -8,11 +8,18 @@ body
     background-color: aliceblue;
 }
 
+#logo
+{
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
 #home
 {
     background-color: #509FFF;
-    border: 5px solid #000;
-    border-radius: 20px;
+    border: 5px solid aliceblue;
     text-decoration: none;
     font-size: 1.5em;
 }
@@ -20,8 +27,7 @@ body
 #resources
 {
     background-color: #509FFF;
-    border: 5px solid #000;
-    border-radius: 20px;
+    border: 5px solid aliceblue;
     text-decoration: none;
     font-size: 1.5em;
 }
@@ -29,8 +35,7 @@ body
 #articles
 {
     background-color: #509FFF;
-    border: 5px solid #000;
-    border-radius: 20px;
+    border: 5px solid aliceblue;
     text-decoration: none;
     font-size: 1.5em;
 }
@@ -38,8 +43,23 @@ body
 #forums
 {
     background-color: #509FFF;
-    border: 5px solid #000;
-    border-radius: 20px;
+    border: 5px solid aliceblue;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#search
+{
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#login
+{
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
     text-decoration: none;
     font-size: 1.5em;
 }
@@ -47,7 +67,7 @@ body
 #description
 {
     background-color: #509FFF;
-    border: 5px solid #000;
+    border: 5px solid aliceblue;
     border-radius: 50px;
     height: 100%;
     text-decoration: none;
