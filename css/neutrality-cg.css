@@ -64,11 +64,10 @@ body
     font-size: 1.5em;
 }
 
-#description
+#footer
 {
     background-color: #509FFF;
     border: 5px solid aliceblue;
-    border-radius: 50px;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
@@ -83,18 +82,9 @@ body
 
 #carousel-example-generic
 {
-    border: 5px solid #000;
+    border: 5px solid aliceblue;
 }
 
-.divider
-{
-    background-color: #509FFF;
-    border: 5px solid #000;
-    border-radius: 50px;
-    height: 100%;
-    text-decoration: none;
-    font-size: 1.5em;
-}
 
 /* unvisited link */
 a:link {
