@@ -1,0 +1,24 @@
+section
+{
+    height: 10em;
+}
+
+#one
+{
+    background-color: red;
+}
+
+#two
+{
+    background-color: blue;
+}
+
+#three
+{
+    background-color: green;
+}
+
+#four
+{
+    background-color: yellow;
+}
