@@ -5,38 +5,37 @@ section
 
 body
 {
-    background-color: #000000;
+    background-color: aliceblue;
 }
 
-#JNJTravel
+#home
 {
-    background-color: #2666B2;
+    background-color: #509FFF;
     border: 5px solid #000;
-    border-radius: 15px;
-    color: #000000;
+    border-radius: 20px;
     text-decoration: none;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
-#TRAVELCLASS
+#resources
 {
-    background-color: #2666B2;
+    background-color: #509FFF;
     border: 5px solid #000;
-    border-radius: 15px;
+    border-radius: 20px;
     text-decoration: none;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
-#PLANETS
+#articles
 {
-    background-color: #2666B2;
+    background-color: #509FFF;
     border: 5px solid #000;
-    border-radius: 15px;
+    border-radius: 20px;
     text-decoration: none;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
-#RISA
+#forums
 {
     background-color: #509FFF;
     border: 5px solid #000;
