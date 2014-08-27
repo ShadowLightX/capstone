@@ -1,0 +1,146 @@
+section
+{
+    height: 100px;
+}
+
+body
+{
+    background-color: #000000;
+}
+
+#JNJTravel
+{
+    background-color: #2666B2;
+    border: 5px solid #000;
+    border-radius: 15px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 2em;
+}
+
+#TRAVELCLASS
+{
+    background-color: #2666B2;
+    border: 5px solid #000;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 2em;
+}
+
+#PLANETS
+{
+    background-color: #2666B2;
+    border: 5px solid #000;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 2em;
+}
+
+#RISA
+{
+    background-color: #509FFF;
+    border: 5px solid #000;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#BAJOR
+{
+    background-color: #509FFF;
+    border: 5px solid #000;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#PACIFICA
+{
+    background-color: #509FFF;
+    border: 5px solid #000;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#VULCAN
+{
+    background-color: #509FFF;
+    border: 5px solid #000;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#description
+{
+    background-color: #509FFF;
+    border: 5px solid #000;
+    border-radius: 50px;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+    
+}
+
+.carousel-inner > .item > img
+{
+    margin: 0 auto;
+}
+
+
+#carousel-example-generic
+{
+    border: 5px solid #000;
+}
+
+.divider
+{
+    background-color: #FFC71D;
+    border: 5px;
+    border-radius: 4px;
+    height: 5px;
+    margin: 5px;
+}
+
+#reserveButton
+{
+    float: right;
+    display: block;
+    background-color: #8C5100;
+    border: 3px solid #8C5100;
+    border-radius: 4px;
+}
+#reserveButton a
+{
+    color: #FF9400;
+    margin: 10px;
+    text-decoration: none;
+    font-family: 'Geo', sans-serif;
+}
+
+#reserveButton:hover
+{
+    background-color: #522F00;
+    border: 3px solid #522F00;
+}
+
+/* unvisited link */
+a:link {
+    color: #000;
+}
+
+/* visited link */
+a:visited {
+    color: #000;
+}
+
+/* mouse over link */
+a:hover {
+    color: #000;
+}
+
+/* selected link */
+a:active {
+    color: #000;
+}
