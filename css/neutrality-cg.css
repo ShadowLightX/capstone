@@ -61,6 +61,15 @@ body
     font-size: 1.5em;
 }
 
+#news
+{
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
 #footer
 {
     background-color: #509FFF;
@@ -68,7 +77,6 @@ body
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
-    
 }
 
 .carousel-inner > .item > img
