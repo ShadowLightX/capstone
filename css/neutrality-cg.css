@@ -1,10 +1,8 @@
-section
-{
+section {
     height: 2em;
 }
 
-body
-{
+body {
     background-color: aliceblue;
 }
 
@@ -13,56 +11,57 @@ body
     
 }
 
-#home
-{
+#home {
     background-color: #509FFF;
     border: 5px solid aliceblue;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-#resources
-{
+#resources {
     background-color: #509FFF;
     border: 5px solid aliceblue;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-#articles
-{
+#articles {
     background-color: #509FFF;
     border: 5px solid aliceblue;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-#forums
-{
+#forums {
     background-color: #509FFF;
     border: 5px solid aliceblue;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-#search
-{
+#search {
     background-color: #509FFF;
     border: 5px solid aliceblue;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-#login
-{
+#login {
     background-color: #509FFF;
     border: 5px solid aliceblue;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-#news
-{
+#news {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#video {
     background-color: #509FFF;
     border: 5px solid aliceblue;
     height: 100%;
