@@ -6,8 +6,7 @@ body {
     background-color: aliceblue;
 }
 
-#logo
-{
+#logo {
     
 }
 
@@ -69,8 +68,7 @@ body {
     font-size: 1.5em;
 }
 
-#footer
-{
+#footer {
     background-color: #509FFF;
     border: 5px solid aliceblue;
     height: 100%;
@@ -78,13 +76,11 @@ body {
     font-size: 1.5em;
 }
 
-.carousel-inner > .item > img
-{
+.carousel-inner > .item > img {
     margin: 0 auto;
 }
 
-#carousel-example-generic
-{
+#carousel-example-generic {
     border: 5px solid aliceblue;
 }
 
