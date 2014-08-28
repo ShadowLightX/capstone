@@ -6,6 +6,18 @@ body {
     background-color: aliceblue;
 }
 
+p {
+    text-align: center;
+}
+
+#linksHeader {
+    text-align: center
+}
+
+#links-ul {
+    text-align:  left;
+}
+
 #logo {
     background-color: #509FFF;
     border: 5px solid aliceblue;
