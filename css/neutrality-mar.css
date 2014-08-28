@@ -100,3 +100,12 @@ a:hover {
 a:active {
     color: #000;
 }
+
+
+
+
+@media (max-width: 768px){
+    #logo{
+        clear: both !important;
+    }
+}
