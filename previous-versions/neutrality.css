@@ -1,0 +1,108 @@
+#logo {
+height: 2em;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+#signup {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#home {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#resources {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#articles {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#forums {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#search {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#login {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#news {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#video {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#footer {
+    background-color: #509FFF;
+    border: 5px solid aliceblue;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+#carousel-example-generic {
+    border: 5px solid aliceblue;
+}
+
+/* unvisited link */
+a:link {
+    color: #000;
+}
+
+/* visited link */
+a:visited {
+    color: #000;
+}
+
+/* mouse over link */
+a:hover {
+    color: #000;
+}
+
+/* selected link */
+a:active {
+    color: #000;
+}
