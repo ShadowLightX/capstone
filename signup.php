@@ -15,16 +15,16 @@ $email = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstName = $_REQUEST["firstName"];
     echo $firstName;
-    /*$lastName = test_input($POST["lastName"]);
+    $lastName = $_REQUEST["lastName"];
     echo $lastName;
-    $userName = test_input($POST["userName"]);
+    $userName = $_REQUEST["userName"];
     echo $userName;
-    $password = test_input($POST["password"]);
+    $password = $_REQUEST["password"];
     echo $password;
-    $confirm = test_input($POST["confirm"]);
+    $confirm = $_REQUEST["confirm"];
     echo $confirm;
-    $email = test_input($POST["email"]);
-    echo $email;*/
+    $email = $_REQUEST["email"];
+    echo $email;
 }
 
 function test_input($data) {
