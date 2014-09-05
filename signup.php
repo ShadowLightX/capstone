@@ -8,9 +8,9 @@ $confirm = "";
 $email = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstName = test_input($POST["firstName"]);
+    $firstName = $_POST["firstName"];
     echo $firstName;
-    $lastName = test_input($POST["lastName"]);
+    /*$lastName = test_input($POST["lastName"]);
     echo $lastName;
     $userName = test_input($POST["userName"]);
     echo $userName;
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirm = test_input($POST["confirm"]);
     echo $confirm;
     $email = test_input($POST["email"]);
-    echo $email;
+    echo $email;*/
 }
 
 function test_input($data) {
