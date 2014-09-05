@@ -1,5 +1,5 @@
-
-.container {
+body {
+    color: #1c1c1c;
     background-color: #1c1c1c;
 }
 
@@ -8,7 +8,7 @@ p {
 }
 
 #linksHeader {
-    text-align: center
+    text-align: center;
 }
 
 #links-ul {
@@ -16,7 +16,7 @@ p {
 }
 
 #logo {
-    
+    background-color: #1c1c1c;
 }
 
 #home {
@@ -61,10 +61,26 @@ p {
     font-size: 1.5em;
 }
 
+.carousel-inner > .item > img {
+    margin: 0 auto;
+    background-color: #1c1c1c;
+}
+
+#carousel-example-generic {
+    background-color: #1c1c1c;
+    margin: 5px;
+}
+
+#news {
+    background-color: #86C75A;
+    border: 5px solid #1c1c1c;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
 #video {
     background-color: #86C75A;
     border: 5px solid #1c1c1c;
-    margin: 5px;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
@@ -73,41 +89,27 @@ p {
 #footer {
     background-color: #86C75A;
     border: 5px solid #1c1c1c;
-    margin: 5px;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
-    
 }
-
-.carousel-inner > .item > img {
-    margin: 0 auto;
-}
-
-
-#carousel-example-generic {
-    background-color: #1c1c1c;
-    border: 5px solid #1c1c1c;
-    margin: 5px;
-}
-
 
 /* unvisited link */
 a:link {
-    color: #000;
+    color: #1c1c1c;
 }
 
 /* visited link */
 a:visited {
-    color: #000;
+    color: #1c1c1c;
 }
 
 /* mouse over link */
 a:hover {
-    color: #000;
+    color: #1c1c1c;
 }
 
 /* selected link */
 a:active {
-    color: #000;
+    color: #1c1c1c;
 }
