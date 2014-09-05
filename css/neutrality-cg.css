@@ -1,39 +1,35 @@
-section {
-    height: 2em;
-}
-
-body {
-    background-color: aliceblue;
+.body {
+    background-color: #1c1c1c;
 }
 
 #logo {
-    
+    background-color: #1c1c1c;
 }
 
 #home {
-    background-color: #509FFF;
-    border: 5px solid aliceblue;
+    background-color: #86C75A;
+    border: 5px solid #1c1c1c;
     text-decoration: none;
     font-size: 1.5em;
 }
 
 #resources {
-    background-color: #509FFF;
-    border: 5px solid aliceblue;
+    background-color: #86C75A;
+    border: 5px solid #1c1c1c;
     text-decoration: none;
     font-size: 1.5em;
 }
 
 #articles {
-    background-color: #509FFF;
-    border: 5px solid aliceblue;
+    background-color: #86C75A;
+    border: 5px solid #1c1c1c;
     text-decoration: none;
     font-size: 1.5em;
 }
 
 #forums {
-    background-color: #509FFF;
-    border: 5px solid aliceblue;
+    background-color: #86C75A;
+    border: 5px solid #1c1c1c;
     text-decoration: none;
     font-size: 1.5em;
 }
