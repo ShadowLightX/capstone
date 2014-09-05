@@ -8,11 +8,11 @@
             <!-- Format -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
             <!-- Stylesheet -->
-        <link rel="stylesheet" type="text/css" href="css/neutrality.css" />
+        <link rel="stylesheet" type="text/css" href="css/neutrality-cg-matt.css" />
             <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
             <!-- Javascript -->
-        <script type="text/javascript" src="javascript/neutrality.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
             <!-- Google font -->
 	<link href='http://fonts.googleapis.com/css?family=Geo' rel='stylesheet' type='text/css'>			
             <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -23,58 +23,28 @@
 	    <![endif]-->
     </head>
     <body>
-        <div class="container">
+        <div id="container" class="container">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 	    <script src="js/bootstrap.min.js"></script>
-            </div>
+        </div>
+            <!--nav-->
             <div class="row">
-		<div class="text-center">
-            	    <section id= "logo" class= "col-md-3"><a href="index.html"><img src="images/network_neutrality-mar.jpg"></a></section>
+		<div id="nav" class="text-center">
+                    <section id= "logo" class= "col-md-2 col-md-offset-1"><a href="index.html"><img src="img/network_neutrality-mar.jpg"></a></section>
+		    <section id= "home" class= "col-md-2"><a href="index-cg.html">Home</section> 
+                    <section id= "resources" class= "col-md-2"><a href="resources-cg.html">Resources</section>
+		    <section id= "articles" class= "col-md-2"><a href="articles-cg.html">Articles</section>
+                    <section id= "forums" class= "col-md-2"><a href="forums-cg.html">Forums</a></section>
 		</div>
-	    </div>
-	    
-	    <div class="row">
 		<div class="text-center">
-		    <p></p>
-		</div>
-	    </div>
-	    
-	    <div class="row">
-		<div class="text-center">
-		    <p></p>
-		</div>
-	    </div>
-	    
-	    <div class="row">
-		<div class="text-center">
-		    <p></p>
-		</div>
-	    </div>
-	    
-	    <div class="row">
-		<div class="text-center">
-		    <p></p>
-		</div>
-	    </div>
-	    
-            <div class="row">
-		<div class="text-center">
-		    <section id= "home" class= "col-md-2 col-md-offset-3"><a href="index.html">Home</a></section>
-		    <section id= "resources" class= "col-md-2"><a href="resources.html">Resources</a></section>
-		    <section id= "articles" class= "col-md-2"><a href="articles.html">Articles</a></section>
-                    <section id= "forums" class= "col-md-2"><a href="forums.html">Forums</a></section>
-		</div>
-	    </div>
-            <div class="row">
-		<div class="text-center">
-            	    <section id= "search" class= "col-xs-8 col-md-5 col-md-offset-3"><a href="....html">Search</a></section>
+            	    <section id= "search" class= "col-xs-8 col-md-5" ><a href="....html">Search</a></section>
                     <section id= "login" class= "col-xs-4 col-md-3"><a href="....html">Login</a></section>
                 </div>
-            </div>     
+	    </div>
                 <!--carousel-->
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <div id="carousel-example-generic" class="carousel slide col-md-10 col-md-offset-1" data-ride="carousel">
                     <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -86,7 +56,7 @@
                     <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="images/ABDGOXQ.jpg" alt="...">
+                        <img src="img/ABDGOXQ.jpg" alt="...">
                         <div class="carousel-caption">
                             ...
                         </div>
@@ -126,6 +96,7 @@
                     <span class="glyphicon glyphicon-chevron-right"></span>
                 </a>
             </div>
+            <!--news-->
             <div class="row">
 		<div class="text-center">
 		    <section id= "news" class= "col-xs-12 col-sm-5 col-sm-offset-1" >
@@ -146,6 +117,7 @@
 		    </section>
 		</div>	
 	    </div>
+            <!--footer-->
             <div class="row">
 		<div class="text-center">
 		    <section id= "footer" class= "col-xs-12 col-sm-10 col-sm-offset-1" >
@@ -155,6 +127,6 @@
                 </div>
             </div>
         </div>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
