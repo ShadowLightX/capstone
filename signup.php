@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
 <?php
 // define variables and set to empty values
 $firstName = "";
@@ -8,7 +13,7 @@ $confirm = "";
 $email = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstName = $_POST["firstName"];
+    $firstName = $_REQUEST["firstName"];
     echo $firstName;
     /*$lastName = test_input($POST["lastName"]);
     echo $lastName;
@@ -29,3 +34,5 @@ function test_input($data) {
     return $data;
 }
 ?>
+    </body>
+</html>
