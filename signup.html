@@ -47,17 +47,23 @@
 			<h1>Registered User Sign Up</h1>
 			<form method="post" action="signup.php">
 			    <label for="firstName">First Name</label>
-			    <input type="firstName" id="firstName" name="firstName" /><br>
+			    <input type="text" name="firstName" value="<?php echo $firstName;?>"/>
+			    <span class="error">* <?php echo $firstNameErr;?></span><br>
 			    <label for="lastName">Last Name</label>
-			    <input type="lastName" id="lastName" name="lastName" /><br>
+			    <input type="text" name="lastName" value="<?php echo $lastName;?>"/>
+			    <span class="error">* <?php echo $lastNameErr;?></span><br>
 			    <label for="userName">User Name</label>
-			    <input type="userName" id="userName" name="userName" /><br>
+			    <input type="text" name="userName" value="<?php echo $userName;?>"/>
+			    <span class="error">* <?php echo $userNameErr;?></span><br>
 			    <label for="password">Enter Password</label>
-			    <input type="password" id="password" name="password" /><br>
+			    <input type="text" name="password" value="<?php echo $password;?>"/>
+			    <span class="error">* <?php echo $passwordNameErr;?></span><br>
 			    <label for="confirm">Confirm Password</label>
-			    <input type="password" id="confirm" name="confirm" /><br>
+			    <input type="text" name="confirm" value="<?php echo $confirm;?>"/>
+			    <span class="error">* <?php echo $confirmErr;?></span><br>
 			    <label for="email">E-mail</label>
-			    <input type="email" id="email" name="email" /><br>
+			    <input type="text" name="email" value="<?php echo $email;?>"/>
+			    <span class="error">* <?php echo $emailErr;?></span><br>
 			    <button type="submit" value="submit">Submit</button>
 			</form>
 		</div>	
