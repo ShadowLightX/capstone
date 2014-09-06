@@ -13,17 +13,17 @@ $confirm = "";
 $email = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstName = test_input($POST['firstName'],"Please enter your first name");
+    $firstName = test_input($_POST['firstName'],"Please enter your first name");
     echo $firstName;
-    $lastName = test_input($POST['lastName'],"Please enter your last name");
+    $lastName = test_input($_POST['lastName'],"Please enter your last name");
     echo $lastName;
-    $userName = test_input($POST['userName'],"Please enter your user name");
+    $userName = test_input($_POST['userName'],"Please enter your user name");
     echo $userName;
-    $password = test_input($POST['password'],"Please create your password");
+    $password = test_input($_POST['password'],"Please create your password");
     echo $password;
-    $confirm = test_input($POST['firstName'],"Please confirm your password");
+    $confirm = test_input($_POST['firstName'],"Please confirm your password");
     echo $confirm;
-    $email = test_input($POST['email'],"Please enter your e-mail");
+    $email = test_input($_POST['email'],"Please enter your e-mail");
     echo $email;
 }
 
