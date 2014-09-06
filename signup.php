@@ -1,35 +1,66 @@
-<?php
-$firstName = check_input($_POST['firstName'], "Enter your first name");
-$lastName = check_input($_POST['lastName'], "Enter your last name");
-$userName = check_input($_POST['userName'], "Enter your user name");
-$password = check_input($_POST['password'], "Create your password");
-$confirm = check_input($_POST['confirm'], "Confirm your password");
-$email = check_input($_POST['email'], "Enter your e-mail");
-?>
+<!DOCTYPE html>
 <html>
+    <head>
+        <style>
+            .error {color: #FF0000;}
+        </style>
+    </head>
     <body>
-        <p>Welcome <?php echo $userName; ?></p><br>
+        <?php
+        // Initialize variables and set to empy strings
+        $firstName = $lastName = "";
+        $firstNameErr = $lastNameErr = "";
+        
+        // Control variables
+        $app_state = "emtpy";  // empty, processed, logged in
+        $valid = 0;
+        
+        // Validate input and sanitize
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            if(empty($_POST["firstName"])) {
+                $firstNameErr = "First name is required";
+            }
+            else {
+                $firstName = test_input($_POST["firstName"]);
+                $valid++;
+            }
+            if (empty($_POST["lastName"])) {
+                $lastNameErr = "Last name is reuqired";
+            }
+            
+            if($valid >= 2) {
+                $app_state = "processed";
+            }
+        }
+        
+        //Sanitize data
+        function test_input($data) {
+            $data = trim(data);
+            $data = stripslashes(data);
+            $data = htmlspecialchars(data);
+            return $data;
+        }
+        
+        if ($app_state == "empty") {
+        ?>
+        <h2>Find User</h2>
+        <p><span class="error>* required</span></p>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+        First Name: <input type="text" name="firstName" value="<?php echo $firstName; ?>"><span class="error">* <?php echo $fisrtNameErr; ?></span><br><br>
+        Last Name: <input type="text" name="lastName" value="<?php echo $lastName; ?>"><span class="error">* <?php echo $lastNameErr; ?></span><br<br>
+        <input type="submit">
+        </form>
     </body>
 </html>
-
 <?php
-function check_input($data, $problem='') {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    if (problem && strlen($data) == 0) {
-        show_error($problem);
+}
+elseif($app_state == "processed") {
+    if($firstName == "Vincent") {
+        $app_state = "Logged in";
     }
-    return $data;
 }
 
-function show_error($myError) {
+if ($app_state == "Logged in") {
+    echo("logged in<br> Hello Vincent</body></html>");
 }
-?>
-    <html>
-        <body>
-            <strong>Please correct the following error:</strong><br>
-            <?php echo $myError; ?>
-<?php
-    exit();
 ?>
