@@ -15,7 +15,7 @@ $firstNameErr = "";
 $lastNameErr = "";
 $userNameErr = "";
 $passwordErr = "";
-$confirmErr = "";
+$confirm_passwordErr = "";
 $emailErr = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -43,10 +43,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = test_input($_POST["password"]);
     }
     
-    if(empty($_POST["confirm"])) {
-        $confirmErr = "Confirm password";
+    if(empty($_POST["confirm_password"])) {
+        $confirm_passwordErr = "Password doesn't match";
     } else {
         $confirm = test_input($_POST["confirm"]);
+    }
+    
+    if($_POST["password"] == $_POST["confirm_password"]) {
+        // success!
+    } else {
+        echo confirm_passwordErr;
     }
     
     if(empty($_POST["email"])) {
