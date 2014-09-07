@@ -11,12 +11,13 @@ $userName = "";
 $password = "";
 $confirm = "";
 $email = "";
-$firstNameErr = "";
-$lastNameErr = "";
-$userNameErr = "";
-$passwordErr = "";
-$confirm_passwordErr = "";
-$emailErr = "";
+// define error varialbles
+$firstNameErr = "First name is required";
+$lastNameErr = "Last name is required";
+$userNameErr = "User name is required";
+$passwordErr = "Password required";
+$confirm_passwordErr = "Password doesn't match";
+$emailErr = "Invalid e-mail address";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($_POST["firstName"])) {
@@ -38,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if(empty($_POST["password"])) {
-        $passwordNameErr = "Password is required";
+        $passwordNameErr = "Password required";
     } else {
         $password = test_input($_POST["password"]);
     }
@@ -52,11 +53,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($_POST["password"] == $_POST["confirm_password"]) {
         // success!
     } else {
-        echo confirm_passwordErr;
+        echo $confirm_passwordErr;
     }
     
     if(empty($_POST["email"])) {
-        $email = "E-mail address required";
+        $email = "Invalid e-mail address";
     } else {
         $email = test_input($_POST["email"]);
     }
