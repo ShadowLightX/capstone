@@ -9,7 +9,7 @@ $firstName = "";
 $lastName = "";
 $userName = "";
 $password = "";
-$confirm = "";
+$confirm_password = "";
 $email = "";
 // define error varialbles
 $firstNameErr = "First name is required";
@@ -45,9 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if(empty($_POST["confirm_password"])) {
-        $confirm_passwordErr = "Password doesn't match";
+        $confirm_passwordErr = "Passwords don't match";
     } else {
-        $confirm = test_input($_POST["confirm"]);
+        $confirm_password = test_input($_POST["confirm_password"]);
     }
     
     if($_POST["password"] == $_POST["confirm_password"]) {
