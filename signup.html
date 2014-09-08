@@ -23,6 +23,20 @@
 	    <![endif]-->
     </head>
     <body>
+	<?php
+	// define variables and set to empty values
+	$firstName = "";
+	// define error varialbles
+	$firstNameErr = "First name is required";
+	
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	 // If form fields are empty give error if not proceed to test input
+	if(empty($_POST["firstName"])) {
+        $firstNameErr = "First name is required";
+	} else {
+        $firstName = test_input($_POST["firstName"]);
+    }
+    ?>
         <div class="container">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -48,7 +62,12 @@
 			<form method="post" action="signup.php">
 			    <label for="firstName">First Name</label>
 			    <input type="text" name="firstName">
+			    <?php>
+				if(empty($_POST["firstName"])) {
+				$firstNameErr = "First name is required";
+			    }
 			    <span class="error">* <?php echo $firstNameErr;?></span>
+			    <?>
 			    <br><br>
 			    <label for="lastName">Last Name</label>
 			    <input type="text" name="lastName">
