@@ -48,22 +48,28 @@
 			<form method="post" action="signup.php">
 			    <label for="firstName">First Name</label>
 			    <input type="text" name="firstName">
-			    <span class="error">* <?php echo $firstNameErr;?></span><br>
+			    <span class="error">* <?php echo $firstNameErr;?></span>
+			    <br><br>
 			    <label for="lastName">Last Name</label>
 			    <input type="text" name="lastName">
-			    <span class="error">* <?php echo $lastNameErr;?></span><br>
+			    <span class="error">* <?php echo $lastNameErr;?></span>
+			    <br><br>
 			    <label for="userName">User Name</label>
 			    <input type="text" name="userName">
-			    <span class="error">* <?php echo $userNameErr;?></span><br>
+			    <span class="error">* <?php echo $userNameErr;?></span>
+			    <br><br>
 			    <label for="password">Enter Password</label>
 			    <input type="password" name="password">
-			    <span class="error">* <?php echo $passwordNameErr;?></span><br>
+			    <span class="error">* <?php echo $passwordErr;?></span>
+			    <br><br>
 			    <label for="confirm_password">Confirm Password</label>
 			    <input type="password" name="confirm_password">
-			    <span class="error">* <?php echo $confirm_passwordErr;?></span><br>
+			    <span class="error">* <?php echo $confirm_passwordErr;?></span>
+			    <br><br>
 			    <label for="email">E-mail</label>
 			    <input type="email" name="email">
-			    <span class="error">* <?php echo $emailErr;?></span><br>
+			    <span class="error">* <?php echo $emailErr;?></span>
+			    <br><br>
 			    <button type="submit" value="submit">Submit</button>
 			</form>
 		</div>	
