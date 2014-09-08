@@ -62,9 +62,10 @@ $emailErr = "Invalid e-mail address";
         $email = test_input($_POST["email"]);
     }
 
-/** Remove leading/trailing white space
- *  Remove slashes
- *  Use specialchars to sanitize input to protect against cross site scripting attack
+/** Clean up input
+ *
+ * Remove leading/trailing white space and remove slashes
+ *  Use specialchars to sanitize input to protect against cross site scripting attacks
  **/
 function test_input($data) {
     $data = trim($data);
