@@ -19,8 +19,6 @@ $passwordErr = "Password required";
 $confirm_passwordErr = "Password doesn't match";
 $emailErr = "Invalid e-mail address";
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // If form fields are empty give error if not proceed to test input
     if(empty($_POST["firstName"])) {
         $firstNameErr = "First name is required";
@@ -53,23 +51,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     // Check if confirmation matches password
-    if($_POST["password"] == $_POST["confirm_password"]) {
-        // success!
-    } else {
+    if($_POST["password"] !== $_POST["confirm_password"]) {
         echo $confirm_passwordErr;
-    }
+    } 
+    
     
     if(empty($_POST["email"])) {
         $email = "Invalid e-mail address";
     } else {
         $email = test_input($_POST["email"]);
     }
-}
 
-// Sanitize 
+/** Remove leading/trailing white space
+ *  Remove slashes
+ *  Use specialchars to sanitize input to protect against cross site scripting attack
+ **/
 function test_input($data) {
     $data = trim($data);
-    $data = stripcslashes($data);
+    $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
 }
