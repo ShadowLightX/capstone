@@ -33,10 +33,9 @@
 	 // If form fields are empty give error if not proceed to test input
 	if(empty($_POST["firstName"])) {
         $firstNameErr = "First name is required";
-	} else {
-        $firstName = test_input($_POST["firstName"]);
+	}
     }
-  ?>
+    ?>
         <div class="container">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -62,15 +61,13 @@
 			<form method="post" action="signup.html">
 			    <label for="firstName">First Name</label>
 			    <input type="text" name="firstName">
-			    <?php			   
+			    <?php
 				if(empty($_POST["firstName"])) {
 				$firstNameErr = "First name is required";
 			    }
-			    <span class="error">* <?php
-			    $firstName = $_POST["firstName"];
-			    echo $firstName; ?></span>
-			    <br><br> 
-			    
+			    ?>
+			    <span class="error">* <?php echo $firstNameErr;?></span>
+			    <br><br>
 			    <label for="lastName">Last Name</label>
 			    <input type="text" name="lastName">
 			    <span class="error">* <?php echo $lastNameErr;?></span>
