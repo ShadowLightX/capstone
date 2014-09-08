@@ -66,8 +66,9 @@
 				if(empty($_POST["firstName"])) {
 				$firstNameErr = "First name is required";
 			    }
-			    <span class="error">* <?php echo $firstNameErr;?></span>
-			    <?>
+			    ?>
+			    <span class="error">* <?php echo $firstNameErr;</span>
+			    ?>
 			    <br><br>
 			    <label for="lastName">Last Name</label>
 			    <input type="text" name="lastName">
