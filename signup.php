@@ -1,81 +1,103 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML> 
 <html>
-    <head>
-    </head>
-    <body>
+<head>
+<style>
+.error {color: #FF0000;}
+</style>
+</head>
+<body> 
+
 <?php
 // define variables and set to empty values
-$firstName = "";
-$lastName = "";
-$userName = "";
-$password = "";
-$confirm_password = "";
-$email = "";
-// define error varialbles
-$firstNameErr = "First name is required";
-$lastNameErr = "Last name is required";
-$userNameErr = "User name is required";
-$passwordErr = "Password required";
-$confirm_passwordErr = "Password doesn't match";
-$emailErr = "Invalid e-mail address";
+$nameErr = $emailErr = $genderErr = $websiteErr = "";
+$name = $email = $gender = $comment = $website = "";
 
-    // If form fields are empty give error if not proceed to test input
-    if(empty($_POST["firstName"])) {
-        $firstNameErr = "First name is required";
-    } else {
-        $firstName = test_input($_POST["firstName"]);
-    }
-    
-    if(empty($_POST["lastName"])) {
-        $lastNameErr = "Last name is required";
-    } else {
-        $lastName = test_input($_POST["lastName"]);
-    }
-    
-    if(empty($_POST["userName"])) {
-        $userNameErr = "User name is required";
-    } else {
-        $userName = test_input($_POST["userName"]);
-    }
-    
-    if(empty($_POST["password"])) {
-        $passwordNameErr = "Password required";
-    } else {
-        $password = test_input($_POST["password"]);
-    }
-    
-    if(empty($_POST["confirm_password"])) {
-        $confirm_passwordErr = "Passwords don't match";
-    } else {
-        $confirm_password = test_input($_POST["confirm_password"]);
-    }
-    
-    // Check if confirmation matches password
-    if($_POST["password"] !== $_POST["confirm_password"]) {
-        echo $confirm_passwordErr;
-    } 
-    
-    
-    if(empty($_POST["email"])) {
-        $email = "Invalid e-mail address";
-    } else {
-        $email = test_input($_POST["email"]);
-    }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   if (empty($_POST["name"])) {
+     $name = "Name is required";
+   } else {
+     $name = test_input($_POST["name"]);
+     // check if name only contains letters and whitespace
+     if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+       $name = "Only letters and white space allowed"; 
+     }
+   }
+   
+   if (empty($_POST["email"])) {
+     $emailErr = "Email is required";
+   } else {
+     $email = test_input($_POST["email"]);
+     // check if e-mail address is well-formed
+     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+       $emailErr = "Invalid email format"; 
+     }
+   }
+   
+   if (empty($_POST["website"])) {
+     $website = "";
+   } else {
+     $website = test_input($_POST["website"]);
+     // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+     if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+       $websiteErr = "Invalid URL"; 
+     }
+   }
 
-/** Clean up input
- *
- * Remove leading/trailing white space and remove slashes
- *  Use specialchars to sanitize input to protect against cross site scripting attacks
- **/
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+   if (empty($_POST["comment"])) {
+     $comment = "";
+   } else {
+     $comment = test_input($_POST["comment"]);
+   }
+    
+    if (empty($_POST["gender"])) {
+     $genderErr = "Gender is required";
+   } else {
+     $gender = test_input($_POST["gender"]);
+   }
 }
 
-echo $data;
-
+function test_input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data);
+   return $data;
+}
 ?>
-    </body>
+
+<h2>Registered User Sign Up</h2>
+<p><span class="error">* required field.</span></p>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
+   Name: <input type="text" name="name" value="<?php echo $name;?>">
+   <span class="error">* <?php echo $nameErr;?></span>
+   <br><br>
+   E-mail: <input type="text" name="email" value="<?php echo $email;?>">
+   <span class="error">* <?php echo $emailErr;?></span>
+   <br><br>
+   Website: <input type="text" name="website" value="<?php echo $website;?>">
+   <span class="error"><?php echo $websiteErr;?></span>
+   <br><br>
+   Comment: <textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
+   <br><br>
+   Gender:
+   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?>  value="female">Female
+   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?>  value="male">Male
+   <span class="error">* <?php echo $genderErr;?></span>
+   <br><br>
+   <input type="submit" name="submit" value="Submit"> 
+</form>
+
+<?php
+echo "<h2>Your Input:</h2>";
+echo $name;
+echo "<br>";
+echo $email;
+echo "<br>";
+echo $website;
+echo "<br>";
+echo $comment;
+echo "<br>";
+echo $gender;
+?>
+
+</body>
 </html>
