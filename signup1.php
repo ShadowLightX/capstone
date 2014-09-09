@@ -1,25 +1,25 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
     <head>
-        <meta charset="UTF-8" />
+        <!--meta charset="UTF-8" />
             <!-- Format -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!--<meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <!-- Format -->
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Sign Up</title>
+        <!-- Format --<meta name="viewport" content="width=device-width, initial-scale=1" />-->
+	<!--<title>Sign Up</title>-->
 	<style>.error {color: #FF0000;}</style>
             <!-- Stylesheet -->
-        <link rel="stylesheet" type="text/css" href="css/neutrality.css" />
+        <!--<link rel="stylesheet" type="text/css" href="css/neutrality.css" />
             <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <!--<link href="css/bootstrap.min.css" rel="stylesheet" />
             <!-- Javascript -->
-        <script type="text/javascript" src="javascript/neutrality.js"></script>
+        <!--<script type="text/javascript" src="javascript/neutrality.js"></script>
             <!-- Google font -->
-	<link href='http://fonts.googleapis.com/css?family=Geo' rel='stylesheet' type='text/css' />			
+	<!--<link href='http://fonts.googleapis.com/css?family=Geo' rel='stylesheet' type='text/css' />			
             <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	    <!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<!--<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	    <![endif]-->
     </head>
@@ -92,12 +92,12 @@
    }
    
 	if (empty($_POST["email"])) {
-	$emailErr = "E-mail is required";
+	$emailErr = "Email is required";
 	} else {
 	$email = test_input($_POST["email"]);
-	// check if e-mail address is well formed
-	if (!preg_match("/^[a-zA-Z ]*$/",$email)) {
-        $emailErr = "Only letters and white space allowed"; 
+	// check if e-mail address is well-formed
+	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Invalid email format"; 
      }
    }
    
@@ -109,13 +109,13 @@
     }
 ?>
 
-        <div class="container">
+	<!--<div class="container">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 	    <link src="/css/bootstrap.min.css" />
             
-            <div class="row">
+            <!--<div class="row">
 		<div class="text-left">
             	    <section id= "logo" class= "col-md-3"><a href="index.html"><img src="images/network_neutrality-mar.jpg"></a></section>
 		</div>
@@ -126,7 +126,7 @@
             	    <section id= "search" class= "col-xs-8 col-md-5 col-md-offset-3"><a href="....html">Search</a></section>
                     <section id= "login" class= "col-xs-4 col-md-3"><a href="....html">Login</a></section>
                 </div>
-            </div>     
+            </div>-->     
                 
             <div class="row">
 		<div class="text-left">			
@@ -145,10 +145,10 @@
 		    password: <input type="text" name="password" value="<?php echo $password;?>">
 		    <span class="error">* <?php echo $passwordErr;?></span>
 		    <br><br>
-		    confirmPassword: <input type="text" name="confirmPassword" value="<?php echo $confirmPassword;?>">
+		    confirmPassword: <input type="password" name="confirmPassword" value="<?php echo $confirmPassword;?>">
 		    <span class="error">* <?php echo $confirmPasswordErr;?></span>
 		    <br><br>
-		    email: <input type="text" name="email" value="<?php echo $email;?>">
+		    email: <input type="email" name="email" value="<?php echo $email;?>">
 		    <span class="error">* <?php echo $emailErr;?></span>
 		    <br><br>
 		    <input type="submit" name="submit" value="Submit"> 
@@ -176,8 +176,7 @@
 			<h2>...</h2>
 			<p>...</p>
 		    </section>
-                </div>
-            </div>
+	    </div>	
 	</div>
     </body>
 </html>
