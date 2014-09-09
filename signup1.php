@@ -7,6 +7,7 @@
             <!-- Format -->
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Sign Up</title>
+	<style>.error {color: #FF0000;}</style>
             <!-- Stylesheet -->
         <link rel="stylesheet" type="text/css" href="css/neutrality.css" />
             <!-- Bootstrap -->
@@ -23,19 +24,91 @@
 	    <![endif]-->
     </head>
     <body>
-	<?php
+    <?php
 	// define variables and set to empty values
-	$firstName = "";
-	// define error varialbles
-	$firstNameErr = "First name is required";
-	
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	 // If form fields are empty give error if not proceed to test input
-	if(empty($_POST["firstName"])) {
-        $firstNameErr = "First name is required";
-	}
+        $firstName = "";
+        $lastName = "";
+        $userName = "";
+        $password = "";
+        $confirm_password = "";
+        $email = "";
+        // define error varialbles
+        $firstNameErr = "";
+        $lastNameErr = "";
+        $userNameErr = "";
+        $passwordErr = "";
+        $confirm_passwordErr = "";
+        $emailErr = "";
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if (empty($_POST["firstName"])) {
+	$firstNameErr = "First Name is required";
+	} else {
+	$firstName = test_input($_POST["firstName"]);
+	// check if name only contains letters and whitespace
+	if (!preg_match("/^[a-zA-Z ]*$/",$firstName)) {
+        $firstNameErr = "Only letters and white space allowed"; 
+     }
+   }
+   
+	if (empty($_POST["lastName"])) {
+	$lastNameErr = "Last name is required";
+	} else {
+	$lastName = test_input($_POST["lastName"]);
+	// check if name only contains letters and whitespace
+	if (!preg_match("/^[a-zA-Z ]*$/",$lastName)) {
+        $lastNameErr = "Only letters and white space allowed"; 
+     }
+   }
+   
+	if (empty($_POST["userName"])) {
+	$userNameErr = "User name is required";
+	} else {
+	$userName = test_input($_POST["userName"]);
+	// check if name only contains letters and whitespace
+	if (!preg_match("/^[a-zA-Z ]*$/",$userName)) {
+        $userNameErr = "Only letters and white space allowed"; 
+     }
+   }
+   
+	if (empty($_POST["password"])) {
+	$passwordErr = "Password is required";
+	} else {
+	$password = test_input($_POST["password"]);
+	// check if name only contains letters and whitespace
+	if (!preg_match("/^[a-zA-Z ]*$/",$password)) {
+        $passwordErr = "Only letters and white space allowed"; 
+     }
+   }
+   
+	if (empty($_POST["confirmPassword"])) {
+	$nameErr = "Confirmation is required";
+	} else {
+	$confirmPassword = test_input($_POST["confirmPassword"]);
+	// check if name only contains letters and whitespace
+	if (!preg_match("/^[a-zA-Z ]*$/",$confirmPassword)) {
+        $confirmPasswordErr = "Only letters and white space allowed"; 
+     }
+   }
+   
+	if (empty($_POST["email"])) {
+	$emailErr = "E-mail is required";
+	} else {
+	$email = test_input($_POST["email"]);
+	// check if e-mail address is well formed
+	if (!preg_match("/^[a-zA-Z ]*$/",$email)) {
+        $emailErr = "Only letters and white space allowed"; 
+     }
+   }
+   
+    function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
     }
-    ?>
+?>
+
         <div class="container">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -56,43 +129,48 @@
             </div>     
                 
             <div class="row">
-		<div class="text-left">
-			<h1>Registered User Sign Up</h1>
-			<form method="post" action="signup.html">
-			    <label for="firstName">First Name</label>
-			    <input type="text" name="firstName">
-			    <?php
-				if(empty($_POST["firstName"])) {
-				$firstNameErr = "First name is required";
-			    }
-			    ?>
-			    <span class="error">* <?php echo $firstNameErr;?></span>
-			    <br><br>
-			    <label for="lastName">Last Name</label>
-			    <input type="text" name="lastName">
-			    <span class="error">* <?php echo $lastNameErr;?></span>
-			    <br><br>
-			    <label for="userName">User Name</label>
-			    <input type="text" name="userName">
-			    <span class="error">* <?php echo $userNameErr;?></span>
-			    <br><br>
-			    <label for="password">Enter Password</label>
-			    <input type="password" name="password">
-			    <span class="error">* <?php echo $passwordErr;?></span>
-			    <br><br>
-			    <label for="confirm_password">Confirm Password</label>
-			    <input type="password" name="confirm_password">
-			    <span class="error">* <?php echo $confirm_passwordErr;?></span>
-			    <br><br>
-			    <label for="email">E-mail</label>
-			    <input type="email" name="email">
-			    <span class="error">* <?php echo $emailErr;?></span>
-			    <br><br>
-			    <button type="submit" value="submit">Submit</button>
-			</form>
-		</div>	
-	    </div>
-            <div class="row">
+		<div class="text-left">			
+		<h2>Registered User Sign Up</h2>
+		<p><span class="error">* required field.</span></p>
+		<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
+		    firstName: <input type="text" name="firstName" value="<?php echo $firstName;?>">
+		    <span class="error">* <?php echo $firstNameErr;?></span>
+		    <br><br>
+		    lastName: <input type="text" name="lastName" value="<?php echo $lastName;?>">
+		    <span class="error">* <?php echo $lastNameErr;?></span>
+		    <br><br>
+		    userName: <input type="text" name="userName" value="<?php echo $userName;?>">
+		    <span class="error">* <?php echo $userNameErr;?></span>
+		    <br><br>
+		    password: <input type="text" name="password" value="<?php echo $password;?>">
+		    <span class="error">* <?php echo $passwordErr;?></span>
+		    <br><br>
+		    confirmPassword: <input type="text" name="confirmPassword" value="<?php echo $confirmPassword;?>">
+		    <span class="error">* <?php echo $confirmPasswordErr;?></span>
+		    <br><br>
+		    email: <input type="text" name="email" value="<?php echo $email;?>">
+		    <span class="error">* <?php echo $emailErr;?></span>
+		    <br><br>
+		    <input type="submit" name="submit" value="Submit"> 
+		</form>
+    <?php
+    echo "<h2>Your Input:</h2>";
+    echo $firstName;
+    echo "<br>";
+    echo $lastName;
+    echo "<br>";
+    echo $userName;
+    echo "<br>";
+    echo $password;
+    echo "<br>";
+    echo $confirmPassword;
+    echo "<br>";
+    echo $email;
+    echo "<br>";
+    ?>
+	    </div>	
+	</div>
+    <div class="row">
 		<div class="text-center">
 		    <section id= "footer" class= "col-xs-12 col-sm-10 col-sm-offset-1" >
 			<h2>...</h2>
