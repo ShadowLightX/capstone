@@ -19,34 +19,6 @@ body {
     background-color: #FFF0D5;
 }
 
-#home {
-    background-color: #59C78A;
-    border: 5px solid #FFF0D5;
-    text-decoration: none;
-    font-size: 1.5em;
-}
-
-#resources {
-    background-color: #59C78A;
-    border: 5px solid #FFF0D5;
-    text-decoration: none;
-    font-size: 1.5em;
-}
-
-#articles {
-    background-color: #59C78A;
-    border: 5px solid #FFF0D5;
-    text-decoration: none;
-    font-size: 1.5em;
-}
-
-#forums {
-    background-color: #59C78A;
-    border: 5px solid #FFF0D5;
-    text-decoration: none;
-    font-size: 1.5em;
-}
-
 #search {
     background-color: #2B7A4E;
     border: 5px solid #FFF0D5;
@@ -125,30 +97,31 @@ a:active {
 .myMenu {
 	margin:0;
 	padding:0;
-	z-index: 2;
 }
 
 .myMenu li {
 	list-style:none;
-	float:left;
-	font:1em Arial, Helvetica, sans-serif;
+	font:1em Helvetica;
+        margin: 0;
+        padding: 0;
 
 }
 
 .myMenu li a:link, .myMenu li a:visited {
-	display:block;
-	text-decoration:none;
-	background-color:#09F;
-	padding: 0.5em 2em;
-	margin:0;
-	border-right: 1px solid #fff;
-	color:#111;
-	z-index:1;
+    margin: 5px;
+    background-color: #59C78A;
+    border: 5px solid rgba(0, 0, 0, 0);
+    display: block;
+    text-decoration:none;
+    color:#111;
+    z-index:1;
+    font-size: 1.5em;
+    text-align: center;
 
 }
 
 .myMenu li a:hover {
-	background-color:#0CF;	
+	background-color:#2B7A4E;	
 }
 
 /*style the sub menu*/
@@ -168,11 +141,11 @@ a:active {
 }
 
 .myMenu li ul li a:link, .myMenu li ul li a:visited {
-	background-color:#09F;
+	background-color:#59C78A;
 	width:auto;
 	z-index: 1;
 }
 
 .myMenu li ul li a:hover {
-	background-color:#0CF;	
+	background-color:#2B7A4E;	
 }
