@@ -1,36 +1,8 @@
 body {
     background-color: #FFF0D5 !important;
     padding: 40px;
-    overflow-x: hidden; /* For Opera */
-    -webkit-box-shadow:
-	inset #FF83D5 0 0 0 5px,
-	inset #FF96D5 0 0 0 1px,
-	inset #FF96D5 0 0 0 10px,
-	inset #FFBBD5 0 0 0 11px,
-	inset #FFCDD5 0 0 0 16px,
-	inset #FFE1D5 0 0 0 17px,
-	inset #FFEED5 0 0 0 22px,
-	inset #FFEAD5 0 0 0 23px;
-    -moz-box-shadow:
-	inset #FF83D5 0 0 0 5px,
-	inset #FF96D5 0 0 0 1px,
-	inset #FF96D5 0 0 0 10px,
-	inset #FFBBD5 0 0 0 11px,
-	inset #FFCDD5 0 0 0 16px,
-	inset #FFE1D5 0 0 0 17px,
-	inset #FFEED5 0 0 0 22px,
-	inset #FFEAD5 0 0 0 23px;
-    box-shadow:
-	inset #FF83D5 0 0 0 5px,
-	inset #FF96D5 0 0 0 1px,
-	inset #FF96D5 0 0 0 10px,
-	inset #FFBBD5 0 0 0 11px,
-	inset #FFCDD5 0 0 0 16px,
-	inset #FFE1D5 0 0 0 17px,
-	inset #FFEED5 0 0 0 22px,
-	inset #FFEAD5 0 0 0 23px;
 }
-
+        
 .container {
     background-color: #FFF0D5;
 }
