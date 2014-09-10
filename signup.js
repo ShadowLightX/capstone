@@ -1,16 +1,16 @@
 $(document).ready(
     function() {
-    $("#signUpForm").validate({
-        //DEBUG MORE: stop the form submission...
-        // ...delete is after debugging
+          $("#signUpForm").validate({
+          //DEBUG MORE: stop the form submission...
+          // ...delete is after debugging
         
-         // debug: true,
-         // errorclass: formatting of messages
-         errorClass: "badForm",
-         
-        // rules define how fields should be sanitized
-        rules: {
-            email: {
+          // debug: true,
+          // errorclass: formatting of messages
+          errorClass: "badForm",
+          
+          // rules define how fields should be sanitized
+          rules: {
+               email: {
                 email: true,
                 required: true
                 },

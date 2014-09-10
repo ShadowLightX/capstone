@@ -50,7 +50,11 @@ catch(Exception $error) {
     echo "<span class='badForm'>" . $error->getMessage() . "</span>";
     }
 }
-    function test_input($input) {
-        return $input;
-    }
+    
+function test_input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data);
+   return $data;
+}
 ?>
