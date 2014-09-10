@@ -97,6 +97,10 @@ p {
     font-size: 1.5em;
 }
 
+#signUpForm {
+    color: black;
+}
+
 /* unvisited link */
 a:link {
     color: #1c1c1c;
@@ -127,7 +131,7 @@ a:active {
 .myMenu li {
 	list-style:none;
 	float:left;
-	font:12px Arial, Helvetica, sans-serif;
+	font:1em Arial, Helvetica, sans-serif;
 
 }
 
