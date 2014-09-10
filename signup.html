@@ -24,23 +24,32 @@
 	<!-- link type="text/css" rel="stylesheet" href="css/jquery-form.css" /-->
     </head>
     <body>
-        <div id="container" class="container">
+       <div id="container" class="container">
+	    <section id= "logo" class= "col-md-2 col-md-offset-1"><a href="index.html"><img src="images/logo.png"></a></section>
+	    <ul class="row myMenu">
 		
-        </div>
-		<!--nav-->
-            <div class="row">
-		<div id="nav" class="text-center">
-                    <section id= "logo" class= "col-md-2 col-md-offset-1"><a href="index.html"><img src="images/network_neutrality-mar.jpg"></a></section>
-		    <section id= "home" class= "col-md-2"><a href="index-cg.html">Home</section> 
-                    <section id= "resources" class= "col-md-2"><a href="resources-cg.html">Resources</section>
-		    <section id= "articles" class= "col-md-2"><a href="articles-cg.html">Articles</section>
-                    <section id= "forums" class= "col-md-2"><a href="forums-cg.html">Forums</a></section>
-		</div>
+	        <li id= "home" class= "col-md-2"><a href="index.html">Home</a></li>
+		<li id= "resources" class="col-md-2"><a href="resources.html">Resources</a>
+		    <ul>
+		        <li><a href="#">...</a></li>
+			<li><a href="#">...</a></li>
+			<li><a href="#">...</a></li>
+			<li><a href="#">...</a></li>
+		    </ul>
+		</li>
+		<li id= "articles" class= "col-md-2"><a href="articles.html">Articles</a>
+		   <ul>
+			<li><a href="#">...</a></li>
+			<li><a href="#">...</a></li>
+			<li><a href="#">...</a></li>
+			<li><a href="#">...</a></li>
+		    </ul>
+		</li>
+		<li id= "forums" class= "col-md-2"><a href="forums.html">Forum</a></li><br>
 		<div class="text-center">
             	    <section id= "search" class= "col-xs-8 col-md-5" ><a href="....html">Search</a></section>
                     <section id= "login" class= "col-xs-4 col-md-3"><a href="....html">Login</a></section>
                 </div>
-	    </div>
 	<h2 class="text-center"></h2>
 		<form class="text-center" id="signUpForm" method="post" action="signup.php">
 		<label for="firstName">First Name</label>
