@@ -36,7 +36,7 @@ $(document).ready(
                     minlength: "Please enter a password of at least 8 characters",
                     required: "Please enter a password",
                 },
-                  confirmPassword: "Passwords do not match"
+                  confirmPassword: "Passwords do not match",
                   
             },
             
@@ -48,7 +48,7 @@ $(document).ready(
                     // URL to submit to
                     // SECURITY WARNING: browsers don't allow you to submit to
                     // an external server - you can only load from your own
-                    url: "signup.php",
+                    url: "signup.html",
                     // data to submit
                     data: $(form).serialize(),
                     // anonymous callback function to react to a successful query
