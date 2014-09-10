@@ -112,7 +112,6 @@ a:active {
 .myMenu li a:link, .myMenu li a:visited {
     margin: 5px;
     background-color: #59C78A;
-    border: 5px solid rgba(0, 0, 0, 0);
     display: block;
     text-decoration:none;
     color:#111;
