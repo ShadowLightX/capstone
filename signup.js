@@ -1,16 +1,16 @@
 $(document).ready(
     function() {
-          $("#signUpForm").validate({
-          //DEBUG MORE: stop the form submission...
-          // ...delete is after debugging
+    $("#signUpForm").validate({
+        //DEBUG MORE: stop the form submission...
+        // ...delete is after debugging
         
-          // debug: true,
-          // errorclass: formatting of messages
-          errorClass: "badForm",
-          
-          // rules define how fields should be sanitized
-          rules: {
-               email: {
+         // debug: true,
+         // errorclass: formatting of messages
+         errorClass: "badForm",
+         
+        // rules define how fields should be sanitized
+        rules: {
+            email: {
                 email: true,
                 required: true
                 },
@@ -19,12 +19,8 @@ $(document).ready(
                 },
                 confirmPassword: {
                     equalTo: "#password"
-                },
-                napHours: {
-                    // setting up a min enforces numeric (integer, double) types
-                    min: 0,
-                    required: true
                 }
+                
             },
             
             // messages define what we tell the user
@@ -40,11 +36,8 @@ $(document).ready(
                     minlength: "Please enter a password of at least 8 characters",
                     required: "Please enter a password",
                 },
-                  confirmPassword: "Passwords do not match",
-                  napHours: {
-                    min: "Please enter 0 or more hours",
-                    required : "Please enter the number of nap hours"
-                }
+                  confirmPassword: "Passwords do not match"
+                  
             },
             
             // setup the AJAX call
