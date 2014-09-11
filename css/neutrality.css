@@ -1,6 +1,6 @@
 body {
     background-color: #FFF0D5 !important;
-    padding: 40px;
+    padding: 5px;
 }
         
 .container {
@@ -17,21 +17,7 @@ body {
 
 #logo {
     background-color: #FFF0D5;
-    margin-right: 2px;
-}
-
-#search {
-    background-color: #2B7A4E;
-    border: 5px solid #FFF0D5;
-    text-decoration: none;
-    font-size: 1.5em;
-}
-
-#login {
-    background-color: #2B7A4E;
-    border: 5px solid #FFF0D5;
-    text-decoration: none;
-    font-size: 1.5em;
+    margin-right: 5px;
 }
 
 .carousel-inner > .item > img {
@@ -50,6 +36,7 @@ p {
 #news {
     background-color: #59C78A;
     border: 5px solid #FFF0D5;
+    height: 100%;
     text-decoration: none;
     font-size: 1.5em;
 }
@@ -72,7 +59,6 @@ p {
 
 #signUpForm {
     color: black;
-    
 }
 
 /* unvisited link */
@@ -93,9 +79,42 @@ a:hover {
 /* selected link */
 a:active {
     color: #1c1c1c;
+    
+/* search and login */    
+}
+.signup {
+	margin:0;
+	padding:0;
+}
+
+.signup li {
+	list-style:none;
+	font:1em Helvetica;
+        margin: 0;
+        padding: 0;
+
+}
+
+.signup li a:link, .myMenu li a:visited {
+    margin: 5px;
+    background-color: #2B7A4E;
+    display: block;
+    text-decoration:none;
+    color:#111;
+    z-index:1;
+    font-size: 1.5em;
+    text-align: center;
+
+}
+
+.signup li a:hover {
+	background-color:#59C78A;	
 }
 
 /*style the main menu*/
+
+
+
 .myMenu {
 	margin:0;
 	padding:0;
