@@ -4,22 +4,27 @@
 // (e.g., the email form value is in $_POST["email"])
 
 // define variables and set to empty values
-$firstName       = "";
-$lastName        = "";
+$firstName       = ($_POST['firstName']);
+$lastName        = ($_POST['lastName']);
 $userName        = "";
 $password        = "";
 $confirmPassword = "";
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["firstName"])) {
-    $firstNameErr = "Name is required";
-  } else {
-    $firstName = test_input($_POST["firstName"]);
-  }
-
 // try the sanitization so we can format errors later on
 try {
+    if(empty($_POST["firstName"])) {
+        throw(new Exception("Please enter your first name"));
+    } else {
+        (filter_var($firstName, FILTER_SANITIZE_STRING) !== $firstName);        
+    }
+    // filter firstName for bad stuff
+    //if(filter_var($firstName, FILTER_SANITIZE_STRING) !== $firstName) {
+        //throw(new Exception("Please enter your first name"));
+    if(empty($_POST["lastName"])) {
+        throw(new Exception("Please enter your last name"));
+    } else {
+        (filter_var($lastName, FILTER_SANITIZE_STRING) !== $lastName);        
+    }
+    
     // if the Email has no @ character, throw an exception
     if(filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL) === false) {
         throw(new Exception("Please enter your Email address"));
@@ -38,23 +43,15 @@ try {
     
     // ensure the passwords match
     if($safePassword !== $safeConfirm) {
-        throw(new Exception("Passwords do not match"));
+        throw(new Exception("Please match passwords"));
     }
     
     // passwords are safe & match
     echo "Your password is confirmed. <br />";
     
-}
+
 // catch the exception and format it as an error message
-catch(Exception $error) {
+} catch (Exception $error) {
     echo "<span class='badForm'>" . $error->getMessage() . "</span>";
-    }
-}
-    
-function test_input($data) {
-   $data = trim($data);
-   $data = stripslashes($data);
-   $data = htmlspecialchars($data);
-   return $data;
 }
 ?>

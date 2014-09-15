@@ -36,7 +36,7 @@ $(document).ready(
                     minlength: "Please enter a password of at least 8 characters",
                     required: "Please enter a password",
                 },
-                  confirmPassword: "Passwords do not match",
+                  confirmPassword: "Please match passwords",
                   
             },
             
