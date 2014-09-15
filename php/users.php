@@ -9,22 +9,27 @@
 class User {
     //first, start with the member (state) variables - documenting each in a block
     /**
-     *integer of user ID's
+     *integer of user ID
      **/
     private $userId;
     
     /**
-     *boolean role
+     *integer of article ID
+     **/
+    private $articleId;
+    
+    /**
+     *string of roles
      **/
     private $role;
     
     /**
-     *array of names
+     *string of names
      **/
     private $name;
     
     /**
-     *array of email addresses
+     *string of email addresses
      **/
     private $email;
     
@@ -32,105 +37,151 @@ class User {
      *constructor for user information
      *
      *@param integer new user ID
-     *@param boolean new role
-     *@param array new names
-     *@param array new emails
+     *@param integer new article ID
+     *@param string new role
+     *@param string new names
+     *@param string new emails
      **/
-    public function __construct($newUser, $newRole, $newName, $newEmail) {
+    public function __construct($newUserId, $newArticleId, $newRole, $newName, $newEmail) {
         try{
             //use our mutator methods to sanitize inputs
-            $this->setKeys($newUserID);
+            $this->setKeys($newUserID); 
+            $this->setType($newArticleId);
             $this->setType($newRole; 
             $this->setType($newName); 
             $this->setType($newEmail);         
         }
-        
+        /**
+         *----------------------------
         catch(UnexpectedValueException $error) {
             //rethrow the exception to the code that tried to create the object
             throw(new UnexpectedValueException("unable to create piano", 0, $error));
         }
     }
-    
+    *-------------------------------------
+    **/
     
     /**
-     *gets the value of user ID
+     *gets the value of the user's ID
      *
      *@return integer value of userId
      **/
     public function getUserId() {
-        return($this->userID);
+        return($this->userId);
     }
     
     /**
-     *sets the value of the user ID
+     *sets the value of the user's ID
      *
      *@param integer of userId
      *@throws UnexpectedValueException if the input is not an integer
      **/
-    public function setUserID($newUserId) {
+    public function setUserId($newUserId) {
         
-        //fourth, verify the value of each key is on the interval [0,1]
-        foreach($newKeys as $pianoKey) {
-            if($newUserId < 0 || $pianoKey > 200000000) {
-                throw(new RangeException("$userId is not on the interval [0,1]"));
+        //verify the value of each user ID is on the interval [1 - 200,000,000]
+        foreach($newUserId as $userId) {
+            if($newUserId < 1 || $newUserId > 200000000) {
+                throw(new RangeException("$newUserId is not an acceptable."));
             }
         }
         
-        //if the array got here, it's passed all our tests - assign it!
-        $this->userId = $newUesrId;
+        //if the integer got here, it's passed all our tests - assign it!
+        $this->userId = $newUserId;
     }
     
     /**
-     *gets the value of type
+     *gets the value of the article's ID
      *
-     *@return array value of type
+     *@return integer value of articleId
      **/
-    public function getType() {
-        return($this->type);
+    public function getArticleId() {
+        return($this->articleId);
     }
     
     /**
-     *sets the type of the piano
+     *sets the value of the article's ID
      *
-     *@param string type of the piano
-     *@throws UnexpectedValueException if the input is not a string
-     *@throws RangeException if the type is not a recognized type
+     *@param integer of articleId
+     *@throws UnexpectedValueException if the input is not an integer
      **/
-    public function setType($newType) {
-        //first, check if the keys are truly a string
-        if(gettype($newType) !== "string") {
-            throw(new UnexpectedValueException("please enter athe type"));
+    public function setArticleId($newArticleId) {
+        
+        //verify the value of each article ID is on the interval [1 - 200,000,000]
+        foreach($newArticleId as $articleId) {
+            if($newArticleId < 1 || $newArticleId > 200000000) {
+                throw(new RangeException("$newArticleId is not an acceptable."));
+            }
         }
         
-        //second, sanitize the string
-        $newType = filter_var($newType, FILTER_SANITIZE_STRING);
-        
-        //third, verify the type against an array of known types
-        $pianoTypes = array("geand", "baby grand", "keyboard", "Playskool");
-        if(in_array($newType, $pianoTypes) === false) {
-            throw(new RangeException("$newType is not a type of piano"));
-        }
-        
-        //if the type was found in the array, we can take it out of quarantine
-        $this->type = $newType;
+        //if the integer got here, it's passed all our tests - assign it!
+        $this->articleId = $newArticleId;
     }
     
-    /**toString() contract to tell the user summary data about this piano
+    
+    /**
+     *gets the role of the user (admin or user)
      *
-     *@param string summary data about this piano
+     *@return string of role
      **/
-    public function __toString() {
-        //first, calculate the mean damage of the keys
-        $mean = 0.0;
-        foreach($this->keys as $pianoKey) {
-            $mean = $mean + $pianoKey;
-        }
-        $mean = $mean / count($this->keys);
-        
-        //second, build a string with the summary
-        $summary = "this is a " . $this->type . " piano with a mean damage of $mean</p>";
-        return($summary);
+    public function getRole() {
+        return($this->role);
     }
-}
-
+    
+    /**
+     *sets the role of the user (admin or user)
+     *
+     *@param string of role
+     **/
+    public function setRole($newRole) {
+        //sanitize the string
+        $newRole = filter_var($newRole, FILTER_SANITIZE_STRING);
+        
+        //if the string got here, it's passed all our tests - assign it!
+        $this->role = $newRole;
+    }
+    
+    /**
+     *gets the name of the user
+     *
+     *@return string of name
+     **/
+    public function getName() {
+        return($this->name);
+    }
+    
+    /**
+     *sets the name of the user
+     *
+     *@param string of name
+     **/
+    public function setName($newName) {
+        //sanitize the string
+        $newName = filter_var($newName, FILTER_SANITIZE_STRING);
+        
+        //if the string got here, it's passed all our tests - assign it!
+        $this->name = $newName;
+    }
+    
+    /**
+     *gets the Email of the user
+     *
+     *@return string of email
+     **/
+    public function getEmail() {
+        return($this->email);
+    }
+    
+    /**
+     *sets the Email of the user
+     *
+     *@param string of email
+     **/
+    public function setEmail($newEmail) {
+        //sanitize the string
+        $newEmail = filter_var($newEmail, FILTER_SANITIZE_STRING);
+        
+        //if the string got here, it's passed all our tests - assign it!
+        $this->email = $newEmail;
+    }
+    
 ?>
