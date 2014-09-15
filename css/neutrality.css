@@ -104,7 +104,6 @@ a:active {
     z-index:1;
     font-size: 1.5em;
     text-align: center;
-
 }
 
 .signup li a:hover {
@@ -129,6 +128,7 @@ a:active {
 }
 
 .myMenu li a:link, .myMenu li a:visited {
+    
     margin: 5px;
     background-color: #59C78A;
     display: block;
@@ -137,7 +137,8 @@ a:active {
     z-index:1;
     font-size: 1.5em;
     text-align: center;
-
+    height: 48px;
+    content: 
 }
 
 .myMenu li a:hover {
