@@ -19,8 +19,12 @@ $(document).ready(
                 },
                 confirmPassword: {
                     equalTo: "#password"
-                }
-                
+                },
+            firstName: {
+               required: true
+            },
+            lastName: {
+               required: true
             },
             
             // messages define what we tell the user
