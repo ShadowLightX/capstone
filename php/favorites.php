@@ -98,12 +98,64 @@
         }
         
         /**
+         * mutator method for article id
+         *
+         * @param mixed new value of article id
+         * @throws UnexpectedValueException if the article Id is not an integer
+         * @throws RangeException if the userId is not positive
+         **/
+        public function setArticleId($newArticleId) {       
+            // first, trim the input of excess whitespace
+            $newArticleId = trim($newArticleId);
+            
+            // second, verify this is an integer
+            if((filter_var($newArticleId, FILTER_VALIDATE_INT)) === false) {
+                throw(new UnexpectedValueException("Article Id $articleId is not an integer"));
+            }
+            
+            // third, convert the id to an integer and ensure it's positive
+            $newArticleId = intval ($newArticleId);
+            if($newArticleId <= 0) {
+                throw(new RangeException("Article Id $newArticleId is not positive"));
+            }
+            
+            // finally, the article id is clean and can be taken out of quarantine
+            $this->articleId = $newArticleId;
+        }
+        
+        /**
          * accessor method for the resource id
          *
          * @return resource id
          **/
         public function getResourceId() {
             return($this->getResourceId);
+        }
+        
+        /**
+         * mutator method for resource id
+         *
+         * @param mixed new value of resource id
+         * @throws UnexpectedValueException if the resource Id is not an integer
+         * @throws RangeException if the userId is not positive
+         **/
+        public function setResourceId($newResourceId) {       
+            // first, trim the input of excess whitespace
+            $newResourceId = trim($newResourceId);
+            
+            // second, verify this is an integer
+            if((filter_var($newResourceId, FILTER_VALIDATE_INT)) === false) {
+                throw(new UnexpectedValueException("resource Id $resourceId is not an integer"));
+            }
+            
+            // third, convert the id to an integer and ensure it's positive
+            $newResourceId = intval ($newResourceId);
+            if($newResourceId <= 0) {
+                throw(new RangeException("Article Id $newResourceId is not positive"));
+            }
+            
+            // finally, the resource id is clean and can be taken out of quarantine
+            $this->articleId = $newResourceId;
         }
         
         /**
