@@ -52,7 +52,11 @@ $(document).ready(
                     // URL to submit to
                     // SECURITY WARNING: browsers don't allow you to submit to
                     // an external server - you can only load from your own
+<<<<<<< HEAD
                     url: "php/signup.php",
+=======
+                    url: "/~sshams/git/capstone/php/signup.php",
+>>>>>>> JS added
                     // data to submit
                     data: $(form).serialize(),
                     // anonymous callback function to react to a successful query
