@@ -82,33 +82,7 @@ a:active {
     
 /* search and login */    
 }
-.signup {
-	margin:0;
-	padding:0;
-}
 
-.signup li {
-	list-style:none;
-	font:1em Helvetica;
-        margin: 0;
-        padding: 0;
-
-}
-
-.signup li a:link, .myMenu li a:visited {
-    margin: 5px;
-    background-color: #2B7A4E;
-    display: block;
-    text-decoration:none;
-    color:#111;
-    z-index:1;
-    font-size: 1.5em;
-    text-align: center;
-}
-
-.signup li a:hover {
-	background-color:#59C78A;	
-}
 
 /*style the main menu*/
 
@@ -138,7 +112,6 @@ a:active {
     font-size: 1.5em;
     text-align: center;
     height: 48px;
-    content: 
 }
 
 .myMenu li a:hover {
