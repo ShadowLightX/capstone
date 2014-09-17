@@ -20,6 +20,63 @@ body {
     margin-right: 5px;
 }
 
+/*nav*/
+.myMenu {
+	margin:0;
+	padding:0;
+}
+
+.myMenu li {
+	list-style:none;
+	font:1em Helvetica;
+        margin: 0;
+        padding: 0;
+}
+
+.myMenu li a:link, .myMenu li a:visited {
+    
+    margin: 5px;
+    background-color: #59C78A;
+    display: block;
+    text-decoration:none;
+    color:#111;
+    z-index:1;
+    font-size: 1.5em;
+    text-align: center;
+    height: 48px;
+}
+
+.myMenu li a:hover {
+	background-color:#2B7A4E;	
+}
+
+/*dropdown menus*/
+.myMenu li ul {
+	position:absolute;
+	visibility:hidden;
+	border-top:1px solid #fff;
+	margin:0;
+	padding:0;
+	z-index:1;
+}
+
+.myMenu li ul li {
+	display:inline;
+	float:none;
+	z-index:1;
+}
+
+.myMenu li ul li a:link, .myMenu li ul li a:visited {
+	background-color:#59C78A;
+	width:auto;
+	z-index: 1;
+}
+
+.myMenu li ul li a:hover {
+	background-color:#2B7A4E;	
+}
+
+/*carousel*/
 .carousel-inner > .item > img {
     margin: 0 auto;
     background-color: #FFF0D5;
@@ -78,65 +135,6 @@ a:hover {
 
 /* selected link */
 a:active {
-    color: #1c1c1c;
-    
-/* search and login */    
+    color: #1c1c1c;  
 }
 
-
-/*style the main menu*/
-.myMenu {
-	margin:0;
-	padding:0;
-}
-
-.myMenu li {
-	list-style:none;
-	font:1em Helvetica;
-        margin: 0;
-        padding: 0;
-
-}
-
-.myMenu li a:link, .myMenu li a:visited {
-    
-    margin: 5px;
-    background-color: #59C78A;
-    display: block;
-    text-decoration:none;
-    color:#111;
-    z-index:1;
-    font-size: 1.5em;
-    text-align: center;
-    height: 48px;
-}
-
-.myMenu li a:hover {
-	background-color:#2B7A4E;	
-}
-
-/*style the sub menu*/
-.myMenu li ul {
-	position:absolute;
-	visibility:hidden;
-	border-top:1px solid #fff;
-	margin:0;
-	padding:0;
-	z-index:1;
-}
-
-.myMenu li ul li {
-	display:inline;
-	float:none;
-	z-index:1;
-}
-
-.myMenu li ul li a:link, .myMenu li ul li a:visited {
-	background-color:#59C78A;
-	width:auto;
-	z-index: 1;
-}
-
-.myMenu li ul li a:hover {
-	background-color:#2B7A4E;	
-}
