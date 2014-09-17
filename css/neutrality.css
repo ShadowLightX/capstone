@@ -34,7 +34,7 @@ body {
 
 .myMenu li a:link, .myMenu li a:visited {
     
-    margin: 4px;
+    margin: 5px;
     background-color: #59C78A;
     display: block;
     text-decoration:none;

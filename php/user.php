@@ -36,7 +36,7 @@ class User {
      *@param string names
      *@param string email
      **/
-    public function __construct($newUserId, $newArticleId, $newProfileId, $newRole, $newName, $newEmail) {
+    public function __construct($newUserId, $newRole, $newName, $newEmail) {
         try{
             //use our mutator methods to sanitize inputs
             $this->setUserId($newUserId);
@@ -109,7 +109,7 @@ class User {
      *@throws UnexpectedValueException if the role is not an integer
      *@throws RangeException if the role is not {0,1,2}
      **/
-    public function setProfileId($newRole) {
+    public function setRole($newRole) {
         //first, trim the input of excess whitespace
         $newRole = trim($newRole);
         
@@ -174,5 +174,5 @@ class User {
         //finally, bring the email out of quarantine
         $this->email = $newEmail;
     }
-    
+}
 ?>
