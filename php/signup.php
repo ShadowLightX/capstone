@@ -1,11 +1,64 @@
+<!DOCTYPE html>
+<html>
+     <head>
+        <Title>Sign Up</title>
+        <meta charset="UTF-8" />
+            <!-- Format -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <!-- Format -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <!-- Stylesheet -->
+        <link rel="stylesheet" type="text/css" href="../css/neutrality.css" />
+            <!-- Bootstrap -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+            <!-- Google font -->
+	<link href='http://fonts.googleapis.com/css?family=Geo' rel='stylesheet' type='text/css'>			
+	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  
+        <script src="//malsup.github.com/jquery.form.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="../javascript/bootstrap.min.js"></script>
+	<script src="../javascript/signup.js"></script>
+	<!-- link type="text/css" rel="stylesheet" href="css/jquery-form.css" /-->
+    </head>
+    <body>
+       <div id="container" class="container">
+	    <div id="container" class="container col-xs-offset-1">
+		<!--nav-->
+		<ul class="row myMenu">
+		    <section id= "logo" class= "col-xs-10 col-md-2"><a href="index.html"><img src="../images/logo.png"></a></section>
+		    <li id= "home" class= "col-xs-10 col-md-2"><a href="index.html">Home</a></li>
+		    <li id= "resources" class="col-xs-10 col-md-2"><a href="resources.html">Resources</a>
+			<ul>
+			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+			</ul>
+		    </li>
+		    <li id= "articles" class= "col-xs-10 col-md-2"><a href="articles.html">Articles</a>
+		       <ul>
+			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+			</ul>
+		    </li>
+		    <li id= "forums" class= "col-xs-10 col-md-2"><a href="forums.html">Forum</a></li><br>
+		    <li id= "search" class= "col-xs-10 col-md-4 reverse" ><a href="....html">Search</a></section>
+		    <li id= "login" class= "col-xs-10 col-md-4 reverse"><a href="....html">Login</a></section>
+		</ul>
+	
 <?php
 // notice the $_POST superglobal is an array!
 // expect all the form values to be loaded into the $_POST superglobal automatically
 // (e.g., the email form value is in $_POST["email"])
 
 // define variables and set to empty values
-$firstName       = ($_POST['firstName']);
-$lastName        = ($_POST['lastName']);
+$firstName       = "";
+$lastName        = "";
 $userName        = "";
 $password        = "";
 $confirmPassword = "";
@@ -52,7 +105,7 @@ try {
     }
     
     // passwords are safe & match
-    echo "Your password is confirmed. <br />";
+    echo "Welcome to Net Neutrality please confirm your e-mail address. <br />";
     
 
 // catch the exception and format it as an error message
@@ -60,3 +113,17 @@ try {
     echo "<span class='badForm'>" . $error->getMessage() . "</span>";
 }
 ?>
+                <p id="outputArea"></p>
+<!--footer-->
+		<div class="row">
+		    <div class="text-center">
+			<section id= "footer" class= "col-xs-10" >
+			    <h2>...</h2>
+			    <p>...</p>
+			</section>
+		    </div>
+		</div>
+	    </div>
+        </div>
+    </body>
+</html>
