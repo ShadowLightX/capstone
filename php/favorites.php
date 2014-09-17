@@ -25,15 +25,15 @@
         /**
          * the bookmark to access the favorited article or resource
          **/
-        private $bookmark;
+        //private $bookmark;
         
-        public function __construct($newUserId, $newArticleId, $newResourceId, $newBookmarkId) {
+        public function __construct($newUserId, $newArticleId, $newResourceId, /*$newBookmarkId)*/ {
             // use the mutator methods to populate the user
             try {
                 $this->setUserId($newUserId);
                 $this->setArticleId($newArticleId);
                 $this->setResourceId($newResourceId);
-                $this->setBookmark($newBookmark);
+                // $this->setBookmark($newBookmark);
             }
             
             catch(UnexpectedValueException $unexpectedValue){
@@ -151,23 +151,12 @@
             // third, convert the id to an integer and ensure it's positive
             $newResourceId = intval ($newResourceId);
             if($newResourceId <= 0) {
-                throw(new RangeException("Article Id $newResourceId is not positive"));
+                throw(new RangeException("resource Id $newResourceId is not positive"));
             }
             
             // finally, the resource id is clean and can be taken out of quarantine
-            $this->articleId = $newResourceId;
+            $this->resourceId = $newResourceId;
         }
-        
-        /**
-         * accessor method for bookmark
-         *
-         * @return bookmark
-         **/
-        public function getBookmark() {
-            return($this->getBookmark);
-        }
-        
-        
     }
 ?>
 
