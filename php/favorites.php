@@ -4,7 +4,7 @@
      *
      * this is a container for articles favorited by users
      **/
-    
+     
     class FavoriteS {
         // first, start with the member (state) variables - documenting each in a doc block
         /**
