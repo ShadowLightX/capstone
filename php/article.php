@@ -1,6 +1,6 @@
 <?php
 /**
- *this class deals with articles found or added to the site
+ *The Article class deals with articles and allows the adding and retrival of articles
  *
  *@author Nicholas Bowling <nbowling505@gmail.com>
  *@version 0.1
@@ -54,6 +54,7 @@ class Article{
     /**
      *set value of Article ID
      *@param mixed the ID that the article has
+     *@throws RangeException for anything that is not null, string, or int
      **/
     public function setArticleID($newArticleId){
         if ($newArticleId == null)
@@ -62,18 +63,32 @@ class Article{
             return;
         }
         
+        //tests for string
         if (gettype($newArticleId) === "string"){
             $newArticleId = trim($newArticleId);
         
             $newArticleId = filter_var($newArticleId, FILTER_SANITIZE_NUMBER_INT);
-            
-            (int)$newArticleId; 
+        
+            //converts to integer    
+            $newArticleId = intval($newArticleID); 
         }
+        
         
         if (gettype($newArticleId !== "int")&& ($newArticleId < 0|| $newArticleId > 20000000))
         {
             throw(new RangeException("$newArticleID is not a number in the correct range"));
         }
+        
+        $this->articleId = $newArticleId;
     }
+    
+    /**
+     *get the value of the article title
+     *
+     *@return string the name(title) of the article
+     **/       
+    public function getTitle(){
+        return $this->title;
+    }    
 }
 ?>
