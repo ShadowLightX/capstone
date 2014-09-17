@@ -17,7 +17,6 @@ body {
 
 #logo {
     background-color: #FFF0D5;
-    margin-right: 5px;
 }
 
 /*nav*/
@@ -35,7 +34,7 @@ body {
 
 .myMenu li a:link, .myMenu li a:visited {
     
-    margin: 5px;
+    margin: 4px;
     background-color: #59C78A;
     display: block;
     text-decoration:none;
@@ -90,7 +89,7 @@ p {
     text-align: center;
 }
 
-#news {
+.news {
     background-color: #59C78A;
     border: 5px solid #FFF0D5;
     height: 100%;

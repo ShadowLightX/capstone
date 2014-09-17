@@ -14,11 +14,6 @@ class User {
     private $userId;
     
     /**
-     *integer of article ID
-     **/
-    private $articleId;
-    
-    /**
      *string of roles
      **/ 
     private $role;
@@ -37,8 +32,6 @@ class User {
      *constructor for user information
      *
      *@param mixed user ID
-     *@param mixed article ID
-     *@param mixed profile ID
      *@param integer role
      *@param string names
      *@param string email
@@ -47,8 +40,6 @@ class User {
         try{
             //use our mutator methods to sanitize inputs
             $this->setUserId($newUserId);
-            $this->setProfileId($newProfileId);
-            $this->setType($newArticleId);
             $this->setRole($newRole);
             $this->setName($newName); 
             $this->setEmail($newEmail);
@@ -101,76 +92,7 @@ class User {
         //finally, the user id is clean and can be taken out of quarantine
         $this->userId = $newUserId;
     }
-    
-    /**
-     *accessor method for profile ID
-     *
-     *@return integer value of profile ID
-     **/
-    public function getUserId() {
-        return($this->profileId);
-    }
-    
-    /**
-     *mutator method for profile ID
-     *
-     *@param mixed new value of profile id or null if a new object
-     *@throws UnexpectedValueException if the profile ID is not an integer
-     *@throws RangeException if the profile ID is not positive
-     **/
-    public function setProfileId($newProfileId) {
-        //zeroth, allow a null if this is a new object
-        if($newProfileId === null) {
-            $this->profileId = null;
-            return;
-        }
-        
-        //first, trim the input of excess whitespace
-        $newProfileId = trim($newProfileId);
-        
-        //second, verify this is an integer
-        if((filter_var($newProfileId, FILTER_VALIDATE_INT)) === false) {
-            throw(new UnexpectedValueException("profile id $newProfileId is not an integer"));
-        }
-        
-        //third, convert the id to an integer and ensure it's positive
-        $newProfileId = intval($newProfileId);
-        if($newProfileId <= 0) {
-            throw(new RangeException("profile id $newProfileId is not positive"));
-        }
-        
-        //finally, the profile id is clean and can be taken out of quarantine
-        $this->profileId = $newProfileId;
-    } 
-    
-    /**
-     *gets the value of the article's ID
-     *
-     *@return integer value of articleId
-     **/
-    public function getArticleId() {
-        return($this->articleId);
-    }
-    
-    /**
-     *sets the value of the article's ID
-     *
-     *@param integer of articleId
-     *@throws UnexpectedValueException if the input is not an integer
-     **/
-    public function setArticleId($newArticleId) {
-        
-        //verify the value of each article ID is on the interval [1 - 200,000,000]
-        foreach($newArticleId as $articleId) {
-            if($newArticleId <= 0) {
-                throw(new RangeException("$newArticleId is not an acceptable."));
-            }
-        }
-        
-        //if the integer got here, it's passed all our tests - assign it!
-        $this->articleId = $newArticleId;
-    }
-    
+  
     /**
      *accessor method for role
      *
