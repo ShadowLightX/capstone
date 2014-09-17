@@ -67,7 +67,7 @@ try {
     if(empty($_POST["firstName"])) {
         throw(new Exception("Please enter your first name"));
     } else {
-        (filter_var($firstName, FILTER_SANITIZE_STRING) !== $firstName);        
+        $firstName = filter_var($firstName, FILTER_SANITIZE_STRING);        
     }
     // filter firstName for bad stuff
     //if(filter_var($firstName, FILTER_SANITIZE_STRING) !== $firstName) {
@@ -75,12 +75,12 @@ try {
     if(empty($_POST["lastName"])) {
         throw(new Exception("Please enter your last name"));
     } else {
-        (filter_var($lastName, FILTER_SANITIZE_STRING) !== $lastName);        
+        $lastName = filter_var($lastName, FILTER_SANITIZE_STRING);        
     }
     if(empty($_POST["userName"])) {
         throw(new Exception("Please create your user name"));
     } else {
-        (filter_var($userName, FILTER_SANITIZE_STRING) !== $userName);        
+        $userName = filter_var($userName, FILTER_SANITIZE_STRING);        
     }
     
     // if the Email has no @ character, throw an exception
