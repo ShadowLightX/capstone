@@ -105,7 +105,7 @@ try {
     }
     
     // passwords are safe & match
-    echo "Welcome to Net Neutrality please confirm your e-mail address. <br />";
+    echo "Welcome to Net Neutrality. Please confirm your e-mail address to complete your registration. <br />";
     
 
 // catch the exception and format it as an error message
