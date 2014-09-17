@@ -45,8 +45,8 @@ echo "\t\t<!-- Stylesheet -->";
 
 function generateNavigation(){
     echo "	<!--nav-->
+                  <section id= 'logo' class= 'col-xs-10 col-md-2'><a href='index.html'><img src='images/logo.png'></a></section>
                   <ul class='row myMenu'>
-                    <section id= 'logo' class= 'col-xs-10 col-md-2'><a href='index.html'><img src='images/logo.png'></a></section>
 		      <li id= 'home' class= 'col-xs-10 col-md-2'><a href='index.html'>Home</a></li>
 		      <li id= 'resources' class='col-xs-10 col-md-2'><a href='resources.html'>Resources</a>
 		    <ul>
@@ -65,8 +65,8 @@ function generateNavigation(){
 		    </li>
 		    <li id= 'forums' class= 'col-xs-10 col-md-2'><a href='forums.html'>Forum</a></li><br>    
 		    <ul class='row signup'>
-			<li id= 'search' class= 'col-xs-10 col-sm-5' ><a href='....html'>Search</a></section>
-			<li id= 'login' class= 'col-xs-10 col-sm-3'><a href='....html'>Login</a></section>
+			<li id= 'search' class= 'col-xs-10 col-sm-5' ><a href='....html'>Search</a></li>
+			<li id= 'login' class= 'col-xs-10 col-sm-3'><a href='....html'>Login</a></li>
 		    </ul>
 		</ul>";
 }
