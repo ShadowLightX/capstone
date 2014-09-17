@@ -25,15 +25,15 @@
         /**
          * the bookmark to access the favorited article or resource
          **/
-        //private $bookmark;
+        private $bookmark;
         
-        public function __construct($newUserId, $newArticleId, $newResourceId, /*$newBookmarkId)*/ {
+        public function __construct($newUserId, $newArticleId, $newResourceId, $newBookmarkId) {
             // use the mutator methods to populate the user
             try {
                 $this->setUserId($newUserId);
                 $this->setArticleId($newArticleId);
                 $this->setResourceId($newResourceId);
-                // $this->setBookmark($newBookmark);
+                $this->setBookmark($newBookmark);
             }
             
             catch(UnexpectedValueException $unexpectedValue){
@@ -156,7 +156,7 @@
             
             // finally, the resource id is clean and can be taken out of quarantine
             $this->resourceId = $newResourceId;
-        }
+        }        
     }
 ?>
 
