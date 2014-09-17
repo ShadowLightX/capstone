@@ -36,30 +36,30 @@ class User {
     /**
      *constructor for user information
      *
-     *@param integer new user ID
-     *@param integer new article ID
-     *@param string new role
-     *@param string new names
-     *@param string new emails
+     *@param mixed user ID
+     *@param mixed article ID
+     *@param mixed profile ID
+     *@param integer role
+     *@param string names
+     *@param string email
      **/
-    public function __construct($newUserId, $newArticleId, $newRole, $newName, $newEmail) {
+    public function __construct($newUserId, $newArticleId, $newProfileId, $newRole, $newName, $newEmail) {
         try{
             //use our mutator methods to sanitize inputs
-            $this->setKeys($newUserID); 
+            $this->setUserId($newUserId);
+            $this->setProfileId($newProfileId);
             $this->setType($newArticleId);
-            $this->setType($newRole; 
-            $this->setType($newName); 
-            $this->setType($newEmail);         
-        }
-        /**
-         *----------------------------
-        catch(UnexpectedValueException $error) {
-            //rethrow the exception to the code that tried to create the object
-            throw(new UnexpectedValueException("unable to create piano", 0, $error));
+            $this->setRole($newRole);
+            $this->setName($newName); 
+            $this->setEmail($newEmail);
+        } catch(UnexpectedValueException $unexpectedValue) {
+            //rethrow to the caller
+            throw(new UnexpectedValueException("unable to construct user", 0, $unexpectedValue));
+        } catch(RangeException $range) {
+            //rethrow to the caller
+            throw(new RangeException("Unable to construct user", 0, $range));
         }
     }
-    *-------------------------------------
-    **/
     
     /**
      *accessor method for user ID
