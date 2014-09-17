@@ -3,7 +3,7 @@
  *The Article class deals with articles and allows the adding and retrival of articles
  *
  *@author Nicholas Bowling <nbowling505@gmail.com>
- *@version 0.1
+ *@version 0.1.2
  **/
 
 class Article{
@@ -25,7 +25,7 @@ class Article{
     /**
      *the datetime the article was published
      **/
-    private $datepublished
+    private $datePublished
     
     /**
      *the large string text inside the article
@@ -89,6 +89,29 @@ class Article{
      **/       
     public function getTitle(){
         return $this->title;
-    }    
+    }
+    
+    /**
+     *set the value of the article title
+     *
+     *@return string
+     **/
+    
+    //example: 09/06/2013/ 1:57:26 pm"
+    //date published
+    public function setDatePublished($newDatePublished){
+        if (gettype !== "string"){
+            throw(new UnexpectedValueException("$newDatePublished is not the expected type"));
+        }
+        
+        $dateTime = date_create_from_format("Y/m/d H:i:s",$newDatePublished);
+        
+        if(date_get_last_errors['warning_count']>=1||date_get_last_errors['error_count']>=1)
+        {
+            throw(new RangeException("$newDatePublished is not in the correct format of YYYY/MM/DD 00:00:00"));
+        }
+        
+        $this->datePublished = $newDatePublished;
+    }
 }
 ?>
