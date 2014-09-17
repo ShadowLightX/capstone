@@ -59,11 +59,10 @@ $(document).ready(
                     success: function(ajaxOutput) {
                         // html() is jQuery's .innerHTML
                         $("#outputArea").html(ajaxOutput);
-                    }
-                    
-                });
-            }
+                         }
+                    });
+               }
+          }
         });
-    }
-    
+    }  
 );
