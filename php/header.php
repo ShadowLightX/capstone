@@ -1,6 +1,6 @@
 <?php
 //do not pass in googlefonts
-function generateHeader ($title, $javascript, $css)
+function generateHeader ($title, $jscript, $css)
 {
 //html that will not be changed for any reason
 echo "<!DOCTYPE html>\n
@@ -29,11 +29,11 @@ echo "\t\t<!-- Stylesheet -->";
 	\t\t<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->\n
 	\t\t<!--[if lt IE 9]-->";
     
-    if (gettype($javascript)!== "array"){
+    if (gettype($jscript)!== "array"){
         throw(new UnexpectedValueException ("javaacript is not an array"));
     }
 
-    $newJavascript = array_values($javascript);
+    $newJavascript = array_values($jscript);
 
     foreach($newJavascript -> $js){
         echo "\t\t<script src="$js"></script>\n";        
