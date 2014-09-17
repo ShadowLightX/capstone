@@ -20,7 +20,7 @@ class User {
     
     /**
      *string of roles
-     **/
+     **/ 
     private $role;
     
     /**
@@ -62,32 +62,86 @@ class User {
     **/
     
     /**
-     *gets the value of the user's ID
+     *accessor method for user ID
      *
-     *@return integer value of userId
+     *@return integer value of user ID
      **/
     public function getUserId() {
         return($this->userId);
     }
     
     /**
-     *sets the value of the user's ID
+     *mutator method for user ID
      *
-     *@param integer of userId
-     *@throws UnexpectedValueException if the input is not an integer
+     *@param mixed new value of user id or null if a new object
+     *@throws UnexpectedValueException if the user ID is not an integer
+     *@throws RangeException if the user ID is not positive
      **/
     public function setUserId($newUserId) {
-        
-        //verify the value of each user ID is on the interval [1 - 200,000,000]
-        foreach($newUserId as $userId) {
-            if($newUserId < 1 || $newUserId > 200000000) {
-                throw(new RangeException("$newUserId is not an acceptable."));
-            }
+        //zeroth, allow a null if this is a new object
+        if($newUserId === null) {
+            $this->userId = null;
+            return;
         }
         
-        //if the integer got here, it's passed all our tests - assign it!
+        //first, trim the input of excess whitespace
+        $newUserId = trim($newUserId);
+        
+        //second, verify this is an integer
+        if((filter_var($newUserId, FILTER_VALIDATE_INT)) === false) {
+            throw(new UnexpectedValueException("user id $newUserId is not an integer"));
+        }
+        
+        //third, convert the id to an integer and ensure it's positive
+        $newUserId = intval($newUserId);
+        if($newUserId <= 0) {
+            throw(new RangeException("user id $newUserId is not positive"));
+        }
+        
+        //finally, the user id is clean and can be taken out of quarantine
         $this->userId = $newUserId;
     }
+    
+    /**
+     *accessor method for profile ID
+     *
+     *@return integer value of profile ID
+     **/
+    public function getUserId() {
+        return($this->profileId);
+    }
+    
+    /**
+     *mutator method for profile ID
+     *
+     *@param mixed new value of profile id or null if a new object
+     *@throws UnexpectedValueException if the profile ID is not an integer
+     *@throws RangeException if the profile ID is not positive
+     **/
+    public function setProfileId($newProfileId) {
+        //zeroth, allow a null if this is a new object
+        if($newProfileId === null) {
+            $this->profileId = null;
+            return;
+        }
+        
+        //first, trim the input of excess whitespace
+        $newProfileId = trim($newProfileId);
+        
+        //second, verify this is an integer
+        if((filter_var($newProfileId, FILTER_VALIDATE_INT)) === false) {
+            throw(new UnexpectedValueException("profile id $newProfileId is not an integer"));
+        }
+        
+        //third, convert the id to an integer and ensure it's positive
+        $newProfileId = intval($newProfileId);
+        if($newProfileId <= 0) {
+            throw(new RangeException("profile id $newProfileId is not positive"));
+        }
+        
+        //finally, the profile id is clean and can be taken out of quarantine
+        $this->profileId = $newProfileId;
+    } 
     
     /**
      *gets the value of the article's ID
@@ -108,7 +162,7 @@ class User {
         
         //verify the value of each article ID is on the interval [1 - 200,000,000]
         foreach($newArticleId as $articleId) {
-            if($newArticleId < 1 || $newArticleId > 200000000) {
+            if($newArticleId <= 0) {
                 throw(new RangeException("$newArticleId is not an acceptable."));
             }
         }
@@ -117,26 +171,38 @@ class User {
         $this->articleId = $newArticleId;
     }
     
-    
     /**
-     *gets the role of the user (admin or user)
+     *accessor method for role
      *
-     *@return string of role
+     *@return integer value of role
      **/
     public function getRole() {
         return($this->role);
     }
     
     /**
-     *sets the role of the user (admin or user)
+     *mutator method for role
      *
-     *@param string of role
+     *@param integer new value of role
+     *@throws UnexpectedValueException if the role is not an integer
+     *@throws RangeException if the role is not {0,1,2}
      **/
-    public function setRole($newRole) {
-        //sanitize the string
-        $newRole = filter_var($newRole, FILTER_SANITIZE_STRING);
+    public function setProfileId($newRole) {
+        //first, trim the input of excess whitespace
+        $newRole = trim($newRole);
         
-        //if the string got here, it's passed all our tests - assign it!
+        //second, verify this is an integer
+        if((filter_var($newRole, FILTER_VALIDATE_INT)) === false) {
+            throw(new UnexpectedValueException("role $newRole is not an integer"));
+        }
+        
+        //third, convert the role to an integer and ensure it's positive
+        $newRole = intval($newRole);
+        if($newRole < 0 || $newRole >2) {
+            throw(new RangeException("role $newRole is not 0, 1, or 2"));
+        }
+        
+        //finally, the role is clean and can be taken out of quarantine
         $this->role = $newRole;
     }
     
@@ -163,24 +229,27 @@ class User {
     }
     
     /**
-     *gets the Email of the user
+     *accessor method for email
      *
-     *@return string of email
+     *@return string value of email
      **/
     public function getEmail() {
         return($this->email);
     }
     
     /**
-     *sets the Email of the user
+     *mutator method for email
      *
-     *@param string of email
+     *@param string new value of email
      **/
     public function setEmail($newEmail) {
-        //sanitize the string
-        $newEmail = filter_var($newEmail, FILTER_SANITIZE_STRING);
+        //first, trim the input of excess whitespace
+        $newEmail = trim($newEmail);
         
-        //if the string got here, it's passed all our tests - assign it!
+        //second, sanitize the email of all invalid email characters
+        $newEmail = filter_var($newEmail, FILTER_SANITIZE_EMAIL);
+        
+        //finally, bring the email out of quarantine
         $this->email = $newEmail;
     }
     
