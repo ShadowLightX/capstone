@@ -5,7 +5,7 @@
      * this is a container for articles favorited by users
      **/
      
-    class FavoriteS {
+    class Favorite {
         // first, start with the member (state) variables - documenting each in a doc block
         /**
          * the user favoriting the article
@@ -48,12 +48,71 @@
         }
         
         /**
-         *accessor method for user id
+         * accessor method for user id
          *
          * @return integer value of user id
          **/
         public function getUserId() {
             return($this->userId);
+        }
+        
+        /**
+         * mutator method for user id
+         *
+         * @param mixed new value of user id or null if a new object
+         * @throws UnexpectedValueException if the userId is not an integer
+         * @throws RangeException if the userId is not positive
+         **/
+        public function setUserId($newUserId) {
+            // zeroth, allow a null if this is a new object
+            if($newUserId === null) {
+                $this->userId = null;
+                return;
+            }
+            
+            // first, trim the input of excess whitespace
+            $newUserId = trim($newUserId);
+            
+            // second, verify this is an integer
+            if((filter_var($newUserId, FILTER_VALIDATE_INT)) === false) {
+                throw(new UnexpectedValueException("user id $userId is not an integer"));
+            }
+            
+            // third, convert the id to an integer and ensure it's positive
+            $newUserId = intval ($newUserId);
+            if($newUserId <= 0) {
+                throw(new RangeException("user id $newUserId is not positive"));
+            }
+            
+            // finally, the user id is clean and can be taken out of quarantine
+            $this->userId = $newUserId;
+        }
+        
+        /**
+         * accessor method for article id
+         *
+         * @return article id
+         **/
+        public function getArticleId() {
+            return($this->articleId);
+        }
+        
+        /**
+         * accessor method for the resource id
+         *
+         * @return resource id
+         **/
+        public function getResourceId() {
+            return($this->getResourceId);
+        }
+        
+        /**
+         * accessor method for bookmark
+         *
+         * @return bookmark
+         **/
+        public function getBookmark() {
+            return($this->getBookmark);
         }
         
         
