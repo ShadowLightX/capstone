@@ -140,8 +140,23 @@ class Article{
         $this->title = $newTitle;
     }
     
-    //example: 09/06/2013/ 13:57:26"
-    //date published
+    /**
+     *get the date the article was published
+     *
+     *@return string formatted sql blessed date
+     **/
+    public function getDatePublished()
+    {
+        $this->datePublished;
+    }
+    
+    /**
+     *set the date the article was published
+     *
+     *@param string the name of the datePublished
+     *@throws UnexceptedValueException if input is not a string
+     *@throws RangeException if the datePublished is not in the correct format
+     **/
     public function setDatePublished($newDatePublished){
         if (gettype !== "string"){
             throw(new UnexpectedValueException("$newDatePublished is not the expected type"));
@@ -156,5 +171,37 @@ class Article{
         
         $this->datePublished = $newDatePublished;
     }
+    
+    /**
+     *get the text in article
+     *
+     *@return string text of the article in question
+     **/
+    public function getText(){
+        $this->text;
+    }
+    
+    /**
+     *set the text in an article
+     *
+     *@param string article text
+     *@throws UnexpectedValueException if the text is not a string
+     *@throws RangeException if the text does not have any length
+     **/
+    
+    public function setText($newText){
+        if (gettype($newText)!== "string"){
+            throw(new UnexpectedValueException("Please use text in the article"));
+        }
+        
+        if (strlen($newText)<1){
+            throw(new RangeException("The article text is not set please tryu again."));
+        }
+        
+        $this->title = $newText;
+    }
+    
+    
+    
 }
 ?>
