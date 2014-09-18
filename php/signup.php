@@ -63,24 +63,27 @@ $userName        = "";
 $password        = "";
 $confirmPassword = "";
 // try the sanitization so we can format errors later on
+// filter firstName for bad stuff
 try {
     if(empty($_POST["firstName"])) {
         throw(new Exception("Please enter your first name"));
     } else {
-        $firstName = filter_var($firstName, FILTER_SANITIZE_STRING);        
+       // (filter_var($firstName, FILTER_SANITIZE_STRING) !== $firstName);
+        $firstName = filter_var($firstName, FILTER_SANITIZE_STRING);
     }
-    // filter firstName for bad stuff
+    
     //if(filter_var($firstName, FILTER_SANITIZE_STRING) !== $firstName) {
         //throw(new Exception("Please enter your first name"));
     if(empty($_POST["lastName"])) {
         throw(new Exception("Please enter your last name"));
     } else {
-        $lastName = filter_var($lastName, FILTER_SANITIZE_STRING);        
+        //(filter_var($lastName, FILTER_SANITIZE_STRING) !== $lastName);
+        $lastName = filter_var($lastName, FILTER_SANITIZE_STRING);
     }
     if(empty($_POST["userName"])) {
         throw(new Exception("Please create your user name"));
     } else {
-        $userName = filter_var($userName, FILTER_SANITIZE_STRING);        
+        $userName= filter_var($userName, FILTER_SANITIZE_STRING);
     }
     
     // if the Email has no @ character, throw an exception
@@ -90,13 +93,16 @@ try {
     
     // if filter_input passed the Email, we can use it
     $safeEmail = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
-
-    // email is safe
-    echo $safeEmail . " just signed up.<br />";
+    
     
     // sanitize both passwords
     $safePassword = filter_input(INPUT_POST, "password",       FILTER_SANITIZE_SPECIAL_CHARS);
     $safeConfirm = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_SPECIAL_CHARS);
+    
+    // email is safe
+    echo "<p id='outputArea'>" . $safeEmail . " just signed up.";
+    echo $safePassword . ", " .$safeConfirm . "</p>";
+    
     
     
     // ensure the passwords match
@@ -113,7 +119,6 @@ try {
     echo "<span class='badForm'>" . $error->getMessage() . "</span>";
 }
 ?>
-                <p id="outputArea"></p>
 <!--footer-->
 		<div class="row">
 		    <div class="text-center">
