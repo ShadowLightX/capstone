@@ -97,7 +97,7 @@ class Article{
      *
      *@param string the name(title) of the article
      *@throws UnexceptedValueException if input is not a string
-     *@throws RangeException if the title is not existent and longer than 70
+     *@throws RangeException if the title is a empty string and longer than 70 characters
      **/
     public function setTitle($newTitle){
         if (gettype($newTitle)!== "string"){
@@ -105,12 +105,40 @@ class Article{
         }
         
         if (strlen($newTitle)<1 || strlen($newTitle)> 70){
-            throw(new RangeException("The article title is too long please try again."));
+            throw(new RangeException("The article title is not set or too long please try again."));
         }
         
         $this->title = $newTitle;
     }
     
+
+   /**
+     *get the name of the article author
+     *
+     *@return string the name of the full name of the article
+     **/       
+    public function getAuthor(){
+        return $this->title;
+    }
+    
+    /**
+     *set the name of the author
+     *
+     *@param string the name of the author
+     *@throws UnexceptedValueException if input is not a string
+     *@throws RangeException if the author is an empty string and longer than 100 characters
+     **/
+    public function setAuthor($newAuthor){
+        if (gettype($newAuthor)!== "string"){
+            throw(new UnexpectedValueException("Please use the name of the author"));
+        }
+        
+        if (strlen($newAuthor)<1 || strlen($newAuthor)> 100){
+            throw(new RangeException("The author is not set or it is longer then permitted please try again."));
+        }
+        
+        $this->title = $newTitle;
+    }
     
     //example: 09/06/2013/ 13:57:26"
     //date published
