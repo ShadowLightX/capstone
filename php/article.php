@@ -91,13 +91,21 @@ class Article{
         return $this->title;
     }
     
+    
+    /**
+     *set the value of the article title
+     *
+     *@param string the name(title) of the article
+     *@throws UnexceptedValueException if input is not a string
+     **/
+    
     /**
      *set the value of the article title
      *
      *@return string
      **/
     
-    //example: 09/06/2013/ 1:57:26 pm"
+    //example: 09/06/2013/ 13:57:26"
     //date published
     public function setDatePublished($newDatePublished){
         if (gettype !== "string"){
