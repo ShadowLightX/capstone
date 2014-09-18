@@ -74,7 +74,7 @@ class Article{
         }
         
         
-        if (gettype($newArticleId !== "int")&& ($newArticleId < 0|| $newArticleId > 20000000))
+        if (gettype($newArticleId) !== "int"&& ($newArticleId < 0|| $newArticleId > 20000000))
         {
             throw(new RangeException("$newArticleID is not a number in the correct range"));
         }
@@ -97,13 +97,20 @@ class Article{
      *
      *@param string the name(title) of the article
      *@throws UnexceptedValueException if input is not a string
+     *@throws RangeException if the title is not existent and longer than 70
      **/
+    public function setTitle($newTitle){
+        if (gettype($newTitle)!== "string"){
+            throw(new UnexpectedValueException("Please use a phrase to describe an article"));
+        }
+        
+        if (strlen($newTitle)<1 || strlen($newTitle)> 70){
+            throw(new RangeException("The article title is too long please try again."));
+        }
+        
+        $this->title = $newTitle;
+    }
     
-    /**
-     *set the value of the article title
-     *
-     *@return string
-     **/
     
     //example: 09/06/2013/ 13:57:26"
     //date published
