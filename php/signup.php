@@ -68,12 +68,8 @@ try {
     if(empty($_POST["firstName"])) {
         throw(new Exception("Please enter your first name"));
     } else {
-       // (filter_var($firstName, FILTER_SANITIZE_STRING) !== $firstName);
         $firstName = filter_input(INPUT_POST, "firstName", FILTER_SANITIZE_STRING);
     }
-    
-    //if(filter_var($firstName, FILTER_SANITIZE_STRING) !== $firstName) {
-        //throw(new Exception("Please enter your first name"));
     if(empty($_POST["lastName"])) {
         throw(new Exception("Please enter your last name"));
     } else {
