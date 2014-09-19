@@ -25,31 +25,31 @@
     </head>
     <body>
        <div id="container" class="container">
-	    <div id="container" class="container col-xs-offset-1">
-		<!--nav-->
-		<ul class="row myMenu">
-		    <section id= "logo" class= "col-xs-10 col-md-2"><a href="index.html"><img src="../images/logo.png"></a></section>
-		    <li id= "home" class= "col-xs-10 col-md-2"><a href="index.html">Home</a></li>
-		    <li id= "resources" class="col-xs-10 col-md-2"><a href="resources.html">Resources</a>
-			<ul>
-			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			</ul>
-		    </li>
-		    <li id= "articles" class= "col-xs-10 col-md-2"><a href="articles.html">Articles</a>
-		       <ul>
-			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			    <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			</ul>
-		    </li>
-		    <li id= "forums" class= "col-xs-10 col-md-2"><a href="forums.html">Forum</a></li><br>
-		    <li id= "search" class= "col-xs-10 col-md-4 reverse" ><a href="....html">Search</a></section>
-		    <li id= "login" class= "col-xs-10 col-md-4 reverse"><a href="....html">Login</a></section>
-		</ul>
+	<div id="container" class="container col-xs-offset-1">
+	  <!--nav-->
+	  <ul class="row myMenu">
+	    <section id= "logo" class= "col-xs-10 col-md-2"><a href="index.html"><img src="../images/logo.png"></a></section>
+	    <li id= "home" class= "col-xs-10 col-md-2"><a href="index.html">Home</a></li>
+	    <li id= "resources" class="col-xs-10 col-md-2"><a href="resources.html">Resources</a>
+	      <ul>
+                <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+		<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+		<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+		<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+	      </ul>
+	    </li>
+	    <li id= "articles" class= "col-xs-10 col-md-2"><a href="articles.html">Articles</a>
+	      <ul>
+                <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+                <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+                <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+                <li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+	      </ul>
+	    </li>
+		<li id= "forums" class= "col-xs-10 col-md-2"><a href="forums.html">Forum</a></li><br>
+		<li id= "search" class= "col-xs-10 col-md-4 reverse" ><a href="....html">Search</a></section>
+		<li id= "login" class= "col-xs-10 col-md-4 reverse"><a href="....html">Login</a></section>
+	    </ul>
 	
 <?php
 // notice the $_POST superglobal is an array!
@@ -92,7 +92,10 @@ try {
     }
     
     // if filter_input passed the Email, we can use it
-    $safeEmail = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
+    $safeEmail = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+    
+    // first, trim the input of excess whitespace
+    $password = trim($password);
     
     
     // sanitize both passwords
@@ -100,8 +103,8 @@ try {
     $safeConfirm = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_SPECIAL_CHARS);
     
     // email is safe
-    echo "<p id='outputArea'>" . $safeEmail . " just signed up.";
-    echo $safePassword . ", " .$safeConfirm . "</p>";
+    echo "<p id='outputArea'>" . $safeEmail . " just signed up.</p>";
+    //echo $safePassword . ", " .$safeConfirm . "</p>";
     
     
     
@@ -111,7 +114,7 @@ try {
     }
     
     // passwords are safe & match
-    echo "Welcome to Net Neutrality. Please confirm your e-mail address to complete your registration. <br />";
+    echo " Please confirm your e-mail address to complete your registration. <br />";
     
 
 // catch the exception and format it as an error message
