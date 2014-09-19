@@ -69,7 +69,7 @@ try {
         throw(new Exception("Please enter your first name"));
     } else {
        // (filter_var($firstName, FILTER_SANITIZE_STRING) !== $firstName);
-        $firstName = filter_var($firstName, FILTER_SANITIZE_STRING);
+        $firstName = filter_input(INPUT_POST, "firstName", FILTER_SANITIZE_STRING);
     }
     
     //if(filter_var($firstName, FILTER_SANITIZE_STRING) !== $firstName) {
@@ -78,12 +78,12 @@ try {
         throw(new Exception("Please enter your last name"));
     } else {
         //(filter_var($lastName, FILTER_SANITIZE_STRING) !== $lastName);
-        $lastName = filter_var($lastName, FILTER_SANITIZE_STRING);
+        $lastName = filter_input(INPUT_POST, "lastName", FILTER_SANITIZE_STRING);
     }
     if(empty($_POST["userName"])) {
         throw(new Exception("Please create your user name"));
     } else {
-        $userName= filter_var($userName, FILTER_SANITIZE_STRING);
+        $userName= filter_input(INPUT_POST, "userName", FILTER_SANITIZE_STRING);
     }
     
     // if the Email has no @ character, throw an exception
@@ -98,23 +98,18 @@ try {
     $password = trim($password);
     
     
-    // sanitize both passwords
+    // sanitize both passwords 127 so
     $safePassword = filter_input(INPUT_POST, "password",       FILTER_SANITIZE_SPECIAL_CHARS);
     $safeConfirm = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_SPECIAL_CHARS);
     
     // email is safe
-    echo "<p id='outputArea'>" . $safeEmail . " just signed up.</p>";
-    //echo $safePassword . ", " .$safeConfirm . "</p>";
-    
-    
-    
+    echo "<p id='outputArea'>Welcome " . $userName . ". Please confirm your e-mail address to complete your registration.</p>";
+
+    //echo $safePassword . ", " .$safeConfirm . "</p>"; 
     // ensure the passwords match
     if($safePassword !== $safeConfirm) {
         throw(new Exception("Please match passwords"));
     }
-    
-    // passwords are safe & match
-    echo " Please confirm your e-mail address to complete your registration. <br />";
     
 
 // catch the exception and format it as an error message
