@@ -10,37 +10,42 @@ class Article{
     /**
      *automatically generated id for an article and is null if not given
      **/
-    private $articleId
+    private $articleId;
     
     /**
      *the string title of the article
      **/
-    private $title
+    private $title;
     
     /**
      *the string author of the article
      **/
-    private $author
+    private $author;
     
     /**
      *the datetime the article was published
      **/
-    private $datePublished
+    private $datePublished;
     
     /**
      *the large string text inside the article
      **/
-    private $text
+    private $text;
     
     /**
      *the string publisher of the article
      **/
-    private $publisher
+    private $publisher;
     
     /**
      *the string url the article was found at
      **/
-    private $url
+    private $url;
+    
+    /**
+     *the array for the image associated with an article
+     **/
+    private $image;
     
     /**
      *get the Article ID number
@@ -237,5 +242,39 @@ class Article{
         $this->publisher = $newPublisher;
     }
     
+    /**
+     *get the url of the article
+     *
+     *@returns string url
+     **/
+    public function getUrl(){
+        return $this->url;
+    }
+    
+    /**
+     *set the url the article was found at
+     *
+     *@param string url of the article
+     *@throws UnexpectedValueException if the url is not a string, not a valid url, or http or https link
+    **/
+    public function setUrl($newUrl){
+        if (gettype($newUrl)!== "string"){
+            throw(new UnexpectedValueException("Please use a url string of the article"));
+        }
+        
+        //check that string is a valid url
+        if (filter_var($newUrl,FILTER_VALIDATE_URL)===false){
+            throw(new UnexpectedValueException("Please use a valid url link"));
+        }
+        
+        $splitUrl = explode ("://",$newUrl);
+        if (strtolower($splitUrl[0]) !== "http" || strtolower($splitUrl[0]) !== "https"){
+            throw(new UnexpectedValueException("Please use only Http and Https"));
+        }
+        
+        $splitUrl[1] = filter_var($splitUrl[1],FILTER_SANITIZE_STRING);
+        
+        $this->url = implode("://",$splitUrl);        
+    }
 }
 ?>
