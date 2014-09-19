@@ -3,7 +3,7 @@
  *The Article class deals with articles and allows the adding and retrival of articles
  *
  *@author Nicholas Bowling <nbowling505@gmail.com>
- *@version 0.1.4
+ *@version 0.1.6
  **/
 
 class Article{
@@ -42,9 +42,23 @@ class Article{
      **/
     private $url;
     
-    public function __construct($newArticleID,$newTitle,$newAuthor,$newDatePublished,$newText,$newPublisher,$newUrl){
+    /**
+     *constructor for a article
+     *
+     *@param mixed Article ID for the article
+     *@param string Title for the article
+     *@param string Author of the article
+     *@param string The date the article was published
+     *@param string The text in the article
+     *@param string The publisher of an article
+     *@param string The URL the article came from
+     *@throws UnexceptedValueException if inputs are of the incorrect types or urls
+     *@throws RangesException if the inputs contain invalid values
+     **/
+    
+    public function __construct($newArticleId,$newTitle,$newAuthor,$newDatePublished,$newText,$newPublisher,$newUrl){
         try{
-            $this->setArticleID($newArticleID);
+            $this->setArticleId($newArticleId);
             $this->setTitle($newTitle);
             $this->setAuthor($newAuthor);
             $this->setDatePublished($newDatePublished);
@@ -76,7 +90,7 @@ class Article{
      *@param mixed the ID that the article has
      *@throws RangeException for anything that is not null, string, or int
      **/
-    public function setArticleID($newArticleId){
+    public function setArticleId($newArticleId){
         if ($newArticleId == null)
         {
             $this->articleId = null;
