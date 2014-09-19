@@ -3,7 +3,7 @@
  *The Article class deals with articles and allows the adding and retrival of articles
  *
  *@author Nicholas Bowling <nbowling505@gmail.com>
- *@version 0.1.2
+ *@version 0.1.4
  **/
 
 class Article{
@@ -108,6 +108,8 @@ class Article{
             throw(new RangeException("The article title is not set or too long please try again."));
         }
         
+        $newTitle = filter_var($newTitle,FILTER_SANITIZE_STRING);
+        
         $this->title = $newTitle;
     }
     
@@ -136,6 +138,8 @@ class Article{
         if (strlen($newAuthor)<1 || strlen($newAuthor)> 100){
             throw(new RangeException("The author is not set or it is longer then permitted please try again."));
         }
+        
+        $newAuthor = filter_var($newAuthor, FILTER_SANITIZE_STRING);
         
         $this->title = $newTitle;
     }
@@ -195,13 +199,43 @@ class Article{
         }
         
         if (strlen($newText)<1){
-            throw(new RangeException("The article text is not set please tryu again."));
+            throw(new RangeException("The article text is not set please try again."));
         }
+        
+        $newText = filter_var($newText,FILTER_SANITIZE_STRING);
         
         $this->title = $newText;
     }
     
+    /**
+     *get the publisher of the article
+     *
+     *@return string publisher of the article
+     **/
+    public function getPublisher(){
+        return $this->publisher;
+    }
     
+    /**
+     *set the publisher of the article
+     *
+     *@param string article publisher
+     *@throws UnexpectedValueException if the publisher is not a string
+     *@throws RangeException if the publisher does not have any length or is longer than 70
+     **/
+    public function setPublisher($newPublisher){
+        if (gettype($newPublisher)!== "string"){
+            throw(new UnexpectedValueException("Please use a publisher of the article"));
+        }
+        
+        if (strlen($newPublisher)<1 || strlen($newPublisher)>70){
+            throw(new RangeException("The article publisher is not set or too long please try again."));
+        }
+        
+        $newPublisher = filter_var($newPublisher,FILTER_SANITIZE_STRING);
+        
+        $this->publisher = $newPublisher;
+    }
     
 }
 ?>
