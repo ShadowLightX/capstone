@@ -42,10 +42,25 @@ class Article{
      **/
     private $url;
     
-    /**
-     *the array for the image associated with an article
-     **/
-    private $image;
+    public function __construct($newArticleID,$newTitle,$newAuthor,$newDatePublished,$newText,$newPublisher,$newUrl){
+        try{
+            $this->setArticleID($newArticleID);
+            $this->setTitle($newTitle);
+            $this->setAuthor($newAuthor);
+            $this->setDatePublished($newDatePublished);
+            $this->setText($newText);
+            $this->setPublisher($newPublisher);
+            $this->setUrl($newUrl);
+        }
+        catch(UnexpectedValueException $error){
+            //rethrow the exception passed when the object was created the object
+            throw(new UnexpectedValueException("unable to create article", 0, $error));
+        }
+        catch(RangeException $error){
+            //rethrow the exception passed from the object was created
+            throw(new RangeException("unable to create article", 0, $error));
+        }
+    }
     
     /**
      *get the Article ID number
@@ -178,7 +193,7 @@ class Article{
             throw(new RangeException("$newDatePublished is not in the correct format of YYYY/MM/DD 00:00:00"));
         }
         
-        $this->datePublished = $newDatePublished;
+        $this->datePublished = $dateTime;
     }
     
     /**
