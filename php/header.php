@@ -1,5 +1,10 @@
 <?php
-//do not pass in googlefonts
+/*
+ *this function outputs the beginning of the page
+ *@param string the title of the page
+ *@param array of javascript files you want to use
+ *@param array of css files(do not pass in googlefonts)
+ **/
 function generateHeader ($title, $jscript, $css)
 {
 //html that will not be changed for any reason
@@ -10,7 +15,6 @@ echo "<!DOCTYPE html>\n
     \t\t<meta charset='UTF-8' />\n
     \t\t<!-- Format -->\n
     \t\t<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n
-    \t\t<!-- Format -->\n
     \t\t<meta name='viewport' content='width=device-width, initial-scale=1'>\n";
     
 echo "\t\t<!-- Stylesheet -->";
@@ -42,6 +46,7 @@ echo "\t\t<!-- Stylesheet -->";
     echo "\t\t<!--[endif]-->\n";
     echo "</head>\n";
 }
+
 
 function generateNavigation(){
     echo "	<!--nav-->
