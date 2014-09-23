@@ -70,10 +70,10 @@ try {
     } else {
         $firstName = filter_input(INPUT_POST, "firstName", FILTER_SANITIZE_STRING);
     }
+    
     if(empty($_POST["lastName"])) {
         throw(new Exception("Please enter your last name"));
     } else {
-        //(filter_var($lastName, FILTER_SANITIZE_STRING) !== $lastName);
         $lastName = filter_input(INPUT_POST, "lastName", FILTER_SANITIZE_STRING);
     }
     if(empty($_POST["userName"])) {
@@ -82,7 +82,6 @@ try {
         $userName= filter_input(INPUT_POST, "userName", FILTER_SANITIZE_STRING);
     }
     
-    // if the Email has no @ character, throw an exception
     if(filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL) === false) {
         throw(new Exception("Please enter your Email address"));
     }
