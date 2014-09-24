@@ -1,10 +1,13 @@
-body {
-    background-color: #FFF0D5 !important;
-    padding: 5px;
+body { 
+  background-image: url('../images/circuits.png'); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
         
 .container {
-    background-color: #FFF0D5;
+    background-color: transparent;
 }
 
 #linksHeader {
@@ -16,7 +19,7 @@ body {
 }
 
 #logo {
-    background-color: #FFF0D5;
+    background-color: transparent;
 }
 
 /*nav*/
@@ -34,10 +37,10 @@ body {
 
 .myMenu li a:link, .myMenu li a:visited {
     margin: 5px;
-    background-color: #59C78A;
+    background-color: #1c1c1c;
     display: block;
     text-decoration:none;
-    color:#111;
+    color: #E03435;
     z-index:1;
     font-size: 1.5em;
     text-align: center;
@@ -45,14 +48,13 @@ body {
 }
 
 .myMenu li a:hover {
-	background-color:#2B7A4E;	
+	background-color: #3D3D3D;	
 }
 
 /*dropdown menus*/
 .myMenu li ul {
 	position:absolute;
 	visibility:hidden;
-	border-top:1px solid #fff;
 	margin:0;
 	padding:0;
 	z-index:1;
@@ -65,23 +67,23 @@ body {
 }
 
 .myMenu li ul li a:link, .myMenu li ul li a:visited {
-	background-color:#59C78A;
+	background-color:#1c1c1c;
 	width:auto;
 	z-index: 1;
 }
 
 .myMenu li ul li a:hover {
-	background-color:#2B7A4E;	
+	background-color:#3D3D3D;	
 }
 
 /*carousel*/
 .carousel-inner > .item > img {
     margin: 0 auto;
-    background-color: #FFF0D5;
+    background-color: transparent;
 }
 
 #carousel-example-generic {
-    background-color: #FFF0D5;
+    background-color: transparent;
 }
 
 p {
@@ -89,24 +91,24 @@ p {
 }
 
 .news {
-    background-color: #59C78A;
-    border: 5px solid #FFF0D5;
+    background-color: #3d3d3d;
+    border: 5px solid transparent;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
 }
 
 #video {
-    background-color: #59C78A;
-    border: 5px solid #FFF0D5;
+    background-color: #3d3d3d;
+    border: 5px solid transparent;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
 }
 
 #footer {
-    background-color: #2B7A4E;
-    border: 5px solid #FFF0D5;
+    background-color: #1c1c1c;
+    border: 5px solid transparent;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
