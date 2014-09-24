@@ -28,6 +28,11 @@ class Article{
     private $datePublished;
     
     /**
+     *article has an image
+     **/
+    private $imageAvaliable;
+    
+    /**
      *the large string text inside the article
      **/
     private $text;
@@ -208,6 +213,36 @@ class Article{
         }
         
         $this->datePublished = $dateTime;
+    }
+    
+    /**
+     *get 0(false) or 1(true) an image is avaliable
+     *
+     *@return int an image exists in a article
+     **/
+    public function getImageAvailable(){
+        $return $this->imageAvailable;
+    }
+        
+    /**
+     *set if an image is available for an article
+     *
+     *@param boolean $newImageAvailable the fact that an image is in the article
+     *@throws UnexpectedValueException when the type passed is not what is expected
+     **/
+    public function setImageAvailbable($newimageAvailable){
+        if (gettype !== "boolean"){
+            throw(new UnexpectedValueException("$newDatePublished is not the expected type"));
+        }
+        
+        if ($newImageAvailable)
+        {
+            $this->imageAvailable = 1;
+        }
+        else
+        {
+            $this->imageAvailable = 0;
+        }
     }
     
     /**
