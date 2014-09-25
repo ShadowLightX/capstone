@@ -154,4 +154,10 @@ a:hover {
 a:active {
     color: #1c1c1c;  
 }
+/* pic for youtube vid in carousel*/
+img.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
