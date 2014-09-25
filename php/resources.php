@@ -32,7 +32,7 @@ class Resource {
      *constructor for resource
      *
      *@param Int for the resource id
-     *@param Int for the user id
+     *@param Int for the admin id
      *@param string The URL the came from
      *@param string Title of the resource
      *@param string Type of resource to format
@@ -108,9 +108,9 @@ class Resource {
     /**
      * Mutator method for Admin id
      *
-     * @param mixed value of user id or allow to be null if it's a new object
-     * @throws UnexpectedValueException if user id is not an integer
-     * @throws RangeException if user id isn't positive
+     * @param mixed value of admin id or allow to be null if it's a new object
+     * @throws UnexpectedValueException if admin id is not an integer
+     * @throws RangeException if admin id isn't positive
     **/
     public function setAdminId($newAdminId) {
         // zeroth, allow null if this is a new object
@@ -130,7 +130,7 @@ class Resource {
         // third, convert admin id and ensure it's positive
         $newAdminId = intval($newAdminId);
         if($newAdminId <= 0) {
-            throw(new RangeException("user id $newAdminId must be a positive integer"));
+            throw(new RangeException("admin id $newAdminId must be a positive integer"));
         }
         
         // finally, admin id is clean and can be removed from quarantine
@@ -170,6 +170,47 @@ class Resource {
         
         $this->resourceLink = implode("://", $splitResourceLink);
     }
+    
+    /**
+     * Accessor method for resource title
+     *
+     * Retrieve the resource title
+     * @return string name of resource
+    **/
+    public function getResourceTitle() {
+        
+    }
+    
+    /**
+     * Mutator method for resource title
+     *
+     * @param string name of the resource
+     * @throws UnexpectedValueException if value is not a string
+     * @throws Range Exception if value is empty or more than 75 characters
+    **/
+    public function setResourceTitle($newResourceTitle) {
+        // verify that resource title is a string
+        if(gettype($newResourceTitle) !== "string") {
+            throw(new UnexpectedValueException("Please enter the title of the resouce $newResourceTitle"));
+        }
+        
+        // trim and filter resource title as a generic string
+        $newResourceTitle = trim($newResourceTitle);
+        $newResourceTitle = filter_var($newResourceTitle, FILTER_SANITIZE_STRING);
+        
+        if(strlen($newResourceTitle) < 0 || strlen($newResourceTitle) > 70) {
+            throw(new RangeException("The title $newResourceTitle is either not set or too long"));   
+        }
+        
+        $this->resourceTitle = $newResourceTitle;
+        }
+        
+        /**
+         * Accessor method for resource type
+         *
+         * 
+        **/
+        
+    }
 }
-
 ?>
