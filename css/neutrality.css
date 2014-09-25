@@ -99,6 +99,11 @@ p {
     font-size: 1.5em;
 }
 
+img.resize{
+    width:540px;
+    height: auto;
+}
+
 .news {
     background-color: #3d3d3d;
     border: 5px solid transparent;
