@@ -3,7 +3,7 @@
  *The Article class deals with articles and allows the adding and retrival of articles
  *
  *@author Nicholas Bowling <nbowling505@gmail.com>
- *@version 0.1.6
+ *@version 0.3.2
  **/
 
 class Article{
@@ -50,23 +50,24 @@ class Article{
     /**
      *constructor for a article
      *
-     *@param mixed Article ID for the article
-     *@param string Title for the article
-     *@param string Author of the article
-     *@param string The date the article was published
-     *@param string The text in the article
-     *@param string The publisher of an article
-     *@param string The URL the article came from
+     *@param mixed $newArticleId the id in the database
+     *@param string $title the article title
+     *@param string $author author of the article 
+     *@param string $newDatePublished The date the article was published
+     *@param string $newText The text in the article
+     *@param string $newPublisher The publisher of an article
+     *@param string $newUrl The URL the article came from
      *@throws UnexceptedValueException if inputs are of the incorrect types or urls
      *@throws RangesException if the inputs contain invalid values
      **/
     
-    public function __construct($newArticleId,$newTitle,$newAuthor,$newDatePublished,$newText,$newPublisher,$newUrl){
+    public function __construct($newArticleId,$newTitle,$newAuthor,$newDatePublished,$newImageAvailable, $newText,$newPublisher,$newUrl){
         try{
             $this->setArticleId($newArticleId);
             $this->setTitle($newTitle);
             $this->setAuthor($newAuthor);
             $this->setDatePublished($newDatePublished);
+            $this->setImageAvailable($newImageAvailable);
             $this->setText($newText);
             $this->setPublisher($newPublisher);
             $this->setUrl($newUrl);
@@ -92,7 +93,7 @@ class Article{
     
     /**
      *set value of Article ID
-     *@param mixed the ID that the article has
+     *@param mixed $newArticleID the ID that the article has
      *@throws RangeException for anything that is not null, string, or int
      **/
     public function setArticleId($newArticleId){
@@ -134,7 +135,7 @@ class Article{
     /**
      *set the value of the article title
      *
-     *@param string the name(title) of the article
+     *@param string $newTitle the name(title) of the article
      *@throws UnexceptedValueException if input is not a string
      *@throws RangeException if the title is a empty string and longer than 70 characters
      **/
@@ -165,7 +166,7 @@ class Article{
     /**
      *set the name of the author
      *
-     *@param string the name of the author
+     *@param string $newAuthor the name of the author
      *@throws UnexceptedValueException if input is not a string
      *@throws RangeException if the author is an empty string and longer than 100 characters
      **/
@@ -196,7 +197,7 @@ class Article{
     /**
      *set the date the article was published
      *
-     *@param string the name of the datePublished
+     *@param string $newDatePublished the name of the datePublished
      *@throws UnexceptedValueException if input is not a string
      *@throws RangeException if the datePublished is not in the correct format
      **/
@@ -216,7 +217,7 @@ class Article{
     }
     
     /**
-     *get 0(false) or 1(true) an image is avaliable
+     *gets the value in an image 0(false) or 1(true) an image is avaliable
      *
      *@return int an image exists in a article
      **/
@@ -227,22 +228,21 @@ class Article{
     /**
      *set if an image is available for an article
      *
-     *@param boolean $newImageAvailable the fact that an image is in the article
+     *@param integer $newImageAvailable the fact that an image is in the article
      *@throws UnexpectedValueException when the type passed is not what is expected
+     *@throws RangeException when the integer is not one or zero
      **/
-    public function setImageAvailbable($newimageAvailable){
-        if (gettype !== "boolean"){
+    public function setImageAvailable($newImageAvailable){
+        if (gettype !== "integer"){
             throw(new UnexpectedValueException("$newDatePublished is not the expected type"));
         }
         
-        if ($newImageAvailable)
+        if ($newImageAvailable !== 0 && $newImageAvailable !== 1)
         {
-            $this->imageAvailable = 1;
+            throw(new RangeException("$newImageAvailable is not 0 or 1"))
         }
-        else
-        {
-            $this->imageAvailable = 0;
-        }
+        
+        $this->imageAvaliable = $newImageAvailable;
     }
     
     /**
@@ -257,7 +257,7 @@ class Article{
     /**
      *set the text in an article
      *
-     *@param string article text
+     *@param string $newText article text
      *@throws UnexpectedValueException if the text is not a string
      *@throws RangeException if the text does not have any length
      **/
@@ -318,7 +318,7 @@ class Article{
     /**
      *set the url the article was found at
      *
-     *@param string url of the article
+     *@param string $newUrl url of the article
      *@throws UnexpectedValueException if the url is not a string, not a valid url, or http or https link
     **/
     public function setUrl($newUrl){
@@ -339,6 +339,149 @@ class Article{
         $splitUrl[1] = filter_var($splitUrl[1],FILTER_SANITIZE_STRING);
         
         $this->url = implode("://",$splitUrl);        
+    }
+    
+    /**
+     * inserts this article to mySQL
+     *
+     * @param resource $mysqli pointer to mySQL connection, by reference
+     * @throws mysqli_sql_exception when mySQL related errors occur
+     **/
+    public function insert(&$mysqli) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // enforce the articleId is null (i.e., don't insert an article that already exists)
+        if($this->articleId !== null) {
+            throw(new mysqli_sql_exception("not a new article"));
+        }
+        
+        // create query template
+        $query     = "INSERT INTO article(title, author, datePublished, imageAvailable, text, publisher, url) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the member variables to the place holders in the template
+        $wasClean = $statement->bind_param("sssisss", $this->title, $this->author,
+                                                   $this->datepublished,  $this->imageAvailable,
+                                                   $this->text, $this->publisher, $this->url);
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+        
+        // update the null userId with what mySQL just gave us
+        $this->articleId = $mysqli->insert_id;
+    }
+    
+    /**
+     * update this article in mySQL
+     *
+     * @param resource $mysqli pointer to mySQL connection, by reference
+     * @throws mysqli_sql_exception when mySQL related errors occur
+     **/
+    public function updateTextDatePublished(&$mysqli) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // enforce the userId is not null (i.e., don't update a user that hasn't been inserted)
+        if($this->userId === null) {
+            throw(new mysqli_sql_exception("Unable to update a user that does not exist"));
+        }
+        
+        // create query template
+        $query     = "UPDATE user SET  text= ?, datePublished = ? WHERE articleId = ?";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the member variables to the place holders in the template
+        $wasClean = $statement->bind_param("ss", $this->text, $this->datepublished);
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+    }
+    
+    /**
+     * gets the Article by ArticleId in the database
+     *
+     * @param resource $mysqli pointer to mySQL connection, by reference
+     * @param string $articleId email to search for
+     * @return mixed User found or null if not found
+     * @throws mysqli_sql_exception when mySQL related errors occur
+     **/
+    public static function getArticleById(&$mysqli, $articleId) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // sanitize the articleId by by seting it
+        $this->setArticleId($articleId);
+        $articleId = $this->getArticleId($articleId, FILTER_SANITIZE_STRING);
+        
+        // create query template
+        $query     = "SELECT title, author, datePublished, imageAvaliable, text, publisher, url FROM article WHERE articleId = ?";
+        
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the email to the place holder in the template
+        $wasClean = $statement->bind_param("i", $articleId);
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+        
+        // get result from the SELECT query 
+        $result = $statement->get_result();
+        if($result === false) {
+            throw(new mysqli_sql_exception("Unable to get result set"));
+        }
+        
+        // since this is a unique field, this will only return 0 or 1 results. So...
+        // 1) if there's a result, make it into a article object normally
+        // 2) if there's no result, return null
+        $row = $result->fetch_assoc(); // fetch_assoc() returns a row as an associative array
+        
+        // convert the associative array to a User
+        if($row !== null) {
+            try {
+                $article = new Article($articleId, row["title"], row["author"], row["datePublished"],
+                                       row["imageAvaliable", row"text", row["publisher"], row["url"]);
+            }
+            catch(Exception $exception) {
+                // if the row couldn't be converted, rethrow it
+                throw(new mysqli_sql_exception("Unable to convert row to User", 0, $exception));
+            }
+            
+            return($article);
+        } else {
+            // 404 Article not found - return null instead
+            return(null);
+        }
     }
 }
 ?>
