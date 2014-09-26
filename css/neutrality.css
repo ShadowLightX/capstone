@@ -155,9 +155,20 @@ a:active {
     color: #1c1c1c;  
 }
 /* pic for youtube vid in carousel*/
-img.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.videoWrapper {
+position: relative;
+padding-bottom: 56.25%;
+height: 0;
+}
+
+.videoWrapper iframe,
+.videoWrapper embed,
+.videoWrapper object
+{
+position: absolute;
+width: 100%;
+height: 100%;
+left: 0;
+top: 0;
 }
 
