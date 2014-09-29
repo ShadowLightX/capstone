@@ -224,7 +224,7 @@ class Article{
      *@return int an image exists in a article
      **/
     public function getImageAvailable(){
-        $return $this->imageAvailable;
+        return $this->imageAvailable;
     }
         
     /**
@@ -241,7 +241,7 @@ class Article{
         
         if ($newImageAvailable !== 0 && $newImageAvailable !== 1)
         {
-            throw(new RangeException("$newImageAvailable is not 0 or 1"))
+            throw(new RangeException("$newImageAvailable is not 0 or 1"));
         }
         
         $this->imageAvaliable = $newImageAvailable;
@@ -410,7 +410,7 @@ class Article{
         }
         
         // bind the member variables to the place holders in the template
-        $wasClean = $statement->bind_param("ssss", $this->title, $this->author, $this->text, $this->datepublished);
+        $wasClean = $statement->bind_param("ssssi", $this->title, $this->author, $this->text, $this->datepublished, $this->articleId);
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
         }
@@ -437,7 +437,7 @@ class Article{
         
         // sanitize the articleId by by seting it
         $this->setArticleId($articleId);
-        $articleId = $this->getArticleId($articleId, FILTER_SANITIZE_STRING);
+        $articleId = $this->getArticleId();
         
         // create query template
         $query     = "SELECT title, author, datePublished, imageAvaliable, text, publisher, url FROM article WHERE articleId = ?";
@@ -472,8 +472,8 @@ class Article{
         // convert the associative array to a User
         if($row !== null) {
             try {
-                $article = new Article($articleId, row["title"], row["author"], row["datePublished"],
-                                       row["imageAvaliable", row"text", row["publisher"], row["url"]);
+                $article = new Article($articleId, $row["title"], $row["author"], $row["datePublished"], $row["imageAvaliable"],
+                                       $row["text"], $row["publisher"], $row["url"]);
             }
             catch(Exception $exception) {
                 // if the row couldn't be converted, rethrow it
