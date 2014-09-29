@@ -142,7 +142,8 @@ class Resource {
     /**
      * Mutator method for resource link URL
      *
-     * 
+     * @param string URL of the resource link
+     * @throws UnexpectedValueException if the URL is not a string, not a valid URL, or http or https link
     **/
     public function setResourceLink($newResourceLink) {
         if(gettype($newResourceLink) !== "string") {
@@ -197,5 +198,119 @@ class Resource {
         
         $this->resourceTitle = $newResourceTitle;
         }
+        
+    /**
+     * inserts this Resource to mySQL
+     *
+     * @param resource $mysqli pointer to mySQL connection, by reference
+     * @throws mysqli_sql_exception when mySQL related errors occur
+     **/
+    public function insert(&$mysqli) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // enforce the resoureId is null (i.e., don't insert a resource that already exists)
+        if($this->resourceId !== null) {
+            throw(new mysqli_sql_exception("not a new resource"));
+        }
+        
+        // create query template
+        $query     = "INSERT INTO resource(userId, resourceLink, resourceTitle) VALUES(?, ?, ?)";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the member variables to the place holders in the template
+        $wasClean = $statement->bind_param("ssss", $this->email, $this->password,
+                                                   $this->salt,  $this->authenticationToken);
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+        
+        // update the null resourceId with what mySQL just gave us
+        $this->resourceId = $mysqli->insert_id;
+    }
+    
+    /**
+     * deletes this Resource from mySQL
+     *
+     * @param resource $mysqli pointer to mySQL connection, by reference
+     * @throws mysqli_sql_exception when mySQL related errors occur
+     **/
+    public function delete(&$mysqli) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // enforce the resourceId is not null (i.e., don't delete a resource that hasn't been inserted)
+        if($this->resourceId === null) {
+            throw(new mysqli_sql_exception("Unable to delete a resource that does not exist"));
+        }
+        
+        // create query template
+        $query     = "DELETE FROM resource WHERE resourceId = ?";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the member variables to the place holder in the template
+        $wasClean = $statement->bind_param("i", $this->resourceId);
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+    }
+    
+    /**
+     * updates this Resource in mySQL
+     *
+     * @param resource $mysqli pointer to mySQL connection, by reference
+     * @throws mysqli_sql_exception when mySQL related errors occur
+     **/
+    public function update(&$mysqli) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // enforce the resourceId is not null (i.e., don't update a resource that hasn't been inserted)
+        if($this->resourceId === null) {
+            throw(new mysqli_sql_exception("Unable to update a resource that does not exist"));
+        }
+        
+        // create query template
+        $query     = "UPDATE resource SET userId = ?, resourceLink = ?, resourceTitle = ? WHERE resourceId = ?";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the member variables to the place holders in the template
+        $wasClean = $statement->bind_param("iss", $this->userId, $this->resourceLink, $this->resourceTitle);
+                                                    
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+    }
+    
     }
 ?>
