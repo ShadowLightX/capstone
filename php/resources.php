@@ -224,8 +224,7 @@ class Resource {
         }
         
         // bind the member variables to the place holders in the template
-        $wasClean = $statement->bind_param("ssss", $this->email, $this->password,
-                                                   $this->salt,  $this->authenticationToken);
+        $wasClean = $statement->bind_param("iss", $this->userId, $this->resourceLink, resourceTitle);
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
         }
