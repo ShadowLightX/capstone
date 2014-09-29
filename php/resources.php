@@ -81,8 +81,8 @@ class Resource {
     
     // third, convert resource id to an integer and ensure it's positive
     $newResourceId = intval($newResourceId);
-    if($resourceId<= 0) {
-        throw(new RangeException("resource id $resourceId must be a positive number"));
+    if($newResourceId<= 0) {
+        throw(new RangeException("resource id $newResourceId must be a positive number"));
     }
     
     // finally, the resource id is clean and can be taken out of quarantine
