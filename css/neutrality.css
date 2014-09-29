@@ -5,10 +5,6 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-        
-.container {
-    background-color: transparent;
-}
 
 #linksHeader {
     text-align: center;
@@ -18,16 +14,10 @@ body {
     text-align:  left;
 }
 
-#logo {
-    background-color: transparent;
+#logo .resize {
 }
 
 /*nav*/
-.myMenu {
-	margin:0;
-	padding:0;
-}
-
 .myMenu li {
 	list-style:none;
 	font:1em Helvetica;
@@ -37,14 +27,14 @@ body {
 
 .myMenu li a:link, .myMenu li a:visited {
     margin: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
     background-color: #0C56E8;
     display: block;
     text-decoration:none;
     color: white;
     z-index:1;
     font-size: 1.5em;
-    text-align:center;
-    height: 48px;
 }
 
 .myMenu li a:hover {
@@ -79,70 +69,64 @@ body {
 /*carousel*/
 .carousel-inner > .item > img {
     margin: 0 auto;
-    background-color: transparent;
+    background-color: #0D9EFF;
 }
 
 #carousel-example-generic {
-    background-color: transparent;
+    background-color: #0D9EFF;
 }
 
 p {
     text-align: center;
 }
 
-.title {
+#title {
     background-color: #0D9EFF;
-    margin: 5px;
     color: white;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-.date {
+#date {
     background-color: #0D9EFF;
-    margin: 5px;
     color: white;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-.links {
-    background-color: #0D9EFF;
-    margin: 5px;
+#links {
+    background-color: #0C56E8;
     color: white;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-.author {
+#author {
     background-color: #0D9EFF;
-    margin: 5px;
     color: white;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-.content {
-    background-color: #0D9EFF;
-    margin: 5px;
+#content {
+    background-color: #0C56E8;
+    border: 5px;
     color: white;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
 }
 
-.publisher {
+#publisher {
     background-color: #0D9EFF;
-    margin: 5px;
     color: white;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
-    
 }
 
 img.resize{
@@ -150,9 +134,8 @@ img.resize{
     height: auto;
 }
 
-.news {
+#news {
     background-color: #0D9EFF;
-    margin: 5px;
     color: white;
     height: 100%;
     text-decoration: none;
@@ -161,7 +144,6 @@ img.resize{
 
 #video {
     background-color: #0D9EFF;
-    margin: 5px;
     color: white;
     height: 100%;
     text-decoration: none;
@@ -170,7 +152,6 @@ img.resize{
 
 #footer {
     background-color: #0C56E8;
-    margin: 5px;
     color: white;
     height: 100%;
     text-decoration: none;

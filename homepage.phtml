@@ -27,31 +27,31 @@
     <body class="col-xs-offset-1">
 	<div class="container">
 	    <!--nav-->
-	    <section id= "logo" class= "col-xs-10 col-md-2"><a href="index.html"><img alt = "net-neutrality-logo" src="images/logo.png"></a></section>
-	    <ul class="row myMenu container">
-		<li id= "home" class= "col-xs-10 col-md-2"><a href="index.html">Home</a></li>
-		<li id= "resources" class="col-xs-10 col-md-2"><a href="resources.html">Resources</a>
+	    <section id="logo" class="col-xs-10 col-md-2 logo"><a href="index.html"><img alt ="net-neutrality-logo" src="images/logo.png"></a></section>
+	    <ul class="row myMenu">
+		<li id="home" class="text-center col-xs-10 col-md-2 home"><a href="index.html"><h2>Home</h2></a></li>
+		<li id="resources" class="text-center col-xs-10 col-md-2 resources"><a href="resources.html"><h2>Resources</h2></a>
 		    <ul>
-			<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
 		    </ul>
 		</li>
-		<li id= "articles" class= "col-xs-10 col-md-2"><a href="articles.html">Articles</a>
+		<li id="articles" class="text-center col-xs-10 col-md-2 articles"><a href="articles.html"><h2>Articles</h2></a>
 		    <ul>
-			<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class= "col-xs-10 col-md-2"><a href="#">...</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
 		    </ul>
 		</li>
-		<li id= "forums" class= "col-xs-10 col-md-2"><a href="forums.html">Forum</a></li>
-		<li id= "search" class= "col-xs-10 col-md-6 reverse" ><a href="....html">Search</a></li>
-		<li id= "login" class= "col-xs-10 col-md-2 reverse"><a href="....html">Login</a></li>
+		<li id="forums" class="text-center col-xs-10 col-md-2 forums"><a href="forums.html"><h2>Forums</h2></a></li>
+		<li id="search" class="text-center col-xs-10 col-md-6 search reverse" ><a href="....html"><h2>Search</h2></a></li>
+		<li id="login" class="text-center col-xs-10 col-md-2 login reverse"><a href="....html"><h2>Login</h2></a></li>
 	    </ul>
 	    <!--carousel-->
-	    <div id="carousel-example-generic" class="carousel slide col-xs-10 container" data-ride="carousel">
+	    <div id="carousel-example-generic" class="carousel slide col-xs-10" data-ride="carousel">
 		<!--indicators-->
 		<ol class="carousel-indicators">
 		    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -89,26 +89,20 @@
 		</a>
 	    </div>
 	    <!--news-->
-	    <div class="row text-center container">
-		<section class= "col-xs-10 news" >
-		    <h2>Recent News</h2>
-		    <p><?php include 'php/articlewidget.php'; ?></p>
-		</section>
-	    </div>
+	    <section id="news" class="text-center col-xs-10 news" >
+		<h2>Recent News</h2>
+		<p><?php include 'php/articlewidget.php'; ?></p>
+	    </section>
 	    <!--video-->
-	    <div class="row text-center container">
-		<section id= "video" class= "col-xs-10 video" >
-		    <h2>...</h2>
-		    <p>...</p>
-		</section>
-	    </div>
+	    <section id= "video" class= "text-center col-xs-10 video" >
+		<h2>...</h2>
+		<p>...</p>
+	    </section>
 	    <!--footer-->
-	    <div class="row text-center container">
-		<section id="footer" class="col-xs-10 footer" >
-		    <h2>...</h2>
-		    <p>...</p>
-		</section>
-	    </div>
+	    <section id="footer" class="text-center col-xs-10 footer" >
+		<h2>...</h2>
+		<p>...</p>
+	    </section>
 	</div>    
     </body>
 </html>
