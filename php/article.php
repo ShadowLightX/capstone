@@ -155,7 +155,7 @@ class Article{
     }
     
 
-   /**
+    /**
      *get the name of the article author
      *
      *@return string the name of the full name of the article
@@ -209,7 +209,8 @@ class Article{
         
         $dateTime = date_create_from_format("Y/m/d H:i:s",$newDatePublished);
         
-        if(date_get_last_errors['warning_count']>=1||date_get_last_errors['error_count']>=1)
+        $wrong = date_get_last_errors();
+        if($wrong['warning_count']>=1||$wrong['error_count']>=1)
         {
             throw(new RangeException("$newDatePublished is not in the correct format of YYYY/MM/DD 00:00:00"));
         }
