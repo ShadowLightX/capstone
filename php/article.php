@@ -1,9 +1,9 @@
 <?php
 /**
- *The Article class deals with articles and allows the adding and retrival of articles
+ *The Article class deals with articles and allows the adding, retrival, and update of articles
  *
  *@author Nicholas Bowling <nbowling505@gmail.com>
- *@version 0.3.2
+ *@version 0.3.5
  **/
 
 class Article{
@@ -54,6 +54,7 @@ class Article{
      *@param string $title the article title
      *@param string $author author of the article 
      *@param string $newDatePublished The date the article was published
+     *@param integer $newImageAvailable The determination if there is an image true 0 or false 1
      *@param string $newText The text in the article
      *@param string $newPublisher The publisher of an article
      *@param string $newUrl The URL the article came from
@@ -383,12 +384,13 @@ class Article{
     }
     
     /**
-     * update this article in mySQL
+     * updates the text, date it was published, author, and title of the article
+     *
      *
      * @param resource $mysqli pointer to mySQL connection, by reference
      * @throws mysqli_sql_exception when mySQL related errors occur
      **/
-    public function updateTextDatePublished(&$mysqli) {
+    public function update(&$mysqli) {
         // handle degenerate cases
         if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
             throw(new mysqli_sql_exception("input is not a mysqli object"));
@@ -400,14 +402,14 @@ class Article{
         }
         
         // create query template
-        $query     = "UPDATE user SET  text= ?, datePublished = ? WHERE articleId = ?";
+        $query     = "UPDATE user SET  title = ?, author= ? , text= ?, datePublished = ? WHERE articleId = ?";
         $statement = $mysqli->prepare($query);
         if($statement === false) {
             throw(new mysqli_sql_exception("Unable to prepare statement"));
         }
         
         // bind the member variables to the place holders in the template
-        $wasClean = $statement->bind_param("ss", $this->text, $this->datepublished);
+        $wasClean = $statement->bind_param("ssss", $this->title, $this->author, $this->text, $this->datepublished);
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
         }
