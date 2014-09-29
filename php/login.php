@@ -34,16 +34,16 @@
      *state the variable userId
      **/
      private $salt;
-    
-    
-    
-    
+     /**
+      *state variable for username
+      **/
+     private $userName;
      /*
      *creating constructor for login
      *
      *
      **/
-    public function __construct($newLoginId, $newUserId, $newAuthenticationToken, $newPassword, $newSalt) {
+    public function __construct($newLoginId, $newUserId, $newAuthenticationToken, $newPassword, $newSalt, $userName) {
         
         try {
             $this->setLoginId($newLoginId);
@@ -162,7 +162,7 @@
         
         // sanitize it and forget it
         $newPassword = filter_var ( $newPassword, FILTER_SANITIZE_STRING);
-        // this?
+        
         $this->password = $newPassword;
         }
         // retreive the value with a getter
@@ -193,7 +193,20 @@
           return($this->salt);
           }
         
-        
+        /**
+         *setting up the userName funciton
+         **/
+        public function setUserName($newUserName) {
+            if(gettype($newUserName) !== "string") {
+            throw(new UnexpectedValueException ("Please retype "));
+        }
+        // sanitize it
+        $newUserName = filter_var ( $newUserName, FILTER_SANITIZE_STRING);
+        }
+        // setting the getter
+        public function getUserName() {
+           return($this->UserName);
+    }
         
   
     } 
