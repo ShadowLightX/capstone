@@ -43,7 +43,7 @@
      *
      *
      **/
-    public function __construct($newLoginId, $newUserId, $newAuthenticationToken, $newPassword, $newSalt, $userName) {
+    public function __construct($newLoginId, $newUserId, $newAuthenticationToken, $newPassword, $newSalt, $newUserName) {
         
         try {
             $this->setLoginId($newLoginId);
@@ -51,6 +51,7 @@
             $this->setauthenticationToken($newAuthenticationToken);
             $this->setpassword($newPassword);
             $this->setsalt($newSalt);
+            $this->setUserName($newUserName);
         }
         catch(UnexpectedValueException $error) {
             // rethrow the exception to the code that tried to create the object
