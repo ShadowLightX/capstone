@@ -35,10 +35,10 @@ class Resource {
      **/
     public function __construct($resourceId, $userId, $resourceLink, $resourceTitle) {
         try{
-            $this ->resourceId($newResourceId);
-            $this ->userId($newUserId);
-            $this ->resourceLink($newResourceLink);
-            $this ->resourceTitle($newResourceTitle);
+            $this ->resourceId($ResourceId);
+            $this ->userId($UserId);
+            $this ->resourceLink($ResourceLink);
+            $this ->resourceTitle($ResourceTitle);
         } catch(UnexpectedValueException $unexpectedValue) {
             // rethrow to caller
             throw(UnexpectedValueException("Unable to construct resource", 0, $unexpectedValue));  
