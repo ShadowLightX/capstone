@@ -26,8 +26,8 @@ class Resource {
     /**
      *constructor for resource
      *
-     *@param Int for the resource id
-     *@param Int for the admin id
+     *@param int for the resource id
+     *@param int for the admin id
      *@param string The URL the came from
      *@param string Title of the resource
      *@throws UnexceptedValueException if inputs are of the incorrect types or urls
@@ -55,7 +55,7 @@ class Resource {
      *
     **/
      public function getResourceId() {
-        
+        return $this->resourceId;    
     }
     /**
      * Mutator method for resource id
@@ -95,7 +95,7 @@ class Resource {
      * @return integer value of user id
     **/
     public function getUserId() {
-        
+        return $this->userId;   
     }
     
     /**
@@ -136,7 +136,7 @@ class Resource {
      * @return string of resource link URL
     **/
     public function getResourceLink() {
-        
+        return $this->resourceLink;    
     }
     
     /**
@@ -172,7 +172,7 @@ class Resource {
      * @return string name of resource
     **/
     public function getResourceTitle() {
-        
+        return $this->resourceTitle;   
     }
     
     /**
