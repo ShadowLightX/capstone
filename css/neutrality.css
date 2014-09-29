@@ -37,18 +37,18 @@ body {
 
 .myMenu li a:link, .myMenu li a:visited {
     margin: 5px;
-    background-color: #1c1c1c;
+    background-color: #0C56E8;
     display: block;
     text-decoration:none;
-    color: #E03435;
+    color: white;
     z-index:1;
     font-size: 1.5em;
-    text-align: center;
+    text-align:center;
     height: 48px;
 }
 
 .myMenu li a:hover {
-	background-color: #3D3D3D;	
+	background-color: #0D9EFF;	
 }
 
 /*dropdown menus*/
@@ -67,13 +67,13 @@ body {
 }
 
 .myMenu li ul li a:link, .myMenu li ul li a:visited {
-	background-color:#1c1c1c;
+	background-color:#0D9EFF;
 	width:auto;
 	z-index: 1;
 }
 
 .myMenu li ul li a:hover {
-	background-color:#3D3D3D;	
+	background-color:#0C56E8;	
 }
 
 /*carousel*/
@@ -90,13 +90,59 @@ p {
     text-align: center;
 }
 
-.articles {
-    background-color: #3d3d3d;
+.title {
+    background-color: #0D9EFF;
     margin: 5px;
-    color: #E03435;
+    color: white;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
+}
+
+.date {
+    background-color: #0D9EFF;
+    margin: 5px;
+    color: white;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.links {
+    background-color: #0D9EFF;
+    margin: 5px;
+    color: white;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.author {
+    background-color: #0D9EFF;
+    margin: 5px;
+    color: white;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.content {
+    background-color: #0D9EFF;
+    margin: 5px;
+    color: white;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.publisher {
+    background-color: #0D9EFF;
+    margin: 5px;
+    color: white;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.5em;
+    
 }
 
 img.resize{
@@ -105,27 +151,27 @@ img.resize{
 }
 
 .news {
-    background-color: #3d3d3d;
+    background-color: #0D9EFF;
     margin: 5px;
-    color: #E03435;
+    color: white;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
 }
 
 #video {
-    background-color: #3d3d3d;
+    background-color: #0D9EFF;
     margin: 5px;
-    color: #E03435;
+    color: white;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
 }
 
 #footer {
-    background-color: #1c1c1c;
+    background-color: #0C56E8;
     margin: 5px;
-    color: #E03435;
+    color: white;
     height: 100%;
     text-decoration: none;
     font-size: 1.5em;
@@ -137,22 +183,22 @@ img.resize{
 
 /* unvisited link */
 a:link {
-    color: #1c1c1c;
+    color: white;
 }
 
 /* visited link */
 a:visited {
-    color: #1c1c1c;
+    color: white;
 }
 
 /* mouse over link */
 a:hover {
-    color: #1c1c1c;
+    color: white;
 }
 
 /* selected link */
 a:active {
-    color: #1c1c1c;  
+    color: white;  
 }
 /* pic for youtube vid in carousel*/
 .videoWrapper {
