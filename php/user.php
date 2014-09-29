@@ -175,46 +175,5 @@ class User {
         //finally, bring the email out of quarantine
         $this->email = $newEmail;
     }
-    
-    /**
-     *accessor method for article ID
-     *
-     *@return integer value of article ID
-     **/
-    public function getArticleId() {
-        return($this->articleId);
-    }
-    
-    /**
-     *mutator method for article ID
-     *
-     *@param mixed new value of artivle id or null if a new object
-     *@throws UnexpectedValueException if the article ID is not an integer
-     *@throws RangeException if the article ID is not positive
-     **/
-    public function setArticleId($newArticleId) {
-        //zeroth, allow a null if this is a new object
-        if($newArticleId === null) {
-            $this->articleId = null;
-            return;
-        }
-        
-        //first, trim the input of excess whitespace
-        $newArticleId = trim($newArticleId);
-        
-        //second, verify this is an integer
-        if((filter_var($newArticleId, FILTER_VALIDATE_INT)) === false) {
-            throw(new UnexpectedValueException("article id $newArticleId is not an integer"));
-        }
-        
-        //third, convert the id to an integer and ensure it's positive
-        $newArticleId = intval($newArticleId);
-        if($newArticleId <= 0) {
-            throw(new RangeException("user id $newArticleId is not positive"));
-        }
-        
-        //finally, the article id is clean and can be taken out of quarantine
-        $this->articleId = $newArticleId;
-    }
 }
 ?>
