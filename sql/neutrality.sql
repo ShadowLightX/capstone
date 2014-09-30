@@ -1,45 +1,57 @@
 -- creating database for net neutrality
 -- beginning with the login class
+
+DROP TABLE IF EXISTS resource;
+DROP TABLE IF EXISTS article;
+DROP TABLE IF EXISTS login;
+DROP TABLE IF EXISTS user;
+
+
+CREATE TABLE user (
+    userId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    email VARCHAR(64) NOT NULL,
+    firstName VARCHAR(70),
+    lastName VARCHAR(70),
+    role VARCHAR(20), 
+    PRIMARY KEY(userId),
+    UNIQUE(email)
+);
 CREATE TABLE login (
     loginId INT UNSIGNED AUTO_INCREMENT NOT NULL,
     userId INT UNSIGNED NOT NULL, 
-    authtToken CHAR(32),
+    authToken CHAR(32),
     password CHAR(128) NOT NULL,
     salt CHAR(64) NOT NULL,
     userName VARCHAR(32), 
     PRIMARY KEY(loginId),
     UNIQUE(userName),
-    FOREIGN KEY(user_id) REFERENCES user(user_id)
+    FOREIGN KEY(userId) REFERENCES user(userId)
 );
-CREATE TABLE user (
-    userId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-    email VARCHAR(64) NOT NULL,
-    firstName VARCHAR(70),
-    lastName VARCHAR(70)
-    role VARCHAR(20), 
-    PRIMARY KEY(userId),
-    UNIQUE(email)
-);     
-CREATE TABLE articles (
-    articleId UNSIGNED AUTO_INCREMENT NOT NULL,
-    userId UNSIGNED INT NOT NULL,
+CREATE TABLE article (
+    articleId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    userId INT UNSIGNED NOT NULL,
     author VARCHAR(80),
     datePublished DATETIME,
-    imageAvalable UNSIGNED TINY INT,
+    imageAvailable TINYINT UNSIGNED,
     title VARCHAR(64) NOT NULL,
     articleText TEXT,
     publisher VARCHAR(70),
     url VARCHAR(2000),
-    PRIMARY KEY(articlesId),
-    FOREIGN KEY(userId) REFERENCES user(user_id),
+    PRIMARY KEY(articleId),
+    FOREIGN KEY(userId) REFERENCES user(userId),
     INDEX (datePublished)
 );
 CREATE TABLE resource(
-    resourcesId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-    userId INT NOT NULL,
+    resourceId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    userId INT UNSIGNED NOT NULL,
     resourceName VARCHAR(64),
     resourceLink VARCHAR(2000),
+<<<<<<< HEAD
     PRIMARY KEY(resourcesId)
     
+=======
+    PRIMARY KEY(resourceId),
+    FOREIGN KEY(userId) REFERENCES user(userId)
+>>>>>>> https://app.asana.com/0/15843277689885/16117410053489 fixed neutrality.sql
 );
     
