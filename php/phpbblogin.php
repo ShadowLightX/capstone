@@ -27,13 +27,32 @@ class PhpBBLogin {
     /**
      * gets the value of admin
      *
-     * @return boolean $admin
+     * @return string value of admin
      **/
+    public function getAdmin() {
+        return($this->admin);
+    }
+    
+    /**
+     * sets the value of admin
+     * 
+     * @param bool admin
+     **/
+    public function setAdmin($newAdmin) {
+        $false = [0, "no", F, no, N, off, null, ""]
+    }
     
     /**
      * gets the value of Authenticated
      *
-     * @return boolean authenticated
+     * @return string value of authenticated
+     **/
+    public function getAuthenticated() {
+        return($this->authenticated);
+    }
+    /**
+     *
+     *
      **/
     
     
@@ -72,19 +91,19 @@ class PhpBBLogin {
         return($this->username);
     }
     /**
-     * sets the value of email
+     * sets the value of username
      *
-     * @param string $newEmail email
+     * @param string $newUsername username
      * @throws UnexpectedValueException if the input doesn't appear to be an Email
      **/
     public function setUsername($newUsername) {
-        // sanitize the Email as a likely Email
+        // sanitize the username as a likely username
         $newUsername = trim($newUsername);
-        if(($newUsername = filter_var($newUsername, FILTER_SANITIZE_EMAIL)) == false) {
+        if(($newUsername = filter_var($newUsername, FILTER_SANITIZE_STRING)) == false) {
             throw(new UnexpectedValueException("$newUsername does not exist"));
         }
         
-        // then just take email out of quarantine
+        // then just take username out of quarantine
         $this->username = $newUsername;
     }
     
