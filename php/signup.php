@@ -66,14 +66,11 @@ $confirmPassword = "";
 // filter firstName for bad stuff
 try {
     if(empty($_POST["firstName"])) {
-        throw(new Exception("Please enter your first name"));
-    } else {
         $firstName = filter_input(INPUT_POST, "firstName", FILTER_SANITIZE_STRING);
     }
     
     if(empty($_POST["lastName"])) {
-        throw(new Exception("Please enter your last name"));
-    } else {
+  
         $lastName = filter_input(INPUT_POST, "lastName", FILTER_SANITIZE_STRING);
     }
     if(empty($_POST["userName"])) {
