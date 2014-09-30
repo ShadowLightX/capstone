@@ -19,9 +19,14 @@ class User {
     private $role;
     
     /**
-     *string of names
+     *string of first names
      **/
-    private $name;
+    private $firstName;
+    
+    /**
+     *string of last names
+     **/
+    private $lastName;
     
     /**
      *string of email addresses
@@ -33,17 +38,18 @@ class User {
      *
      *@param mixed user ID
      *@param integer role
-     *@param string names
+     *@param string first names
+     *@param string last names
      *@param string email
      **/
-    public function __construct($newUserId, $newRole, $newName, $newEmail, $newArticleId) {
+    public function __construct($newUserId, $newRole, $newFirstName, $newLastName, $newEmail,) {
         try{
             //use our mutator methods to sanitize inputs
             $this->setUserId($newUserId);
             $this->setRole($newRole);
-            $this->setName($newName); 
+            $this->setName($newFirstName); 
+            $this->setName($newLastName);
             $this->setEmail($newEmail);
-            $this->setArticleId($newArticleId);
         } catch(UnexpectedValueException $unexpectedValue) {
             //rethrow to the caller
             throw(new UnexpectedValueException("unable to construct user", 0, $unexpectedValue));
@@ -130,25 +136,47 @@ class User {
     }
     
     /**
-     *gets the name of the user
+     *gets the first name of the user
      *
-     *@return string of name
+     *@return string of first name
      **/
-    public function getName() {
-        return($this->name);
+    public function getFirstName() {
+        return($this->firstName);
     }
     
     /**
-     *sets the name of the user
+     *sets the first name of the user
      *
-     *@param string of name
+     *@param string of first name
      **/
-    public function setName($newName) {
+    public function setFirstName($newFirstName) {
         //sanitize the string
-        $newName = filter_var($newName, FILTER_SANITIZE_STRING);
+        $newFirstName = filter_var($newFirstName, FILTER_SANITIZE_STRING);
         
         //if the string got here, it's passed all our tests - assign it!
-        $this->name = $newName;
+        $this->firstName = $newFirstName;
+    }
+    
+    /**
+     *gets the last name of the user
+     *
+     *@return string of last name
+     **/
+    public function getLastName() {
+        return($this->lastName);
+    }
+    
+    /**
+     *sets the last name of the user
+     *
+     *@param string of last name
+     **/
+    public function setLastName($newLastName) {
+        //sanitize the string
+        $newLastName = filter_var($newLastName, FILTER_SANITIZE_STRING);
+        
+        //if the string got here, it's passed all our tests - assign it!
+        $this->lastName = $newLastName;
     }
     
     /**
