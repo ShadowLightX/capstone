@@ -49,4 +49,3 @@ CREATE TABLE resource(
     PRIMARY KEY(resourceId),
     FOREIGN KEY(userId) REFERENCES user(userId)
 );
-    
