@@ -27,7 +27,7 @@
     <body class="col-xs-offset-1">
 	<div class="container">
 	    <!--nav-->
-	    <section id="logo" class="col-xs-10 col-md-2 logo"><a href="index.html"><img alt ="net-neutrality-logo" src="images/logo.png"></a></section>
+	    <section id="logo" class="col-xs-10 col-md-2 logo"><a href="index.php"><img alt ="net-neutrality-logo" src="images/logo.png"></a></section>
 	    <ul class="row myMenu">
 		<li id="home" class="text-center col-xs-10 col-md-2 home"><a href="index.php"><h2>Home</h2></a></li>
 		<li id="resources" class="text-center col-xs-10 col-md-2 resources"><a href="resources.html"><h2>Resources</h2></a>
@@ -40,10 +40,9 @@
 		</li>
 		<li id="articles" class="text-center col-xs-10 col-md-2 articles"><a href="articles.html"><h2>Articles</h2></a>
 		    <ul>
-			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="article-template.html">Article</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="articles-template1.html">Article1</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="articles-template2.html">Article2</a></li>
 		    </ul>
 		</li>
 		<li id="forums" class="text-center col-xs-10 col-md-2 forums"><a href="forums.html"><h2>Forums</h2></a></li>
