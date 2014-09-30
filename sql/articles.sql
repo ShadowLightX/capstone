@@ -14,5 +14,8 @@ CREATE TABLE articles (
     articleAvail INT
 );
 
- INSERT INTO articles(title, url, author, imageurl , articleAvail) VALUES( "stemulus news", "http://www.kob.com/article/stories/S3568196.shtml#.VCDSFCtdWps", "kob", "http://www.kob.com/article/stories/S3568196.shtml#.VCDSFCtdWps", 1)
+ INSERT INTO articles(title, url, author, imageurl , articleAvail) VALUES( "InfoWorld.com/net-neutrality", "http://www.infoworld.com/t/net-neutrality/comcast-marxism-and-net-neutrality-twisted-words-shameless-hypocrisy-249411", 1)
+  INSERT INTO articles(title, url, author, imageurl , articleAvail) VALUES( "savetheinternet.com/net-neutrality", "http://www.savetheinternet.com/net-neutrality", 1)
+   INSERT INTO articles(title, url, author, imageurl , articleAvail) VALUES( "eff.org/issues/net-neutrality", "https://www.eff.org/issues/net-neutrality", 1)
+ 
 SELECT title, url, datepub FROM articles ORDER BY datepub desc LIMIT 3;
