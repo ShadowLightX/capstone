@@ -19,10 +19,10 @@ body {
 
 /*nav*/
 .myMenu li {
-	list-style:none;
-	font:1em Helvetica;
-        margin: 0;
-        padding: 0;
+    list-style:none;
+    font:1em Helvetica;
+    margin: 0;
+    padding: 0;
 }
 
 .myMenu li a:link, .myMenu li a:visited {
@@ -38,32 +38,33 @@ body {
 }
 
 .myMenu li a:hover {
-	background-color: #0D9EFF;	
+    background-color: #0D9EFF;	
 }
 
 /*dropdown menus*/
 .myMenu li ul {
-	position:absolute;
-	visibility:hidden;
-	margin:0;
-	padding:0;
-	z-index:1;
+    position:absolute;
+    visibility:hidden;
+    margin:0;
+    padding:0;
+    z-index:1;
 }
 
 .myMenu li ul li {
-	display:inline;
-	float:none;
-	z-index:1;
+    display:inline;
+    float:none;
+    z-index:1;
 }
 
 .myMenu li ul li a:link, .myMenu li ul li a:visited {
-	background-color:#0D9EFF;
-	width:auto;
-	z-index: 1;
+    background-color:#0D9EFF;
+    width:auto;
+    z-index: 1;
+    font-size: 1.5em;
 }
 
 .myMenu li ul li a:hover {
-	background-color:#0C56E8;	
+    background-color:#0C56E8;	
 }
 
 /*carousel*/
