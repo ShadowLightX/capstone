@@ -46,12 +46,7 @@ CREATE TABLE resource(
     userId INT UNSIGNED NOT NULL,
     resourceName VARCHAR(64),
     resourceLink VARCHAR(2000),
-<<<<<<< HEAD
-    PRIMARY KEY(resourcesId)
-    
-=======
     PRIMARY KEY(resourceId),
     FOREIGN KEY(userId) REFERENCES user(userId)
->>>>>>> https://app.asana.com/0/15843277689885/16117410053489 fixed neutrality.sql
 );
     
