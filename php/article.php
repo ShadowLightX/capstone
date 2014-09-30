@@ -1,4 +1,4 @@
-<?php
+<?php---*--
 /**
  *The Article class deals with articles and allows the adding, retrival, and update of articles
  *
@@ -150,7 +150,7 @@ class Article{
         }
         
             
-        if ($newArticleId < 0|| $newArticleId > 20000000)){
+        if ($newArticleId < 0|| $newArticleId > 20000000){
             throw(new RangeException("$newUserId is not a number in the correct range"));
         }
         
@@ -474,7 +474,7 @@ class Article{
         $articleId = $this->getArticleId();
         
         // create query template
-        $query     = "SELECT title, author, datePublished, imageAvaliable, articleText, publisher, url FROM article WHERE articleId = ?";
+        $query     = "SELECT userId, title, author, datePublished, imageAvaliable, articleText, publisher, url FROM article WHERE articleId = ?";
         
         $statement = $mysqli->prepare($query);
         if($statement === false) {
@@ -506,7 +506,7 @@ class Article{
         // convert the associative array to a User
         if($row !== null) {
             try {
-                $article = new Article($articleId, $row["title"], $row["author"], $row["datePublished"], $row["imageAvaliable"],
+                $article = new Article($articleId, $row["userId"], $row["title"], $row["author"], $row["datePublished"], $row["imageAvaliable"],
                                        $row["text"], $row["publisher"], $row["url"]);
             }
             catch(Exception $exception) {
@@ -525,7 +525,7 @@ class Article{
      * gets the three most recent Articles in order of date in the database
      *
      * @param resource $mysqli pointer to mySQL connection, by reference
-     * @return mixed three most recent articles found or null if not found
+     * @return array of objects of the three most recent articles found
      * @throws mysqli_sql_exception when mySQL related errors occur
      **/
     public static function getArticlesInOrderByDate(&$mysqli){
@@ -535,7 +535,8 @@ class Article{
         }
         
         // create query template
-        $query   = "SELECT articleId, title FROM article ORDER BY datePublished DESC LIMIT 3";
+        $query   = "SELECT articleId, userId, title, datePublished, imageAvaliable, articleText, publisher, url
+            FROM article ORDER BY datePublished DESC LIMIT 3";
         
         $statement = $mysqli->prepare($query);
         if($statement === false) {
@@ -547,18 +548,16 @@ class Article{
             throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
         }
         
-        $rows = $result->fetch_assoc(); // fetch_assoc() returns a row as an associative array
-        
-        // convert the associative array to a User
-        if($rows !== null) {
-            
-        }   
-            
-            return($article);
-        } else {
-            // 404 Article not found - return null instead
-            return(null);
+        $resultRows = array();
+        while(($row = $result->fetch_assoc()) !== null) { // fetch_assoc() returns a row as an associative array
+            // create an object using the constructor
+            $article = new Article ($row["articleId"], $row["userId"], $row["title"], $row["datePublished"], $row["imageAvailable"],
+                                    $row["articleText"], $row["publisher"], $row["url"]);
+            // add the object to the array
+            $resultRows[] = $article;
         }
+        
+        return $resultRows;
     }
 }
 ?>
