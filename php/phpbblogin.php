@@ -8,14 +8,6 @@
  **/ 
 class PhpBBLogin {
     /**
-     * username of user
-     **/
-    private $username;
-    /**
-     * email of user
-     **/
-    private $email;
-    /**
      * denotes whether or not user is an admin
      **/
     private $admin;
@@ -23,33 +15,28 @@ class PhpBBLogin {
      * function to authenticate a user login
      **/
     private $authenticated;
+    /**
+     * email of user
+     **/
+    private $email;
+    /**
+     * username of user
+     **/
+    private $username;
     
     /**
-     * gets the value of username
+     * gets the value of admin
      *
-     * @return string value of username
+     * @return boolean $admin
      **/
-    public function getUsername() {
-        return($this->username);
-    }
     
     /**
-     * sets the value of email
+     * gets the value of Authenticated
      *
-     * @param string $newEmail email
-     * @throws UnexpectedValueException if the input doesn't appear to be an Email
+     * @return boolean authenticated
      **/
-    public function setUsername($newUsername) {
-        // sanitize the Email as a likely Email
-        $newUsername = trim($newUsername);
-        if(($newUsername = filter_var($newUsername, FILTER_SANITIZE_EMAIL)) == false) {
-            throw(new UnexpectedValueException("$newUsername does not exist"));
-        }
-        
-        // then just take email out of quarantine
-        $this->username = $newUsername;
-    }
-        
+    
+    
     /**
      * gets the value of email
      *
@@ -77,16 +64,29 @@ class PhpBBLogin {
     }
     
     /**
-     * gets the value of admin
+     * gets the value of username
      *
-     * @return boolean $admin
+     * @return string value of username
      **/
-    
+    public function getUsername() {
+        return($this->username);
+    }
     /**
-     * gets the value of Authenticated
+     * sets the value of email
      *
-     * @return string value of email
+     * @param string $newEmail email
+     * @throws UnexpectedValueException if the input doesn't appear to be an Email
      **/
+    public function setUsername($newUsername) {
+        // sanitize the Email as a likely Email
+        $newUsername = trim($newUsername);
+        if(($newUsername = filter_var($newUsername, FILTER_SANITIZE_EMAIL)) == false) {
+            throw(new UnexpectedValueException("$newUsername does not exist"));
+        }
+        
+        // then just take email out of quarantine
+        $this->username = $newUsername;
+    }
     
     public function loginUser(){
         
