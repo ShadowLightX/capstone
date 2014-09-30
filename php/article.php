@@ -145,13 +145,12 @@ class Article{
      *@throws RangeException if the number is not in the correct range of exceptation
      **/
     public function setUserId($newUserId){
-        if (gettype($newArticleId) !== "int"{
+        if (gettype($newArticleId) !== "int") {
             throw (new UnexpectedValueException("$newUserId is not a number"));
         }
         
             
-        if ($newArticleId < 0|| $newArticleId > 20000000))
-        {
+        if ($newArticleId < 0|| $newArticleId > 20000000)){
             throw(new RangeException("$newUserId is not a number in the correct range"));
         }
         
@@ -529,7 +528,6 @@ class Article{
      * @return mixed three most recent articles found or null if not found
      * @throws mysqli_sql_exception when mySQL related errors occur
      **/
-    
     public static function getArticlesInOrderByDate(&$mysqli){
         // handle degenerate cases
         if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
@@ -549,25 +547,18 @@ class Article{
             throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
         }
         
-        $row = $result->fetch_assoc(); // fetch_assoc() returns a row as an associative array
+        $rows = $result->fetch_assoc(); // fetch_assoc() returns a row as an associative array
         
         // convert the associative array to a User
-        if($row !== null) {
-            try {
-                $article = new Article($articleId, $row["title"], $row["author"], $row["datePublished"], $row["imageAvaliable"],
-                                       $row["text"], $row["publisher"], $row["url"]);
-            }
-            catch(Exception $exception) {
-                // if the row couldn't be converted, rethrow it
-                throw(new mysqli_sql_exception("Unable to convert row to User", 0, $exception));
-            }
+        if($rows !== null) {
+            
+        }   
             
             return($article);
         } else {
             // 404 Article not found - return null instead
             return(null);
         }
-    
     }
 }
 ?>
