@@ -37,9 +37,14 @@ class PhpBBLogin {
      * sets the value of admin
      * 
      * @param bool admin
+     * @throws Exception if there is no true or false
      **/
     public function setAdmin($newAdmin) {
-        $false = [0, "no", F, no, N, off, null, ""]
+        $false = [0, "false", F, no, N, off, null, ""];
+        $true = [1,"true", T, yes, Y, Sí, on];
+        if ($newAdmin != $false || $newAdmin != $true) {
+            throw(new Exception("You must chose: admin, or not admin? be warned, I know when you lie."));
+        }
     }
     
     /**
@@ -51,10 +56,14 @@ class PhpBBLogin {
         return($this->authenticated);
     }
     /**
+     * sets value of authenticated
      *
-     *
+     * @param bool authenticated
+     * @throws Exception if the user is not autheticated
      **/
-    
+    public function setAuthenticated($newAuthentication) {
+        
+    }
     
     /**
      * gets the value of email
