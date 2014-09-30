@@ -35,13 +35,14 @@ class Resource {
      **/
     public function __construct($resourceId, $userId, $resourceLink, $resourceTitle) {
         try{
-            $this ->resourceId($ResourceId);
-            $this ->userId($UserId);
-            $this ->resourceLink($ResourceLink);
-            $this ->resourceTitle($ResourceTitle);
+
+            $this ->setResourceId($resourceId);
+            $this ->setUserId($userId);
+            $this ->setResourceLink($resourceLink);
+            $this ->setResourceTitle($resourceTitle);
         } catch(UnexpectedValueException $unexpectedValue) {
             // rethrow to caller
-            throw(UnexpectedValueException("Unable to construct resource", 0, $unexpectedValue));  
+            throw(new UnexpectedValueException("Unable to construct resource", 0, $unexpectedValue));  
         } catch(RangeException $range) {
             // rethrow to caller
             throw(new RangeException("Unable to construct resource", 0, $range));
@@ -156,7 +157,7 @@ class Resource {
         }
         
         $splitResourceLink = explode ("://", $newResourceLink);
-        if(strtolower($splitResourceLink[0]) !== "http" || strtolower($splitResourceLink[0]) !== "https") {
+        if(strtolower($splitResourceLink[0]) !== "http" && strtolower($splitResourceLink[0]) !== "https") {
             throw(new UnexpectedValueException("Please use only Http and Https"));    
         }
         
@@ -207,10 +208,10 @@ class Resource {
      **/
     public function insert(&$mysqli) {
         // handle degenerate cases
-        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+        if(gettype($mysqli) !== "object" && get_class($mysqli) !== "mysqli") {
             throw(new mysqli_sql_exception("input is not a mysqli object"));
         }
-        
+        echo $this->getResourceId();
         // enforce the resoureId is null (i.e., don't insert a resource that already exists)
         if($this->resourceId !== null) {
             throw(new mysqli_sql_exception("not a new resource"));
@@ -224,7 +225,7 @@ class Resource {
         }
         
         // bind the member variables to the place holders in the template
-        $wasClean = $statement->bind_param("iss", $this->userId, $this->resourceLink, resourceTitle);
+        $wasClean = $statement->bind_param("iss", $this->userId, $this->resourceLink, $this->resourceTitle);
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
         }

@@ -39,7 +39,7 @@ CREATE TABLE resource(
     userId INT NOT NULL,
     resourceName VARCHAR(64),
     resourceLink VARCHAR(2000),
-    PRIMARY KEY(resourceId),
-    FOREIGN KEY(userId) REFERENCES user(user_id)
+    PRIMARY KEY(resourcesId)
+    
 );
     
