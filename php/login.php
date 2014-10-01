@@ -86,7 +86,7 @@
         }
            //set the getter
            public function getLoginId() {
-           return($this->LoginId);
+           return($this->loginId);
            }
               /**
            *set userId to integer
@@ -208,6 +208,124 @@
         public function getUserName() {
            return($this->UserName);
     }
+    
+    
+    
+    /**
+     *adding my insert, delete and update
+     **/
+     public function insert(&$mysqli) {
+        // handle degenerate cases 
+        if(gettype($mysqli) !== "object" && get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // enforce the loginId is null (i.e., don't insert a login that already exists)
+        if($this->loginId !== null) {
+            throw(new mysqli_sql_exception("not a new login"));
+        }
+        
+        // create query template
+        // CUSTOMIZE THE QUERY -- BIGGEST CHANGE
+        $query     = "INSERT INTO login(userId, authenticationToken, password, salt, userName) VALUES(?, ?, ?, ?, ?)";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the member variables to the place holders in the template
+        // CHANGE STATE VARIABLE NAMES
+        // the first argument states the type: d = double, i = integer, and s = string
+        $wasClean = $statement->bind_param("iss", $this->userId, $this->authenticationToken, $this->password, $this->salt, $this->userName);
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        // DOES NOT CHANGE
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+        
+        // update the null loginId with what mySQL just gave us
+        $this->loginId = $mysqli->insert_id;
+    }
+    
+    /**
+     * deletes this login from mySQL
+     *
+     * @param login $mysqli pointer to mySQL connection, by reference
+     * @throws mysqli_sql_exception when mySQL related errors occur
+     **/
+    public function delete(&$mysqli) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // enforce the loginId is not null (i.e., don't delete a login that hasn't been inserted)
+        if($this->loginId === null) {
+            throw(new mysqli_sql_exception("Unable to delete a login that does not exist"));
+        }
+        
+        // create query template
+        $query     = "DELETE FROM login WHERE loginId = ?";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the member variables to the place holder in the template
+        $wasClean = $statement->bind_param("i", $this->loginId);
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+    }
+    
+    /**
+     * updates this login in mySQL
+     *
+     * @param login $mysqli pointer to mySQL connection, by reference
+     * @throws mysqli_sql_exception when mySQL related errors occur
+     **/
+    public function update(&$mysqli) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // enforce the loginId is not null (i.e., don't update a resource that hasn't been inserted)
+        if($this->loginId === null) {
+            throw(new mysqli_sql_exception("Unable to update a resource that does not exist"));
+        }
+        
+        // create query template
+        $query     = "UPDATE login SET userId = ?, authenticationToken = ?, password = ?, salt = ?, userName = ?, WHERE loginId = ?";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the member variables to the place holders in the template
+        $wasClean = $statement->bind_param("iisss", $this->userId, $this->authenticationToken, $this->password, $this->salt, $this->userName);
+                                                    
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+    }
+    
+}
+?>
         
   
     } 
