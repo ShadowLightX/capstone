@@ -1,4 +1,4 @@
-<?php---*--
+<?php
 /**
  *The Article class deals with articles and allows the adding, retrival, and update of articles
  *
