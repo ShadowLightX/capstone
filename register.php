@@ -2,42 +2,7 @@
 require_once("header.html");
 ?>
 	       <!--start of form-->
-	       <!--rey start-->
-	       <!--start of form-->
-	       <h2 class="text-center"></h2><br><br><br>
-	       <!--<p id="outputArea"></p>-->
-	       <!--New addition TEST-->
-	       <div id="wrapper">
-		    <div id="tabContainer">
-			 <div class="tabs">
-			      <ul>
-				   <li id="tabHeader_1">Login</li>
-				   <li id="tabHeader_2">Registration</li>
-			      <!--taking this out <li id="tabHeader_3">Page 3</li>-->
-			      </ul>
-			 </div>
-			 <div class="tabscontent">
-			      <div class="tabpage" id="tabpage_1">
-				   <h2>Login</h2>
-				   <p>
-					<!-- adding login form -->
-					<form name="login" action="index_submit" method="get" accept-charset="utf-8">  
-					     <ul>  
-						  <li><label for="usermail">Email</label>  
-						  <input type="email" name="usermail" placeholder="yourname@email.com" required></li>  
-						  <li><label for="password">Password</label>  
-						  <input type="password" name="password" placeholder="password" required></li>  
-						  <li>  
-						  <input type="submit" value="Login"></li>  
-					     </ul>  
-					</form>  
-				   <!-- ending addition -->
-				   </p>
-			      </div>
-			       <!--<div class="tabpage" id="tabpage_2">  checking -->
-			      <h2>Registration</h2>
-			      <!--mutation begin-->
-			      <!-- rey end-->
+	     
 				   <p>
 				   <!--<h2 class="text-center"></h2><br><br><br>-->
 					<form class="text-center col-xs-10" id="signUpForm" method="post" action="php/signup.php">
@@ -56,20 +21,7 @@ require_once("header.html");
 					    <input type="email" id="email" name="email" placeholder="E-mail" /><br><br>
 					    <button type="submit">Submit</button>
 					</form>
-				   </p>
-			      <!--rey start-->
-			      </div>
-			      <!--taking this out
-			      <div class="tabpage" id="tabpage_3">
-				   <h2>Page 3</h2>
-				   <p>Pellentesque habitant morbi tristique senectus...</p>
-			      </div>-->
-			 </div>
-		    </div>
-	       </div>    
-	       <script src="javascript/tabs.js"></script>
-	       <!--END TEST-->
-	       <!-- rey end-->
+			   
 	       <p id="outputArea"></p>
 <?php
 require_once("footer.html");
