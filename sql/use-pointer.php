@@ -1,6 +1,6 @@
 <?php
 // require the shared mySQL class
-require_once("/etc/apache2/captstone-mysql/net-neutrality.php", "net_neutrality", "hatscrimwispycellscala", "net_neutrality");
+require_once("/etc/apache2/captstone-mysql/net-neutrality.php");
 
 // every time one needs mySQL access, all one needs to do is run a single method...
 try {
