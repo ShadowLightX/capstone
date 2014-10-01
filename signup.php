@@ -34,7 +34,7 @@ require_once("header.html");
 				   <!-- ending addition -->
 				   </p>
 			      </div>
-			      <div class="tabpage" id="tabpage_2">
+			       <!--<div class="tabpage" id="tabpage_2">  checking -->
 			      <h2>Registration</h2>
 			      <!--mutation begin-->
 			      <!-- rey end-->
@@ -64,7 +64,7 @@ require_once("header.html");
 				   <h2>Page 3</h2>
 				   <p>Pellentesque habitant morbi tristique senectus...</p>
 			      </div>-->
-			 </div>
+			 </div>-->
 		    </div>
 	       </div>    
 	       <script src="javascript/tabs.js"></script>
