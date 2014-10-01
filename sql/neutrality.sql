@@ -1,12 +1,6 @@
 -- creating database for net neutrality
 -- beginning with the login class
 
-DROP TABLE IF EXISTS resource;
-DROP TABLE IF EXISTS article;
-DROP TABLE IF EXISTS login;
-DROP TABLE IF EXISTS user;
-
-
 CREATE TABLE user (
     userId INT UNSIGNED AUTO_INCREMENT NOT NULL,
     email VARCHAR(64) NOT NULL,
