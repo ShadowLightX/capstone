@@ -8,6 +8,8 @@
         <!--start of form-->
         <h2 class="text-center"></h2><br><br><br>
         <form class="text-center" id="createArticleForm" method="post" action="php/article.php">
+            <label for="articleId">Article ID</label>
+            <input type="text" id="articleId" name="articleId" /> <br><br>
             <label for="userId">User Id</label>
             <input type="text" id="userId" name="userId" /> <br><br>
             <label for="title">Title</label>
