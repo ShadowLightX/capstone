@@ -42,6 +42,7 @@ class Resource {
             $this ->setResourceTitle($resourceTitle);
         } catch(UnexpectedValueException $unexpectedValue) {
             // rethrow to caller
+            var_dump($unexpectedValue);
             throw(new UnexpectedValueException("Unable to construct resource", 0, $unexpectedValue));  
         } catch(RangeException $range) {
             // rethrow to caller
@@ -208,17 +209,17 @@ class Resource {
      **/
     public function insert(&$mysqli) {
         // handle degenerate cases
-        if(gettype($mysqli) !== "object" && get_class($mysqli) !== "mysqli") {
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
             throw(new mysqli_sql_exception("input is not a mysqli object"));
         }
-        echo $this->getResourceId();
+        
         // enforce the resoureId is null (i.e., don't insert a resource that already exists)
         if($this->resourceId !== null) {
             throw(new mysqli_sql_exception("not a new resource"));
         }
         
         // create query template
-        $query     = "INSERT INTO resource(userId, resourceLink, resourceTitle) VALUES(?, ?, ?)";
+        $query     = "INSERT INTO resource(userId, resourceLink, resourceName) VALUES(?, ?, ?)";
         $statement = $mysqli->prepare($query);
         if($statement === false) {
             throw(new mysqli_sql_exception("Unable to prepare statement"));
@@ -232,8 +233,9 @@ class Resource {
         
         // execute the statement
         if($statement->execute() === false) {
-            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+            throw(new mysqli_sql_exception("could not execute the statement"));
         }
+        
         
         // update the null resourceId with what mySQL just gave us
         $this->resourceId = $mysqli->insert_id;
@@ -293,14 +295,14 @@ class Resource {
         }
         
         // create query template
-        $query     = "UPDATE resource SET userId = ?, resourceLink = ?, resourceTitle = ? WHERE resourceId = ?";
+        $query     = "UPDATE resource SET userId = ?, resourceLink = ?, resourceName = ? WHERE resourceId = ?";
         $statement = $mysqli->prepare($query);
         if($statement === false) {
             throw(new mysqli_sql_exception("Unable to prepare statement"));
         }
         
         // bind the member variables to the place holders in the template
-        $wasClean = $statement->bind_param("iss", $this->userId, $this->resourceLink, $this->resourceTitle);
+        $wasClean = $statement->bind_param("isss", $this->userId, $this->resourceLink, $this->resourceTitle, $this->resourceId);
                                                     
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
@@ -311,6 +313,61 @@ class Resource {
             throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
         }
     }
-    
+    public static function getResourceByResourceId(&$mysqli, $resourceId) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // sanitize the Email before searching
+        $resourceId = trim($resourceId);
+        $resourceId = filter_var($resourceId, FILTER_SANITIZE_NUMBER_INT);
+        
+        // create query template
+        $query     = "SELECT userId, resourceLink, resourceName FROM resource WHERE resourceId = ?";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the email to the place holder in the template
+        $wasClean = $statement->bind_param("i", $resourceId);
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+        
+        // get result from the SELECT query *pounds fists*
+        $result = $statement->get_result();
+        if($result === false) {
+            throw(new mysqli_sql_exception("Unable to get result set"));
+        }
+        
+        // since this is a unique field, this will only return 0 or 1 results. So...
+        // 1) if there's a result, we can make it into a User object normally
+        // 2) if there's no result, we can just return null
+        $row = $result->fetch_assoc(); // fetch_assoc() returns a row as an associative array
+        
+        // convert the associative array to a User
+        if($row !== null) {
+            try {
+                $resource = new Resource($row["userId"], $row["resourceLink"], $row["resourceName"]);
+            }
+            catch(Exception $exception) {
+                // if the row couldn't be converted, rethrow it
+                throw(new mysqli_sql_exception("Unable to convert row to Resource", 0, $exception));
+            }
+            
+            // if we got here, the User is good - return it
+            return($resource);
+        } else {
+            // 404 User not found - return null instead
+            return(null);
+        }
+    }
 }
 ?>
