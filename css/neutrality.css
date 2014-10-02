@@ -197,10 +197,7 @@ padding-bottom: 56.25%;
 height: 0;
 }
 
-.videoWrapper iframe,
-.videoWrapper embed,
-.videoWrapper object
-{
+.videoWrapper iframe, .videoWrapper embed, .videoWrapper object {
 position: absolute;
 width: 85%;
 height: 80%;

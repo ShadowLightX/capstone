@@ -42,7 +42,7 @@ class User {
      *@param string last names
      *@param string email
      **/
-    public function __construct($newUserId, $newRole, $newFirstName, $newLastName, $newEmail,) {
+    public function __construct($newUserId, $newRole, $newFirstName, $newLastName, $newEmail) {
         try{
             //use our mutator methods to sanitize inputs
             $this->setUserId($newUserId);
