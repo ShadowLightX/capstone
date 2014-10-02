@@ -1,6 +1,6 @@
 $(document).ready(
     function() {
-    $("#signUpForm").validate({
+    $("#resitrationsignUpForm").validate({
         //DEBUG MORE: stop the form submission...
         // ...delete is after debugging
         
@@ -10,43 +10,47 @@ $(document).ready(
          
         // rules define how fields should be sanitized
         rules: {
-            email: {
-                email: true,
-                required: true
-                },
-            password: {
-                minlength: 8
-                },
-                confirmPassword: {
-                    equalTo: "#password"
-               },
-            userName: {
-               userName: true,
-               required: true 
-            }
+          email: {
+               email: true,
+               required: true
+          },
+          password: {
+               minlength: 8
+          },
+          confirmPassword: {
+               equalTo: "#password"
+          },
+          userName: {
+               required: true,
+               max: 30
+          }
         },
             
             // messages define what we tell the user
-            messages: {
-                email: {
-                    // email is the message they get for input that's invalid
-                      email: "please enter a valid Email",
-                     // required is the message they get for omitting the Email
-                      required: "Please enter anything at all"
-                },
-                  // it is not necessary to expand when there's only one rule
-                  password: {
-                    minlength: "Please enter a password of at least 8 characters",
-                    required: "Please enter a password",
-                },
-                  confirmPassword: {
-                    equalTo: "Please match passwords"
-                  }
-            },
+        messages: {
+          email: {
+               // email is the message they get for input that's invalid
+               email: "please enter a valid Email",
+               // required is the message they get for omitting the Email
+               required: "Please enter anything at all"
+          },
+               // it is not necessary to expand when there's only one rule
+          password: {
+               minlength: "Please enter a password of at least 8 characters",
+               required: "Please enter a password",
+               },
+          confirmPassword: {
+               equalTo: "Please match passwords"
+               },
+          userName:{
+               required: "Please enter a user name",
+               max: "Please enter a shorter User Name"
+               }     
+          },
             
-            // setup the AJAX call
-            submitHandler: function(form) {
-                $(form).ajaxSubmit({
+          // setup the AJAX call
+          submitHandler: function(form) {
+               $(form).ajaxSubmit({
                     // How do we send this data? GET or POST
                     type: "POST",
                     // URL to submit to
@@ -57,11 +61,10 @@ $(document).ready(
                     data: $(form).serialize(),
                     // anonymous callback function to react to a successful query
                     success: function(ajaxOutput) {
-                        // html() is jQuery's .innerHTML
-                        $("#outputArea").html(ajaxOutput);
-                         }
-                    });
-               }
-        });
-    }  
-);
+                         // html() is jQuery's .innerHTML
+                         $("#outputArea").html(ajaxOutput);
+                    }
+               });
+          }
+     });
+});  
