@@ -355,7 +355,7 @@ class Resource {
         // convert the associative array to a User
         if($row !== null) {
             try {
-                $resource = new Resource($row["userId"], $row["resourceLink"], $row["resourceName"]);
+                $resource = new Resource($resourceId, $row["userId"], $row["resourceLink"], $row["resourceName"]);
             }
             catch(Exception $exception) {
                 // if the row couldn't be converted, rethrow it
