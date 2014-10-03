@@ -11,6 +11,7 @@ require_once("login.php");
 // verify the CSRF data
 try {
     $verified = verifyCsrf($_POST["csrfName"], $_POST["csrfToken"]);
+    
     if($verified === true) {
 	  $firstName       = null;
 	  $lastName        = null;
@@ -20,25 +21,29 @@ try {
 	  // try the sanitization so we can format errors later on
 	  // filter firstName for bad stuff
 	  try {
+	       
 	       if(!empty($_POST["firstName"])) {
-	            $firstName = filter_input(INPUT_POST, "firstName", FILTER_SANITIZE_STRING);
+	            $safeFirstName = filter_input(INPUT_POST, "firstName", FILTER_SANITIZE_STRING);
 	       }
 	  
 	       if(!empty($_POST["lastName"])) {
-	            $lastName = filter_input(INPUT_POST, "lastName", FILTER_SANITIZE_STRING);
+	            $safeLastName = filter_input(INPUT_POST, "lastName", FILTER_SANITIZE_STRING);
 	       }
 	  
 	       if(empty($_POST["userName"])) {
 	            throw(new Exception("Please enter a User Name"));
 	       }
-	       else {
-	            $userName= filter_input(INPUT_POST, "userName", FILTER_SANITIZE_STRING);
+	       else if(strlen($_POST["userName"])> 30){
+		    throw(new Exception("Please enter a shorter User Name"));
 	       }
-    
+	       else {
+	            $safeUserName= filter_input(INPUT_POST, "userName", FILTER_SANITIZE_STRING);
+	       }
+	       
 	       if(filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL) === false) {
 	            throw(new Exception("Please enter your Email address"));
 	       }
-    
+	       
 	       // if filter_input passed the Email, we can use it
 	       $safeEmail = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
     
@@ -52,16 +57,15 @@ try {
 	       }
 	       
 	       // everything checks out
-	       echo "Welcome $userName Please confirm your e-mail address $safeEmail to complete your registration.";       
+	       echo "Welcome $safeUserName Please confirm your e-mail address $safeEmail to complete your registration.";       
 	       
 	  }
 
 	  // catch the exception and format it as an error message
 	  catch (Exception $error) {
-	       echo "<span class='badForm'>" . $error->getMessage() . "</span>";
+	       echo "blah";//"<span class='badForm'>" . $error->getMessage() . "</span>";
 	  }	
-        
-     }
+    }
     else {
         echo "<span class='badform'>CSRF verification failed.</span>";
     }

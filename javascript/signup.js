@@ -1,6 +1,6 @@
 $(document).ready(
     function() {
-    $("#resitrationsignUpForm").validate({
+    $("#signUpForm").validate({
         //DEBUG MORE: stop the form submission...
         // ...delete is after debugging
         
@@ -22,7 +22,7 @@ $(document).ready(
           },
           userName: {
                required: true,
-               max: 30
+               maxlength: 30
           }
         },
             

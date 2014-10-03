@@ -41,8 +41,7 @@ function generateInputTags() {
  * @return bool true if the token verified, false if not
  * @throws RunTimeException if there's no session to verify the CSRF data in
  **/
-function verifyCsrf($name, $sentToken)
-{
+function verifyCsrf($name, $sentToken){
     // make sure there's a session to write to
     if(session_status() !== PHP_SESSION_ACTIVE) {
         throw(new RuntimeException("Unable to generate form: session inactive"));
