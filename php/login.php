@@ -171,9 +171,10 @@
            public function getPassword() {
            return($this->password);
     }
-        /**
-         *setting the setter for salt
-         */
+    
+    /**
+     *setting the setter for salt
+    */
          public function setSalt($newSalt){
        
          // first trim the input of excess whitespace
@@ -213,7 +214,9 @@
     
     
     /**
-     *adding my insert, delete and update
+     *Inserts a login record into the mySql database
+     *
+     *@param resource $mysqli pointer to mySQL connection, by reference
      **/
      public function insert(&$mysqli) {
         // handle degenerate cases 
@@ -253,7 +256,7 @@
     }
     
     /**
-     * deletes this login from mySQL
+     * Deletes this login from mySQL
      *
      * @param login $mysqli pointer to mySQL connection, by reference
      * @throws mysqli_sql_exception when mySQL related errors occur
@@ -289,7 +292,7 @@
     }
     
     /**
-     * updates this login in mySQL
+     * updates this login row selected in mySQL
      *
      * @param login $mysqli pointer to mySQL connection, by reference
      * @throws mysqli_sql_exception when mySQL related errors occur
@@ -329,10 +332,10 @@
     /**
      *Selects a login by userName and returns one result on success
      *@param resource $mysqli object pointer
-     *@param string $newUserName the user that you wnat to look for
+     *@param string $newUserName the user that you want to look for
      *@throws mysqli_sql_exception for any database connection problems or issues
+     *@return mixed null if no result is found or a login object
      **/
-    
     public static function selectLoginByUserName(&$mysqli, $newUserName)
     {
         if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
@@ -389,6 +392,13 @@
         }
     }
     
+    /**
+     *Selects a login by userId and returns one result on success
+     *@param resource $mysqli object pointer
+     *@param string $newUserId the user id that you want to look for
+     *@throws mysqli_sql_exception for any database connection problems or issues
+     *@return mixed null if no result is found or a login object
+     **/
     public static function selectLoginByUserId(&$mysqli, $newUserId)
     {
         if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
@@ -407,7 +417,7 @@
         }
         
         // bind the member variables to the place holders in the template
-        $wasClean = $statement->bind_param("s", $cleanUser);
+        $wasClean = $statement->bind_param("i", $cleanUser);
         
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
@@ -431,7 +441,70 @@
         // convert the associative array to a User
         if($row !== null) {
             try {
-                $article = new Login($row["loginId"], $row["userId"], $row["authenticationToken"], $row["password"], $row["salt"], $cleanUser);                          $row["text"], $row["publisher"], $row["url"]);
+                $article = new Login($row["loginId"], $cleanUserId , $row["authenticationToken"], $row["password"], $row["salt"], $row["userName"]);                          $row["text"], $row["publisher"], $row["url"]);
+            }
+            catch(Exception $exception) {
+                // if the row couldn't be converted, rethrow it
+                throw(new mysqli_sql_exception("Unable to convert row to Login", 0, $exception));
+            }
+            
+            return($article);
+        } else {
+            // 404 Article not found - return null instead
+            return(null);
+        }
+    }
+    
+    /**
+     *Selects a login by authenticationToken and returns one result on success
+     *@param resource $mysqli object pointer
+     *@param string $newUserName the user that you want to look for
+     *@throws mysqli_sql_exception for any database connection problems or issues
+     *@return mixed null if no result is found or a login object
+     **/
+    public static function selectLoginByAuthenticationToken(&$mysqli, $newAuthenticationToken)
+    {
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        //santize and reset
+        $this->setAuthenticationToken(newUserId);
+        $cleanAuthenticationToken = $this->getAuthenticationToken();
+        
+        //prepare the select statement
+        $query     = "SELECT loginId, userId, password, salt, userName FROM login WHERE authenticationToken = ?";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the member variables to the place holders in the template
+        $wasClean = $statement->bind_param("s", $cleanAuthenicationToken);
+        
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+        
+        $result = $statement->get_result();
+        if($result === false) {
+            throw(new mysqli_sql_exception("Unable to get result set"));
+        }
+        
+        // since this is a unique field, this will only return 0 or 1 results. So...
+        // 1) if there's a result, make it into a article object normally
+        // 2) if there's no result, return null
+        $row = $result->fetch_assoc(); // fetch_assoc() returns a row as an associative array
+        
+        // convert the associative array to a User
+        if($row !== null) {
+            try {
+                $article = new Login($row["loginId"], $row["userId"] , $cleanAuthenticationToken, $row["password"], $row["salt"], $row["userName"]);                          $row["text"], $row["publisher"], $row["url"]);
             }
             catch(Exception $exception) {
                 // if the row couldn't be converted, rethrow it

@@ -460,7 +460,7 @@ class Article{
      *
      * @param resource $mysqli pointer to mySQL connection, by reference
      * @param string $articleId articleId to search for
-     * @return mixed User found or null if not found
+     * @return mixed Article found or null if not found
      * @throws mysqli_sql_exception when mySQL related errors occur
      **/
     public static function getArticleById(&$mysqli, $articleId) {
