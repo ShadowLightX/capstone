@@ -1,10 +1,7 @@
 <?php
 /**
- *creating a class for login
- *login class to state the attributes in login table
- *this class will also clarify the login specifications
- *beginning by declaring the variables password and userName
- *
+ *This is the login class for obtaining and creating a login from the login table. This class
+ *will also clarify the fields in the table and when instaned create an object for database manipulation.
  *
  *@author Rey Baros 
  **/
@@ -12,14 +9,11 @@
  
  class login {
     /**
-     *declaring variables password, loginId, userId
-     *
-     *declaring loginId 
-     *
+     *state variable for loginId (primary key)
      **/
     private $loginId;
     /**
-     *declaring password variable
+     *state variable for userId 
      */
     private $userId;
     /**
@@ -38,13 +32,19 @@
       *state variable for username
       **/
      private $userName;
+     
      /*
-     *creating constructor for login
-     *
-     *
+     *The constructor or expected variables need for class creation loginId can be null
+     *@param mixed $newLoginId the login id of the individual loging in
+     *@param integer $newUserId the id of the user associated with the login
+     *@param string $authenticationToken is randomized string for email authenication
+     *@param string $newPassword the encrypted password 
+     *@param string $newSalt the salt used to create the encrypted password
+     *@param string $newUserName the username choosen for login purposes
+     *@throws UnexpectedValueException when bad types are passed into the constructor 
+     *@throws RangeException when a value passed is not in an acceptable range of values
      **/
-    public function __construct($newLoginId, $newUserId, $newAuthenticationToken, $newPassword, $newSalt, $newUserName) {
-        
+    public function __construct($newLoginId, $newUserId, $newAuthenticationToken, $newPassword, $newSalt, $newUserName) {    
         try {
             $this->setLoginId($newLoginId);
             $this->setuserId($newUserId);
@@ -74,7 +74,7 @@
             throw(new UnexptectedValueException ("Invalid Characters"));
         }
         
-        if($newLoginId < 1 || $login> 2000000) {
+        if($newLoginId < 0) {
             throw(new RangeException("$newLoginId is not acceptable"));
         }   
         
@@ -144,7 +144,7 @@
     }
     
     /**
-     *accessor method for authenication token
+     *gets the current value of the authenicationToken
      *@return string value of the authenitation token that was created for registration purposes 
     **/
     public function getAuthenticationToken(){
@@ -152,7 +152,7 @@
     }
     
     /**  
-     * sets the password for this login 
+     * Sets the password for this login 
      * @param string $newPassword the password as it was passed in
      * @throws UnexpectedValueException if the input is not a string
     **/
@@ -167,13 +167,16 @@
         
         $this->password = $newPassword;
         }
-        // retreive the value with a getter
-           public function getPassword() {
+    
+    // retreive the value with a getter
+    public function getPassword() {
            return($this->password);
     }
     
     /**
-     *setting the setter for salt
+     *Sets the salt of the login
+     *
+     *@param string $newSalt the salt used during creation 
     */
          public function setSalt($newSalt){
        
@@ -190,25 +193,43 @@
          // finally, if it passed the regular expresssion, it is clean and can be taken out of the quarantine
          $newSalt = strtolower($newSalt);
          $this->salt = $newSalt;
-     }
+    }
     
-          public function getSalt() {
+    
+    public function getSalt() {
           return($this->salt);
-          }
+    }
         
-        /**
-         *setting up the userName funciton
-         **/
-        public function setUserName($newUserName) {
-            if(gettype($newUserName) !== "string") {
-            throw(new UnexpectedValueException ("Please retype "));
+    
+    /**
+     *sets the userName for this login
+     *
+     *@param string $newUserName The name the user has choosen for logging in
+     *@throws UnexpectedValue exception if valuse passed is not a string
+     *@throws RangeException if the user name does not conform to length standards
+    **/
+    public function setUserName($newUserName) {
+        if(gettype($newUserName) !== "string") {
+            throw(new UnexpectedValueException ("Please provide a regular user name"));
         }
+        
+        if(strlen($newUserName <= 0)){
+            throw(new RangeException ("Please enter a user name"));
+        }
+        
+        if(strlen($newUserName >30)){
+            throw(new RangeException ("Please enter a shorter user name"));
+        }
+        
         // sanitize it
         $newUserName = filter_var ( $newUserName, FILTER_SANITIZE_STRING);
-        }
-        // setting the getter
-        public function getUserName() {
-           return($this->UserName);
+        
+        $this->userName = $newUserName;
+    }
+        
+    // setting the getter
+    public function getUserName() {
+        return($this->UserName);
     }
     
     

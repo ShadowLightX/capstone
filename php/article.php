@@ -3,7 +3,7 @@
  *The Article class deals with articles and allows the adding, retrival, and update of articles
  *
  *@author Nicholas Bowling <nbowling505@gmail.com>
- *@version 0.3.8
+ *@version 0.4
  **/
 
 class Article{
@@ -65,7 +65,7 @@ class Article{
      *@param string $newPublisher The publisher of an article
      *@param string $newUrl The URL the article came from
      *@throws UnexceptedValueException if inputs are of the incorrect types or urls
-     *@throws RangesException if the inputs contain invalid values
+     *@throws RangeException if the inputs contain invalid values
      **/
     
     public function __construct($newArticleId,$newUserId, $newTitle,$newAuthor,$newDatePublished,$newImageAvailable, $newArticleText,$newPublisher,$newUrl){
@@ -122,7 +122,7 @@ class Article{
         }
         
         
-        if (gettype($newArticleId) !== "int"&& ($newArticleId < 0|| $newArticleId > 20000000))
+        if (gettype($newArticleId) !== "int"&& $newArticleId < 0)
         {
             throw(new RangeException("$newArticleId is not a number in the correct range"));
         }
@@ -150,7 +150,7 @@ class Article{
         }
         
             
-        if ($newArticleId < 0|| $newArticleId > 20000000){
+        if ($newArticleId < 0){
             throw(new RangeException("$newUserId is not a number in the correct range"));
         }
         
@@ -178,7 +178,7 @@ class Article{
             throw(new UnexpectedValueException("Please use a phrase to describe an article"));
         }
         
-        if (strlen($newTitle)<1 || strlen($newTitle)> 70){
+        if (strlen($newTitle)<1 || strlen($newTitle)> 64){
             throw(new RangeException("The article title is not set or too long please try again."));
         }
         
@@ -456,7 +456,7 @@ class Article{
     }
     
     /**
-     * gets the Article by ArticleId in the database
+     * Selects the Article by ArticleId in the database
      *
      * @param resource $mysqli pointer to mySQL connection, by reference
      * @param string $articleId articleId to search for
@@ -522,7 +522,7 @@ class Article{
     }
     
     /**
-     * gets the three most recent Articles in order of date in the database
+     * Selects the three most recent Articles in order of date in the database
      *
      * @param resource $mysqli pointer to mySQL connection, by reference
      * @return array of objects of the three most recent articles found
