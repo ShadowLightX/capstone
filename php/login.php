@@ -7,7 +7,7 @@
  **/
 
  
- class login {
+ class Login {
     /**
      *state variable for loginId (primary key)
      **/

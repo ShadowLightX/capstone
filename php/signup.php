@@ -7,14 +7,15 @@ session_start();
 require_once("cs.php");
 require_once("user.php");
 require_once("login.php");
+require_once("/etc/apache2/capstone-mysql/net-neutrality.php");
 
 // verify the CSRF data
 try {
     $verified = verifyCsrf($_POST["csrfName"], $_POST["csrfToken"]);
     
     if($verified === true) {
-	  $firstName       = null;
-	  $lastName        = null;
+	  $safeFirstName       = null;
+	  $safeLastName        = null;
 	  $userName        = "";
 	  $password        = "";
 	  $confirmPassword = "";
@@ -55,22 +56,44 @@ try {
 	       if($safePassword !== $safeConfirm) {
 		    throw(new Exception("Please type matching passwords"));
 	       }
+	       //create the salt
+	       $salt = bin2hex(openssl_random_pseudo_bytes(32));
+	       
+	       //encrypt passwords
+	       $passHashed = hash_pbkdf2("sha512", $safepassword, $salt, 2048, 128);
+	       
+	       //create authentication token
+	       $token = bin2hex(openssl_random_pseudo_bytes(16));
+	       
+	       //create classes
+	       $user = new User(null, "user",$safeFirstName,$safeLastName,$safeEmail);
+	       $userId = $user->getUserId();
+	       $login = new Login(null,$userId,$token,$passHashed,$salt,$safeUserName);
+	       
+	       //connect to the database
+	       $mySql = Pointer::getPointer();
+	       
+	       //insert into the user table and the login table
+	       $user->insert($mySql);
+	       $login->insert($mySql);
+	       
+	       //test success
+	       $tUser = User::getUserByUserId($mySql, $userId);
 	       
 	       // everything checks out
-	       echo "Welcome $safeUserName Please confirm your e-mail address $safeEmail to complete your registration.";       
-	       
+	       echo "Welcome" . $tUser->getUserName(); .  "Please confirm your e-mail address" . $tUser->getEmail() . "to complete your registration.";
 	  }
 
 	  // catch the exception and format it as an error message
 	  catch (Exception $error) {
-	       echo "blah";//"<span class='badForm'>" . $error->getMessage() . "</span>";
+	       echo "<span class='badForm'>" . $error->getMessage() . "</span>";
 	  }	
     }
     else {
-        echo "<span class='badform'>CSRF verification failed.</span>";
+        echo "<span class='badform'>Form validation failed.</span>";
     }
 }
 catch(RuntimeException $runtime) {
-    echo "<span class='badForm'>Unable to verify CSRF token: </span>" . $runtime->getMessage();
+    echo "<span class='badForm'>Please try going back to the main site and try again.</span>" . $runtime->getMessage();
 }
 ?>
