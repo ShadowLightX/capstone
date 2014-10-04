@@ -195,14 +195,17 @@
          $this->salt = $newSalt;
     }
     
-    
+    /*
+     *Gets the value of the salt
+     *
+     *@return sting the value of the salt for this login
+     */
     public function getSalt() {
           return($this->salt);
     }
-        
     
     /**
-     *sets the userName for this login
+     *Sets the userName for this login
      *
      *@param string $newUserName The name the user has choosen for logging in
      *@throws UnexpectedValue exception if valuse passed is not a string
@@ -217,7 +220,7 @@
             throw(new RangeException ("Please enter a user name"));
         }
         
-        if(strlen($newUserName >30)){
+        if(strlen($newUserName > 30)){
             throw(new RangeException ("Please enter a shorter user name"));
         }
         
@@ -227,12 +230,13 @@
         $this->userName = $newUserName;
     }
         
-    // setting the getter
+    /* gets the value of the User Name
+     *
+     * @return string The user name of the login we are acceaaing
+     **/
     public function getUserName() {
         return($this->UserName);
     }
-    
-    
     
     /**
      *Inserts a login record into the mySql database
@@ -538,7 +542,5 @@
             return(null);
         }
     }
-    
-    
 }
 ?>
