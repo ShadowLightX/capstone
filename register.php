@@ -1,7 +1,6 @@
 <?php
-require_once("header.html");
+require_once("header.php");
 require_once("./php/cs.php");
-session_start();
 ?>
      <form class="text-center col-xs-10" id="signUpForm" method="post" action="php/signup.php">
 	  <p style="color: red">*required</p><br>

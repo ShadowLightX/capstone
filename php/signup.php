@@ -14,8 +14,8 @@ try {
     $verified = verifyCsrf($_POST["csrfName"], $_POST["csrfToken"]);
     
     if($verified === true) {
-	  $safeFirstName       = null;
-	  $safeLastName        = null;
+	  $safeFirstName   = null;
+	  $safeLastName    = null;
 	  $userName        = "";
 	  $password        = "";
 	  $confirmPassword = "";
@@ -71,17 +71,18 @@ try {
 	       $login = new Login(null,$userId,$token,$passHashed,$salt,$safeUserName);
 	       
 	       //connect to the database
-	       $mySql = Pointer::getPointer();
+	       $database = Pointer::getPointer();
 	       
 	       //insert into the user table and the login table
-	       $user->insert($mySql);
-	       $login->insert($mySql);
-	       
-	       //test success
-	       $tUser = User::getUserByUserId($mySql, $userId);
+	       $user->insert($database);
+	       $login->insert($database);
+     
+	       /*send an email verification (not ready yet)
+	       mail($user->getEmail, "Email Verification", "Welcome to our site we a pleased you have decided to register
+		    with us. Your authentication venue is $website/?auth='$token'");*/
 	       
 	       // everything checks out
-	       echo "Welcome" . $tUser->getUserName(); .  "Please confirm your e-mail address" . $tUser->getEmail() . "to complete your registration.";
+	       echo "Welcome" . $user->getUserName(); .  "Please confirm your e-mail address" . $user->getEmail() . "to complete your registration.";
 	  }
 
 	  // catch the exception and format it as an error message
