@@ -12,7 +12,7 @@ require_once("header.html");
 		<!--wrapper for slides-->
 		<div class="carousel-inner">
 		    <div class="item active">
-			<a id="carousel1" href="videos.html"><img src="images/vi-hart-net-neutrality-600x369.jpg" alt="net neutrality video"></a><!--added link-->
+			<a id="carousel1" href="videos.php"><img src="images/vi-hart-net-neutrality-600x369.jpg" alt="net neutrality video"></a><!--added link-->
 			<div class="carousel-caption">
 			    Watch the video here!
 			</div>
