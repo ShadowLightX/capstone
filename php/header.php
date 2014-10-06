@@ -102,8 +102,8 @@ session_start();
             <div>
                 <label for="password">Password</label>
                 <input type="password" id="userPassword" name="userPassword" value="" />
-            </div> <h3>
-            <input type="submit" name="Login" value="Login" /></h3>
+            </div>
+	    <h3><input type="submit" name="Login" value="Login" /></h3>
             <a class="close" href="#close"></a>
 	    </form>
         </div>
