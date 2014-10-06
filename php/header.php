@@ -1,10 +1,10 @@
 <?php
-require_once("article.php")
+require_once("article.php");
 require_once("/etc/apache2/capstone-mysql/net-neutrality.php");
 session_start();
 function buildArticleList(){
     $database = Pointer::getPointer();
-    $recentArticle = Article::getArticleInOrderByDate($database);
+    $recentArticle = Article::getArticlesInOrderByDate($database);
     $articleList = "";
     foreach ($recentArticle as $netArticles){
 	$page = $netArticles->getArticleId();
@@ -53,13 +53,13 @@ function buildArticleList(){
 	    <!--nav-->
 	    <section id="logo" class="col-xs-10 col-md-2 logo"><a href="index.php"><img alt ="net-neutrality-logo" src="images/logo.png"></a></section>
 	    <ul class="row myMenu">
-
-		<li id="forums" class="text-center col-xs-10 col-md-2 forums"><a href="bootcamp-coders.cnm.edu/~mayala/forum"><h2>Forums</h2></a></li>
-		<li id="search" class="text-center col-xs-10 col-md-4 search reverse" ><a href="....html"><h2>Search</h2></a></li>
-		<li id="register" class="text-center col-xs-10 col-md-2 register reverse"><a href="register.php"><h2>Register</h2></a></li>
-		<li id="login" class="text-center col-xs-10 col-md-2 login reverse"><a href="....html"><h2>Login</h2></a></li>
-		<li id="home" class="text-center col-xs-10 col-md-2 home"><a href="index.php"><h2>Home</h2></a></li>
-		<li id="resources" class="text-center col-xs-10 col-md-2 resources"><a href="resources.php"><h2>Resources</h2></a>
+		<li id="search" class="text-center col-xs-10 col-md-4 search" ><a href="....html"><h2>Search</h2></a></li>
+		<li id="register" class="text-center col-xs-10 col-md-2 register"><a href="register.php"><h2>Register</h2></a></li>
+		<li id="login" class="text-center col-xs-10 col-md-2 login"><a href="....html"><h2>Login</h2></a></li>
+		<li id="home" class="text-center col-xs-10 col-md-2 home reverse"><a href="index.php"><h2>Home</h2></a></li>
+		<li id="forums" class="text-center col-xs-10 col-md-2 forums reverse"><a href="bootcamp-coders.cnm.edu/~mayala/forum"><h2>Forums</h2></a></li>
+		<li id="resources" class="text-center col-xs-10 col-md-2 resources reverse"><a href="resources.php"><h2>Resources</h2></a>
+		
 		    <ul>
 			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
 			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
@@ -70,7 +70,8 @@ function buildArticleList(){
 		<li id="articles" class="text-center col-xs-10 col-md-2 articles"><a href="articles.php"><h2>Articles</h2></a>
 		    <ul>
 			<?php
-			echo buildArticleList();
+			echo "<li class='text-center col-xs-10 col-md-2'><a href='#'>...</a></li>";
+			//echo buildArticleList();
 			?>
 		    </ul>
 		</li>

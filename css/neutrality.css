@@ -14,9 +14,6 @@ body {
     text-align:  left;
 }
 
-#logo .resize {
-}
-
 /*nav*/
 .myMenu li {
     list-style:none;
@@ -26,15 +23,15 @@ body {
 }
 
 .myMenu li a:link, .myMenu li a:visited {
-    margin: 5px;
-    padding-bottom: 5px;
-    padding-top: 5px;
+    margin: 4px;
+    padding-bottom: 2px;
+    padding-top: 2px;
     background-color: #0C56E8;
     display: block;
     text-decoration:none;
     color: white;
     z-index:1;
-    font-size: 1.5em;
+    font-size: 1.25em;
 }
 
 .myMenu li a:hover {
@@ -60,7 +57,7 @@ body {
     background-color:#0D9EFF;
     width:auto;
     z-index: 1;
-    font-size: 1.5em;
+    font-size: 1.25em;
 }
 
 .myMenu li ul li a:hover {

@@ -82,7 +82,7 @@ try {
 		    with us. Your authentication venue is $website/?auth='$token'");*/
 	       
 	       // everything checks out
-	       echo "Welcome" . $user->getUserName(); .  "Please confirm your e-mail address" . $user->getEmail() . "to complete your registration.";
+	       echo "Welcome" . $user->getUserName() .  "Please confirm your e-mail address" . $user->getEmail() . "to complete your registration.";
 	  }
 
 	  // catch the exception and format it as an error message
