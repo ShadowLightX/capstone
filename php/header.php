@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 require_once("article.php");
 require_once("/etc/apache2/capstone-mysql/net-neutrality.php");
 session_start();
@@ -11,6 +12,39 @@ function buildArticleList(){
 	$articleList = $articleList . "<li class='text-center col-xs-10 col-md-2'><a href='display.php?article=$page'>" . $netArticles->getTitle() . "</a></li>/n";
     }
     return ($articleList);
+=======
+require_once("php/article.php");
+require_once("php/login.php");
+require_once("php/user.php");
+require_once("php/resources.php");
+require_once("php/cs.php");
+require_once("/etc/apache2/capstone-mysql/net-neutrality.php");
+session_start();
+function siteLogin(){
+    $verified = verifyCsrf($_POST["csrfName"], $_POST["csrfToken"]);
+    if ($verified === true){
+	try{
+	    $database = Pointer::getPointer();
+	    //scrub the incomming stuff from $post using input santization
+	    $newUserName = filter_input(INPUT_POST, "userName", FILTER_SANITIZE_STRING);
+	    $newPassword = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
+	    //pass the values to be found in our database
+	    $ourNewLogin = Login::selectLoginByUserNamePassword($database,$newUserName,$newPassword);
+	    //no object
+	    if ($ourNewLogin != null){
+	      //check registration is null
+	        //set session variable user = username
+	        //set session variable admin = T or F
+	        //set session registered = T
+	      //else please register before continuing   
+	    }
+	}
+	catch (Exception $exception)
+	{
+	    echo "<span> The following error occured: $exception";
+	}
+    }    
+>>>>>>> https://app.asana.com/0/15833644813232/16917144320415
 }
 ?>
 <!DOCTYPE html>
@@ -53,6 +87,7 @@ function buildArticleList(){
 	    <!--nav-->
 	    <section id="logo" class="col-xs-10 col-md-2 logo"><a href="index.php"><img alt ="net-neutrality-logo" src="images/logo.png"></a></section>
 	    <ul class="row myMenu">
+<<<<<<< HEAD
 		<li id="search" class="text-center col-xs-10 col-md-4 search" ><a href="....html"><h2>Search</h2></a></li>
 		<li id="register" class="text-center col-xs-10 col-md-2 register"><a href="register.php"><h2>Register</h2></a></li>
 		<li id="login" class="text-center col-xs-10 col-md-2 login"><a href="....html"><h2>Login</h2></a></li>
@@ -60,6 +95,10 @@ function buildArticleList(){
 		<li id="forums" class="text-center col-xs-10 col-md-2 forums reverse"><a href="bootcamp-coders.cnm.edu/~mayala/forum"><h2>Forums</h2></a></li>
 		<li id="resources" class="text-center col-xs-10 col-md-2 resources reverse"><a href="resources.php"><h2>Resources</h2></a>
 		
+=======
+		<li id="home" class="text-center col-xs-10 col-md-2 home"><a href="index.php"><h2>Home</h2></a></li>
+		<li id="resources" class="text-center col-xs-10 col-md-2 resources"><a href="resources.php"><h2>Resources</h2></a>
+>>>>>>> https://app.asana.com/0/15833644813232/16917144320415
 		    <ul>
 			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
 			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
@@ -69,10 +108,49 @@ function buildArticleList(){
 		</li>
 		<li id="articles" class="text-center col-xs-10 col-md-2 articles"><a href="articles.php"><h2>Articles</h2></a>
 		    <ul>
+<<<<<<< HEAD
 			<?php
 			echo "<li class='text-center col-xs-10 col-md-2'><a href='#'>...</a></li>";
 			//echo buildArticleList();
 			?>
+=======
+			<li class="text-center col-xs-10 col-md-2"><a href="article-template.php">Article</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="article-template1.php">Article1</a></li>
+>>>>>>> https://app.asana.com/0/15833644813232/16917144320415
 		    </ul>
 		</li>
+		<li id="forums" class="text-center col-xs-10 col-md-2 forums"><a href="bootcamp-coders.cnm.edu/~mayala/forum"><h2>Forums</h2></a></li>
+		<li id="search" class="text-center col-xs-10 col-md-4 search reverse" ><a href="....html"><h2>Search</h2></a></li>
+		<li id="register" class="text-center col-xs-10 col-md-2 register reverse"><a href="register.php"><h2>Register</h2></a></li>
+		<li id="login" class="text-center col-xs-10 col-md-2 login reverse"> <!--<a href=" "> --> <!--<h2>login</h2>  this goes after the popup code-->
+		<!-- start, do not delete the comments-->
+		 <div class="main" <!--img src="images/network_neutrality-mar.jpg">
+            <div class="panel"> 
+                <a href="#login_form" id="login_pop" ><h2>Login</h2></a>
+                <!--<a href="#join_form" id="join_pop">Sign Up</a>
+            </div>
+        </div>
+         popup form #1 -->
+        <a href="#x" class="overlay" id="login_form"></a>
+        <div class="popup">
+            <!-- <h2>Welcome Guest!</h2>  -->
+            <p><h5>Please enter your login and password here</h5></p>
+	    <div>
+	      <?php
+	       echo generateInputTags();
+	       ?>
+	    </div>
+            <div>
+                <label for="login">User Name</label> 
+                <input type="text" id="login" name="login" value="" />
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" value="" />
+            </div> <h3>
+            <input type="button" value="Login" /></h3>
+            <a class="close" href="#close"></a>
+        </div>
+		<!-- end of login link-->
+		<!--</a>--></li>
 	    </ul>
