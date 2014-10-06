@@ -25,7 +25,7 @@ require_once("header.html");
         </header>
  
         <!-- panel with buttons -->
-        <div class="main" img src="images/network_neutrality-mar.jpg">
+        <div class="main" <!--img src="images/network_neutrality-mar.jpg"> -->
             <div class="panel">
                 <a href="#login_form" id="login_pop" >Log In</a>
                 <!--<a href="#join_form" id="join_pop">Sign Up</a> -->
