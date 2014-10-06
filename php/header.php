@@ -1,50 +1,10 @@
 <?php
-
-require_once("article.php");
-require_once("/etc/apache2/capstone-mysql/net-neutrality.php");
-session_start();
-function buildArticleList(){
-    $database = Pointer::getPointer();
-    $recentArticle = Article::getArticlesInOrderByDate($database);
-    $articleList = "";
-    foreach ($recentArticle as $netArticles){
-	$page = $netArticles->getArticleId();
-	$articleList = $articleList . "<li class='text-center col-xs-10 col-md-2'><a href='display.php?article=$page'>" . $netArticles->getTitle() . "</a></li>/n";
-    }
-    return ($articleList);
-
 require_once("php/article.php");
 require_once("php/login.php");
 require_once("php/user.php");
-require_once("php/resources.php");
 require_once("php/cs.php");
 require_once("/etc/apache2/capstone-mysql/net-neutrality.php");
 session_start();
-function siteLogin(){
-    $verified = verifyCsrf($_POST["csrfName"], $_POST["csrfToken"]);
-    if ($verified === true){
-	try{
-	    $database = Pointer::getPointer();
-	    //scrub the incomming stuff from $post using input santization
-	    $newUserName = filter_input(INPUT_POST, "userName", FILTER_SANITIZE_STRING);
-	    $newPassword = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
-	    //pass the values to be found in our database
-	    $ourNewLogin = Login::selectLoginByUserNamePassword($database,$newUserName,$newPassword);
-	    //no object
-	    if ($ourNewLogin != null){
-	      //check registration is null
-	        //set session variable user = username
-	        //set session variable admin = T or F
-	        //set session registered = T
-	      //else please register before continuing   
-	    }
-	}
-	catch (Exception $exception)
-	{
-	    echo "<span> The following error occured: $exception";
-	}
-    }    
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,6 +89,7 @@ function siteLogin(){
         <div class="popup">
             <!-- <h2>Welcome Guest!</h2>  -->
             <p><h5>Please enter your login and password here</h5></p>
+	    <form name="login" method="post" action="php/userlogin.php">
 	    <div>
 	      <?php
 	       echo generateInputTags();
@@ -136,14 +97,15 @@ function siteLogin(){
 	    </div>
             <div>
                 <label for="login">User Name</label> 
-                <input type="text" id="login" name="login" value="" />
+                <input type="text" id="userLogin" name="userLogin" value="" />
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" value="" />
+                <input type="password" id="userPassword" name="userPassword" value="" />
             </div> <h3>
-            <input type="button" value="Login" /></h3>
+            <input type="submit" name="Login" value="Login" /></h3>
             <a class="close" href="#close"></a>
+	    </form>
         </div>
 		<!-- end of login link-->
 		<!--</a>--></li>
