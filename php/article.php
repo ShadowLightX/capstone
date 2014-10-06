@@ -3,7 +3,7 @@
  *The Article class deals with articles and allows the adding, retrival, and update of articles
  *
  *@author Nicholas Bowling <nbowling505@gmail.com>
- *@version 0.4
+ *@version 0.3.8
  **/
 
 class Article{
@@ -65,7 +65,7 @@ class Article{
      *@param string $newPublisher The publisher of an article
      *@param string $newUrl The URL the article came from
      *@throws UnexceptedValueException if inputs are of the incorrect types or urls
-     *@throws RangeException if the inputs contain invalid values
+     *@throws RangesException if the inputs contain invalid values
      **/
     
     public function __construct($newArticleId,$newUserId, $newTitle,$newAuthor,$newDatePublished,$newImageAvailable, $newArticleText,$newPublisher,$newUrl){
@@ -142,11 +142,7 @@ class Article{
         }
         
         
-<<<<<<< HEAD
-        if (gettype($newArticleId) !== "int"&& $newArticleId < 0)
-=======
         if (gettype($newArticleId) !== "integer" || $newArticleId < 0)
->>>>>>> refactored to prep for SimpleTest
         {
             throw(new RangeException("$newArticleId is not a number in the correct range"));
         }
@@ -174,11 +170,7 @@ class Article{
         }
         
             
-<<<<<<< HEAD
-        if ($newArticleId < 0){
-=======
         if ($newUserId < 0|| $newUserId > 20000000){
->>>>>>> refactored to prep for SimpleTest
             throw(new RangeException("$newUserId is not a number in the correct range"));
         }
         
@@ -206,7 +198,7 @@ class Article{
             throw(new UnexpectedValueException("Please use a phrase to describe an article"));
         }
         
-        if (strlen($newTitle)<1 || strlen($newTitle)> 64){
+        if (strlen($newTitle)<1 || strlen($newTitle)> 70){
             throw(new RangeException("The article title is not set or too long please try again."));
         }
         
@@ -520,15 +512,9 @@ class Article{
     }
     
     /**
-     * Selects the Article by ArticleId in the database
+     * gets the Article by ArticleId in the database
      *
-<<<<<<< HEAD
-     * @param resource $mysqli pointer to mySQL connection, by reference
-     * @param string $articleId articleId to search for
-     * @return mixed Article found or null if not found
-=======
      * @param arser found or null if not found
->>>>>>> refactored to prep for SimpleTest
      * @throws mysqli_sql_exception when mySQL related errors occur
      **/
     public static function getArticleByArticleId(&$mysqli, $articleId) {
@@ -595,13 +581,13 @@ class Article{
     }
     
     /**
-     * Selects the three most recent Articles in order of date in the database
+     * gets the three most recent Articles in order of date in the database
      *
      * @param resource $mysqli pointer to mySQL connection, by reference
      * @return array of objects of the three most recent articles found
      * @throws mysqli_sql_exception when mySQL related errors occur
      **/
-    public static function getArticlesInOrderByDate(&$mysqli){
+    public static function getArticlesDateInOrderBy(&$mysqli){
         // handle degenerate cases
         if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
             throw(new mysqli_sql_exception("input is not a mysqli object"));

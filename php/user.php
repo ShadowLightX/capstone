@@ -245,9 +245,9 @@ class User {
     }
     
     /**
-     * Deletes this instace of User from the user table in mySQL
+     * deletes this User from mySQL
      *
-     * @param resource $mysqli pointer to mySQL connection, by reference
+     * @param user $mysqli pointer to mySQL connection, by reference
      * @throws mysqli_sql_exception when mySQL related errors occur
      **/
     public function delete(&$mysqli) {
@@ -281,9 +281,9 @@ class User {
     }
     
     /**
-     * Updates this User in mySQL
+     * updates this User in mySQL
      *
-     * @param resource $mysqli pointer to mySQL connection, by reference
+     * @param user $mysqli pointer to mySQL connection, by reference
      * @throws mysqli_sql_exception when mySQL related errors occur
      **/
     public function update(&$mysqli) {
