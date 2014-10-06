@@ -27,6 +27,33 @@ class PhpBBLogin {
      **/
     private $username;
     
+    /*
+     * The constructor or expected variables need for class creation loginId can be null
+     *
+     * @param bool $newAdmin determines whther user is admin
+     * @param bool $newAuthenticated determines whether user is authenticated
+     * @param string $newEmail the email given by the user
+     * @param string $newUsername the username choosen for login purposes
+     * @throws UnexpectedValueException when bad types are passed into the constructor 
+     * @throws RangeException when a value passed is not in an acceptable range of values
+     **/
+    public function __construct($newLoginId, $newUserId, $newAuthenticationToken, $newPassword, $newSalt, $newUserName) {    
+        try {
+            $this->setAdmin($newadmin);
+            $this->setAuthenticated($newAuthenticated);
+            $this->setEmail($newEmail);
+            $this->setUsername($newUsername);
+        }
+        catch(UnexpectedValueException $error) {
+            // rethrow the exception to the code that tried to create the object
+            throw(new UnexpectedValueException("unable to create Login", 0, $error));
+        }
+        catch(RangeException $error) {
+            // again, just re-throw to inform the caller of the error
+            throw(new RangeException("unable to create Login", 0, $error));
+        }
+    }
+    
     /**
      * gets the value of admin
      *
