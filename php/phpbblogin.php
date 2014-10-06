@@ -6,7 +6,8 @@
  *
  * @author Modesto Ayala Ruth <tigrecientifico@gmail.com>
  **/
-require_once("login.php")
+require_once("login.php");
+require_once("user.php");
  
 class PhpBBLogin {
     /**
@@ -129,25 +130,42 @@ class PhpBBLogin {
     /**
      * logs in a user from mySQL
      *
+     * @param mysqli $mysqli mySQLi object, by reference
      * @param string $username username of the user
      * @param string $password clear text password of the user
      * @return bool true if authenticated, false if not
      * @throws mysqli_sql_exception if a mySQL error occurs
      **/
-    public function loginUser($username, $password) {
-        $userLogin = Login::selectLoginByUsername($username);
+    public function loginUser(&$mysqli, $username, $password) {
+        $userLogin = Login::selectLoginByUsername($mysqli, $username);
+        
+        if($userLogin === null) {
+            return(false);
+        }
         
         $hash = hash_pbkdf2("sha512", $password, $userLogin->getSalt(), 2048, 128);
-        
-        $getPassword = 
+        $getPassword = $userLogin->getPassword();
         
         if ($hash === $getPassword) {
+            $user = User::getUserByUserId($mysqli, $userLogin->getId());
+            $role = $user->getRole();
+            if($role === "admin") {
+                $this->setAdmin(true);
+            } else {
+                $this->setAdmin(false);
+            }
             
+            $this->setUserName($user->getUserName());
+            $this->setEmail($user->getEmail());
+            return(true);
+        } else {
+            return(false);
         }
     }
     
-    public function jsonLogin(){
-        json_encode
+    public function jsonLogin(&$mysqli, $username, $password){
+        $this->setAuthenticated($this->loginUser($mysqli, $username, $password));
+        return(json_encode($this));
     }
 }
 
