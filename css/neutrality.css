@@ -86,6 +86,11 @@ p {
     text-align: center;
 }
 
+#articles {
+    color: white;
+    background-color: #0D9EFF;
+}
+
 #title {
     background-color: #0D9EFF;
     color: white;
