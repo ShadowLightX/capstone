@@ -11,18 +11,19 @@ function siteLogin(){
 	    $database = Pointer::getPointer();
 	    //scrub the incomming stuff from $post using input santization
 	    $newUserName = filter_input(INPUT_POST, "userLogin", FILTER_SANITIZE_STRING);
-	    $newPassword = filter_input(INPUT_POST, "userpassword", FILTER_SANITIZE_STRING);
+	    $newPassword = trim(filter_input(INPUT_POST, "userpassword", FILTER_SANITIZE_STRING));
 	    //pass the values to be found in our database
-	    $ourNewLogin = Login::selectLoginByUserNamePassword($database,$newUserName,$newPassword);
+	    $phplogin = PhpBBLogin::loginUser($database,$newUserName,$newPassword);
+	    $ourLogin = Login::selectLoginByUserNamePassword($database,$newUserName,$newPassword);
 	    //no object
-	    if ($ourNewLogin != null){
+	    if ($phplogin == true){
 		    if(isset($_SESSION["user"]) === false)
 		    {
 			if ($ourNewLogin->getAuthenticationToken()!=null){
 				$_SESSION["user"] = $newUserName;
-				$ourUser = User::getUserByUserId($database, $ourNewLogin->getUSerId());
+				$ourUser = User::getUserByUserId($database, $ourNewLogin->getUserId());
 				$role = $ourUser->getRole();
-				if ($role = "admin"){
+				if ($role == "admin"){
 				    $_SESSION["admin"] = true;
 				}
 				else
