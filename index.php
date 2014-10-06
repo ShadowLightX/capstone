@@ -1,5 +1,5 @@
 <?php
-require_once("header.php");
+require_once("php/header.php");
 ?>
 	    <!--carousel-->
 	    <div id="carousel-example-generic" class="carousel slide col-xs-10" data-ride="carousel">
