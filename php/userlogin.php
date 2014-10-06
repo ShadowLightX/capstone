@@ -1,7 +1,8 @@
 <?php
-require_once("php/login.php");
-require_once("php/user.php");
-require_once("php/cs.php");
+require_once("login.php");
+require_once("user.php");
+require_once("phpbblogin.php")
+require_once("cs.php");
 require_once("/etc/apache2/capstone-mysql/net-neutrality.php");
 session_start();
 function siteLogin(){
