@@ -470,7 +470,7 @@
         // convert the associative array to a User
         if($row !== null) {
             try {
-                $login = new Login($row["loginId"], $cleanUserId , $row["authenticationToken"], $row["password"], $row["salt"], $row["userName"]);                          $row["text"], $row["publisher"], $row["url"]);
+                $login = new Login($row["loginId"], $cleanUserId , $row["authenticationToken"], $row["password"], $row["salt"], $row["userName"]);                         
             }
             catch(Exception $exception) {
                 // if the row couldn't be converted, rethrow it
@@ -533,7 +533,7 @@
         // convert the associative array to a User
         if($row !== null) {
             try {
-                $login = new Login($row["loginId"], $row["userId"] , $cleanAuthenticationToken, $row["password"], $row["salt"], $row["userName"]);                          $row["text"], $row["publisher"], $row["url"]);
+                $login = new Login($row["loginId"], $row["userId"] , $cleanAuthenticationToken, $row["password"], $row["salt"], $row["userName"]);
             }
             catch(Exception $exception) {
                 // if the row couldn't be converted, rethrow it
@@ -599,7 +599,7 @@
         // convert the associative array to a User
         if($row !== null) {
             try {
-                $login = new Login($row["loginId"], $row["userId"] , $row["authenticationToken"], $cleanPassword, $row["salt"], $cleanUserName);                          $row["text"], $row["publisher"], $row["url"]);
+                $login = new Login($row["loginId"], $row["userId"] , $row["authenticationToken"], $cleanPassword, $row["salt"], $cleanUserName);                       
             }
             catch(Exception $exception) {
                 // if the row couldn't be converted, rethrow it
