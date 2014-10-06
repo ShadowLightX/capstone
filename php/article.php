@@ -82,11 +82,11 @@ class Article{
         }
         catch(UnexpectedValueException $error){
             //rethrow the exception passed when the object was created the object
-            throw(new UnexpectedValueException("unable to create article", 0, $error));
+            throw(new UnexpectedValueException("unable to create article $error", 0, $error));
         }
         catch(RangeException $error){
             //rethrow the exception passed from the object was created
-            throw(new RangeException("unable to create article", 0, $error));
+            throw(new RangeException("unable to create article $error", 0, $error));
         }
     }
     
@@ -100,36 +100,60 @@ class Article{
     }
     
     /**
-     *set value of Article ID
-     *@param mixed $newArticleID the ID that the article has
+     *set value of Article Id
+     *@param mixed $newArticleId the ID that the article has
      *@throws RangeException for anything that is not null, string, or int
      **/
     public function setArticleId($newArticleId){
-        if ($newArticleId == null)
-        {
+        if ($newArticleId === null) {
             $this->articleId = null;
             return;
         }
+ /*        // first, trim the input
+    $newArticleId = trim($newArticleId);
+    
+    // second, check if article id is an integer
+    if((filter_var($newArticleId, FILTER_VALIDATE_INT)) === false) {
+        throw(UnexpectedValueException("resource id $newArticleId is not a number"));
+    }
+    
+    // third, convert article id to an integer and ensure it's positive
+    $newArticleId = intval($newArticleId);
+    if($newArticleId<= 0) {
+        throw(new RangeException("resource id $newArticleId must be a positive number"));
+    }
+    
+    // finally, the article id is clean and can be taken out of quarantine
+    $this->articleId = $newArticleId;
+}*/
         
         //tests for string
         if (gettype($newArticleId) === "string"){
             $newArticleId = trim($newArticleId);
         
             $newArticleId = filter_var($newArticleId, FILTER_SANITIZE_NUMBER_INT);
+            
+            if(strlen($newArticleId)<1){
+                throw(new RangeException("$newArticleId has no length please try again"));
+            }
         
             //converts to integer    
             $newArticleId = intval($newArticleId); 
         }
         
         
+<<<<<<< HEAD
         if (gettype($newArticleId) !== "int"&& $newArticleId < 0)
+=======
+        if (gettype($newArticleId) !== "integer" || $newArticleId < 0)
+>>>>>>> refactored to prep for SimpleTest
         {
             throw(new RangeException("$newArticleId is not a number in the correct range"));
         }
         
         $this->articleId = $newArticleId;
     }
-    
+
     
     /**
      *get userId of person that created the article or added it to the database
@@ -145,12 +169,16 @@ class Article{
      *@throws RangeException if the number is not in the correct range of exceptation
      **/
     public function setUserId($newUserId){
-        if (gettype($newArticleId) !== "int") {
+        if (gettype($newUserId) !== "integer") {
             throw (new UnexpectedValueException("$newUserId is not a number"));
         }
         
             
+<<<<<<< HEAD
         if ($newArticleId < 0){
+=======
+        if ($newUserId < 0|| $newUserId > 20000000){
+>>>>>>> refactored to prep for SimpleTest
             throw(new RangeException("$newUserId is not a number in the correct range"));
         }
         
@@ -194,7 +222,7 @@ class Article{
      *@return string the name of the full name of the article
      **/       
     public function getAuthor(){
-        return $this->title;
+        return $this->author;
     }
     
     /**
@@ -215,7 +243,7 @@ class Article{
         
         $newAuthor = filter_var($newAuthor, FILTER_SANITIZE_STRING);
         
-        $this->title = $newTitle;
+        $this->author = $newAuthor;
     }
     
     /**
@@ -225,7 +253,7 @@ class Article{
      **/
     public function getDatePublished()
     {
-        $this->datePublished;
+        return $this->datePublished;
     }
     
     /**
@@ -236,19 +264,19 @@ class Article{
      *@throws RangeException if the datePublished is not in the correct format
      **/
     public function setDatePublished($newDatePublished){
-        if (gettype !== "string"){
+        if (gettype($newDatePublished) !== "string"){
             throw(new UnexpectedValueException("$newDatePublished is not the expected type"));
         }
         
-        $dateTime = date_create_from_format("Y/m/d H:i:s",$newDatePublished);
+        $dateTime = date_create_from_format("Y-m-d H:i:s",$newDatePublished);
         
         $wrong = date_get_last_errors();
         if($wrong['warning_count']>=1||$wrong['error_count']>=1)
         {
-            throw(new RangeException("$newDatePublished is not in the correct format of YYYY/MM/DD 00:00:00"));
+            throw(new RangeException("$newDatePublished is not in the correct format of YYYY-MM-DD 00:00:00"));
         }
         
-        $this->datePublished = $dateTime;
+        $this->datePublished = $newDatePublished;
     }
     
     /**
@@ -257,7 +285,7 @@ class Article{
      *@return int an image exists in a article
      **/
     public function getImageAvailable(){
-        return $this->imageAvailable;
+        return $this->imageAvaliable;
     }
         
     /**
@@ -268,7 +296,7 @@ class Article{
      *@throws RangeException when the integer is not one or zero
      **/
     public function setImageAvailable($newImageAvailable){
-        if (gettype !== "integer"){
+        if (gettype($newImageAvailable) !== "integer"){
             throw(new UnexpectedValueException("$newDatePublished is not the expected type"));
         }
         
@@ -276,7 +304,6 @@ class Article{
         {
             throw(new RangeException("$newImageAvailable is not 0 or 1"));
         }
-        
         $this->imageAvaliable = $newImageAvailable;
     }
     
@@ -286,7 +313,7 @@ class Article{
      *@return string text of the article in question
      **/
     public function getArticleText(){
-        $this->text;
+        return $this->articleText;
     }
     
     /**
@@ -298,17 +325,17 @@ class Article{
      **/
     
     public function setArticleText($newArticleText){
-        if (gettype($newText)!== "string"){
+        if (gettype($newArticleText)!== "string"){
             throw(new UnexpectedValueException("Please use text in the article"));
         }
         
-        if (strlen($newText)<1){
+        if (strlen($newArticleText)<1){
             throw(new RangeException("The article text is not set please try again."));
         }
         
-        $newText = filter_var($newText,FILTER_SANITIZE_STRING);
+        $newArticleText = filter_var($newArticleText,FILTER_SANITIZE_STRING);
         
-        $this->title = $newText;
+        $this->articleText = $newArticleText;
     }
     
     /**
@@ -367,7 +394,7 @@ class Article{
         }
         
         $splitUrl = explode ("://",$newUrl);
-        if (strtolower($splitUrl[0]) !== "http" || strtolower($splitUrl[0]) !== "https"){
+        if (strtolower($splitUrl[0]) !== "http" && strtolower($splitUrl[0]) !== "https"){
             throw(new UnexpectedValueException("Please use only Http and Https"));
         }
         
@@ -400,11 +427,10 @@ class Article{
         if($statement === false) {
             throw(new mysqli_sql_exception("Unable to prepare statement"));
         }
-        
         // bind the member variables to the place holders in the template
         $wasClean = $statement->bind_param("isssisss", $this->userId, $this->title, $this->author,
-                                                   $this->datepublished,  $this->imageAvailable,
-                                                   $this->text, $this->publisher, $this->url);
+                                                   $this->datePublished,  $this->imageAvaliable,
+                                                   $this->articleText, $this->publisher, $this->url);
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
         }
@@ -418,11 +444,47 @@ class Article{
         $this->articleId = $mysqli->insert_id;
     }
     
+     /**
+     * deletes this Resource from mySQL
+     *
+     * @param resource $mysqli pointer to mySQL connection, by reference
+     * @throws mysqli_sql_exception when mySQL related errors occur
+     **/
+    public function delete(&$mysqli) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // enforce the articleId is not null (i.e., don't delete a article that hasn't been inserted)
+        if($this->articleId === null) {
+            throw(new mysqli_sql_exception("Unable to delete an article"));
+        }
+        
+        // create query template
+        $query     = "DELETE FROM article WHERE articleId = ?";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the member variables to the place holder in the template
+        $wasClean = $statement->bind_param("i", $this->articleId);
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+    }
+    
     /**
      * updates the text, date it was published, author, and title of the article
      *
      *
-     * @param resource $mysqli pointer to mySQL connection, by reference
+     * @param article $mysqli pointer to mySQL connection, by reference
      * @throws mysqli_sql_exception when mySQL related errors occur
      **/
     public function update(&$mysqli) {
@@ -437,14 +499,16 @@ class Article{
         }
         
         // create query template
-        $query     = "UPDATE user SET userId = ?, title = ?, author= ? , articleText= ?, datePublished = ? WHERE articleId = ?";
+        $query     = "UPDATE article SET userId = ?, title = ?, author= ? , articleText= ?, datePublished = ?, imageAvailable = ?, publisher = ?, url = ? WHERE articleId = ?";
         $statement = $mysqli->prepare($query);
         if($statement === false) {
             throw(new mysqli_sql_exception("Unable to prepare statement"));
         }
         
         // bind the member variables to the place holders in the template
-        $wasClean = $statement->bind_param("issssi", $this->userId, $this->title, $this->author, $this->articleText, $this->datepublished, $this->articleId);
+        $wasClean = $statement->bind_param("issssissi", $this->userId, $this->title, $this->author,
+                                                   $this->articleText, $this->datePublished,  $this->imageAvaliable,
+                                                    $this->publisher, $this->url, $this->articleId);
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
         }
@@ -458,23 +522,32 @@ class Article{
     /**
      * Selects the Article by ArticleId in the database
      *
+<<<<<<< HEAD
      * @param resource $mysqli pointer to mySQL connection, by reference
      * @param string $articleId articleId to search for
      * @return mixed Article found or null if not found
+=======
+     * @param arser found or null if not found
+>>>>>>> refactored to prep for SimpleTest
      * @throws mysqli_sql_exception when mySQL related errors occur
      **/
-    public static function getArticleById(&$mysqli, $articleId) {
+    public static function getArticleByArticleId(&$mysqli, $articleId) {
         // handle degenerate cases
         if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
             throw(new mysqli_sql_exception("input is not a mysqli object"));
         }
+        // enforce the articleId is not null (i.e., don't update an article that hasn't been inserted)
+        //if($this->articleId === null) {
+        //    throw(new mysqli_sql_exception("Unable to update an article that does not exist"));
+        //}
         
         // sanitize the articleId by by seting it
-        $this->setArticleId($articleId);
-        $articleId = $this->getArticleId();
+        //$this->setArticleId($articleId);
+        //$articleId = $this->getArticleId();
         
         // create query template
-        $query     = "SELECT userId, title, author, datePublished, imageAvaliable, articleText, publisher, url FROM article WHERE articleId = ?";
+        $query     = "SELECT userId, title, author, datePublished, imageAvailable,
+                    articleText, publisher, url FROM article WHERE articleId = ?";
         
         $statement = $mysqli->prepare($query);
         if($statement === false) {
@@ -506,12 +579,12 @@ class Article{
         // convert the associative array to a User
         if($row !== null) {
             try {
-                $article = new Article($articleId, $row["userId"], $row["title"], $row["author"], $row["datePublished"], $row["imageAvaliable"],
-                                       $row["text"], $row["publisher"], $row["url"]);
+                $article = new Article($articleId, $row["userId"], $row["title"], $row["author"], $row["datePublished"], $row["imageAvailable"],
+                                       $row["articleText"], $row["publisher"], $row["url"]);
             }
             catch(Exception $exception) {
                 // if the row couldn't be converted, rethrow it
-                throw(new mysqli_sql_exception("Unable to convert row to User", 0, $exception));
+                throw(new mysqli_sql_exception("Unable to convert row to Article $exception", 0, $exception));
             }
             
             return($article);
