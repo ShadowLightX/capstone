@@ -134,7 +134,7 @@
          
          
          // second verify this is a string of 32 hexadecimal characters
-        $filterOptions = array("option" => array("regexp" => "/^[\da-f] {32} $/i"));
+        $filterOptions = array("option" => array("regexp" => "/^[\da-f] {32}$"));
         if((filter_var($newAuthenticationToken, FILTER_VALIDATE_REGEXP, $filterOptions)) === false) {
             throw(new UnexpectedValueException("$newAuthenticationToken is not hexidecimal"));
         }
