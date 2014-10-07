@@ -70,6 +70,11 @@
      *@throws RangeException if login range is invalid
     **/
     public function setLoginId($newLoginId) {
+        if ($newLoginId === null) {
+            $this->loginId = null;
+            return;
+        }
+        
         if(gettype($newLoginId) !== "integer"){
             throw(new UnexptectedValueException ("Invalid Characters"));
         }

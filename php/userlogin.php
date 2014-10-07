@@ -24,7 +24,7 @@ function siteLogin(){
 				$_SESSION["user"] = $newUserName;
 				$ourUser = User::getUserByUserId($database, $ourNewLogin->getUserId());
 				$role = $ourUser->getRole();
-				if ($role == "admin"){
+				if ($role == 0){
 				    $_SESSION["admin"] = true;
 				}
 				else

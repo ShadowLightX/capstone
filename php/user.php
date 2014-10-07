@@ -239,7 +239,6 @@ class User {
             throw(new mysqli_sql_exception("could not execute the statement"));
         }
         
-        
         // update the null userId with what mySQL just gave us
         $this->userId = $mysqli->insert_id;
     }
@@ -335,6 +334,69 @@ class User {
         
         // bind the email to the place holder in the template
         $wasClean = $statement->bind_param("i", $userId);
+        if($wasClean === false) {
+            throw(new mysqli_sql_exception("Unable to bind parameters"));
+        }
+        
+        // execute the statement
+        if($statement->execute() === false) {
+            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
+        }
+        
+        // get result from the SELECT query *pounds fists*
+        $result = $statement->get_result();
+        if($result === false) {
+            throw(new mysqli_sql_exception("Unable to get result set"));
+        }
+        
+        // since this is a unique field, this will only return 0 or 1 results. So...
+        // 1) if there's a result, we can make it into a User object normally
+        // 2) if there's no result, we can just return null
+        $row = $result->fetch_assoc(); // fetch_assoc() returns a row as an associative array
+        
+        // convert the associative array to a User
+        if($row !== null) {
+            try {
+                $user = new User($row["userId"], $row["role"], $row["firstName"], $row["lastName"], $row["email"]);
+            }
+            catch(Exception $exception) {
+                // if the row couldn't be converted, rethrow it
+                throw(new mysqli_sql_exception("Unable to convert row to user: $exception", 0, $exception));
+            }
+            
+            // if we got here, the User is good - return it
+            return($user);
+        } else {
+            // 404 User not found - return null instead
+            return(null);
+        }
+    }
+    
+    /*
+     *gets a user by email provided
+     *
+     *@param resource $mysqli pointer to the mysqli database connection
+     *@param string $newEmail The email that you are looking for
+     */
+    public static function getUserByEmail(&$mysqli, $newEmail) {
+        // handle degenerate cases
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
+            throw(new mysqli_sql_exception("input is not a mysqli object"));
+        }
+        
+        // sanitize the Email before searching
+        $userId = trim($newEmail);
+        $userId = filter_var($userId, FILTER_SANITIZE_EMAIL);
+        
+        // create query template
+        $query     = "SELECT userId, email, firstName, lastName, role FROM user WHERE email = ?";
+        $statement = $mysqli->prepare($query);
+        if($statement === false) {
+            throw(new mysqli_sql_exception("Unable to prepare statement"));
+        }
+        
+        // bind the email to the place holder in the template
+        $wasClean = $statement->bind_param("s", $newEmail);
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
         }

@@ -60,26 +60,29 @@ try {
 	       $salt = bin2hex(openssl_random_pseudo_bytes(32));
 	       
 	       //encrypt passwords
-	       $passHashed = hash_pbkdf2("sha512", $safepassword, $salt, 2048, 128);
+	       $passHashed = hash_pbkdf2("sha512", $safePassword, $salt, 2048, 128);
 	       
 	       //create authentication token
 	       $token = bin2hex(openssl_random_pseudo_bytes(16));
 	       
 	       //create classes
-	       $user = new User(null, "user",$safeFirstName,$safeLastName,$safeEmail);
+	       $database = Pointer::getPointer();
+	       $exists = User::getUserByEmail($database,$safeEmail);
+	       if ($exists->getEmail() == $safeEmail){
+		    $exists->delete($database);
+		    //throw(new RuntimeException ("You have already registered"))
+	       }
+	       $user = new User(null,2,$safeFirstName,$safeLastName,$safeEmail);
+     
+	       //insert into the user table and the login table
+	      
+	       $user->insert($database);
 	       $userId = $user->getUserId();
 	       $login = new Login(null,$userId,$token,$passHashed,$salt,$safeUserName);
-	       
-	       //connect to the database
-	       $database = Pointer::getPointer();
-	       
-	       //insert into the user table and the login table
-	       $user->insert($database);
 	       $login->insert($database);
      
-	       /*send an email verification (not ready yet)
-	       mail($user->getEmail, "Email Verification", "Welcome to our site we a pleased you have decided to register
-		    with us. Your authentication venue is $website/?auth='$token'");*/
+	       mail($user->getEmail(), "Email Verification", "Welcome to our site we are pleased you have decided to register
+		    for an account on our site. Your authentication venue is <a href='bootcamp-coders.cnm.edu/net-neutrality/php/auth.php?auth=$token'>here</a>.");
 	       
 	       // everything checks out
 	       echo "Welcome" . $user->getUserName() .  "Please confirm your e-mail address" . $user->getEmail() . "to complete your registration.";
@@ -88,7 +91,7 @@ try {
 	  // catch the exception and format it as an error message
 	  catch (Exception $error) {
 	       echo "<span class='badForm'>" . $error->getMessage() . "</span>";
-	  }	
+	  }
     }
     else {
         echo "<span class='badform'>Form validation failed.</span>";
