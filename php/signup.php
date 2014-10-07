@@ -78,7 +78,7 @@ try {
 		    }
 		    else
 		    {
-		        $loginUpdate = new Login(null,$newUser->getUserId(), $token,$passHashed,$salt,$safeUserName)
+		        $loginUpdate = new Login(null,$newUser->getUserId(), $token,$passHashed,$salt,$safeUserName);
 			$loginUpdate->insert($database); 
 		    
 		    //throw(new RuntimeException ("You have already registered"))
