@@ -77,9 +77,8 @@ try {
 	       $user->insert($database);
 	       $login->insert($database);
      
-	       /*send an email verification (not ready yet)
 	       mail($user->getEmail, "Email Verification", "Welcome to our site we a pleased you have decided to register
-		    with us. Your authentication venue is $website/?auth='$token'");*/
+		    with us. Your authentication venue is <a href='bootcamp-coders.cnm.edu/net-neutrality/auth.php?auth=$token'>here</a>.");
 	       
 	       // everything checks out
 	       echo "Welcome" . $user->getUserName() .  "Please confirm your e-mail address" . $user->getEmail() . "to complete your registration.";
