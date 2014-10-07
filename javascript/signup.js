@@ -63,6 +63,7 @@ $(document).ready(
                     success: function(ajaxOutput) {
                          // html() is jQuery's .innerHTML
                          $("#outputArea").html(ajaxOutput);
+                         setTimeout(function(){window.location = 'bootcamp-coders.cnm.edu/net-neutrality/';},120000);
                     }
                });
           }
@@ -106,6 +107,9 @@ $(document).ready(
                     success: function(ajaxOutput) {
                          // html() is jQuery's .innerHTML
                          $("#outputArea").html(ajaxOutput);
+                         $("#submit").onclick(
+                              setTimeout(function(){location.reload()},30000) 
+                         ); 
                     }
                });
           }
