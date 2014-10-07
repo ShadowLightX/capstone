@@ -67,7 +67,7 @@ else {
 			<li class="text-center col-xs-10 col-md-2"><a href="article-template1.php">Article1</a></li>
 		    </ul>
 		</li>
-		<li id="forums" class="text-center col-xs-10 col-md-2 forums"><a href="bootcamp-coders.cnm.edu/~mayala/forum"><h2>Forums</h2></a></li>
+		<li id="forums" class="text-center col-xs-10 col-md-2 forums"><a href="forum/"><h2>Forums</h2></a></li>
 		<li id="search" class="text-center col-xs-10 col-md-4 search reverse" ><script>
 		    (function() {
 			var cx = '009791810137793547729:flmkvccfzue';
