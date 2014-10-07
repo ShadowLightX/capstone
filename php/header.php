@@ -53,21 +53,16 @@ else {
 	    <section id="logo" class="col-xs-10 col-md-2 logo"><a href="index.php"><img alt ="net-neutrality-logo" src="images/logo.png"></a></section>
 	    <ul class="row myMenu">
 		<li id="home" class="text-center col-xs-10 col-md-2 home"><a href="index.php"><h2>Home</h2></a></li>
-		<li id="resources" class="text-center col-xs-10 col-md-2 resources"><a href="resources.php"><h2>Resources</h2></a>
+		<li id="resources" class="text-center col-xs-10 col-md-2 resources"><a href=""><h2>Resources</h2></a>
 		    <ul>
-			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
-			<li class="text-center col-xs-10 col-md-2"><a href="#">...</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="http://www.change.org/p/tom-wheeler-save-net-neutrality">Sign the Petition</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="http://www.savetheinternet.com/sti-home">Get involved</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="http://www.senate.gov/reference/common/faq/How_to_contact_senators.htm">Contact your Senators</a></li>
 		    </ul>
 		</li>
 		<li id="articles" class="text-center col-xs-10 col-md-2 articles"><a href="articles.php"><h2>Articles</h2></a>
 		    <ul>
-			<?php
-			echo "<li class='text-center col-xs-10 col-md-2'><a href='#'>...</a></li>";
-			//echo buildArticleList();
-			?>
-			<li class="text-center col-xs-10 col-md-2"><a href="article-template.php">Article</a></li>
+			<li class="text-center col-xs-10 col-md-2"><a href="article-template.php">Comcast Time Warner Merger</a></li>
 			<li class="text-center col-xs-10 col-md-2"><a href="article-template1.php">Article1</a></li>
 		    </ul>
 		</li>
