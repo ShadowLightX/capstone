@@ -85,9 +85,12 @@ try {
 	       $login->insert($database);
 	       }
      
-	       mail($safeEmail, "Email Verification", "Welcome to our site we are pleased you have decided to register
+	       $sent = mail($safeEmail, "Email Verification", "Welcome to our site we are pleased you have decided to register
 		    for an account on our site. Your authentication venue is <a href='bootcamp-coders.cnm.edu/net-neutrality/php/auth.php?auth=$token'>here</a>.");
 	       
+	       if ($sent == false){
+		    throw(new RuntimeException("Your email did not complete normally));
+	       }
 	       // everything checks out
 	       echo "Welcome" . $user->getUserName() .  "Please confirm your e-mail address" . $user->getEmail() . "to complete your registration.";
 	  }
