@@ -69,7 +69,7 @@ try {
 	       $database = Pointer::getPointer();
 	       $exists = User::getUserByEmail($database,$safeEmail);
 	       if ($exists !== null){
-		    $newUser = User($exists->getUserId(), 2, $safeFirstName, $safeLastName, $safeEmail);
+		    $newUser = new User($exists->getUserId(), 2, $safeFirstName, $safeLastName, $safeEmail);
 		    $newUser->update($database);
 		    $newLoginExists = Login::selectLoginByUserName($database,$safeUserName);
 		    if ($newLoginExists !== null){
