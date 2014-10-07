@@ -69,9 +69,12 @@ try {
 	       $database = Pointer::getPointer();
 	       $exists = User::getUserByEmail($database,$safeEmail);
 	       if ($exists->getEmail() == $safeEmail){
-		    $exists->delete($database);
+		    $exists->update($database);
+		    $loginUpdate = new Login(null,$userId,$token,$passHashed,$salt,$safeUserName);
+		    $loginUpdate->update($database);
 		    //throw(new RuntimeException ("You have already registered"))
 	       }
+	       else{
 	       $user = new User(null,2,$safeFirstName,$safeLastName,$safeEmail);
      
 	       //insert into the user table and the login table
@@ -80,8 +83,9 @@ try {
 	       $userId = $user->getUserId();
 	       $login = new Login(null,$userId,$token,$passHashed,$salt,$safeUserName);
 	       $login->insert($database);
+	       }
      
-	       mail($user->getEmail(), "Email Verification", "Welcome to our site we are pleased you have decided to register
+	       mail($safeEmail, "Email Verification", "Welcome to our site we are pleased you have decided to register
 		    for an account on our site. Your authentication venue is <a href='bootcamp-coders.cnm.edu/net-neutrality/php/auth.php?auth=$token'>here</a>.");
 	       
 	       // everything checks out

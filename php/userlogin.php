@@ -14,14 +14,14 @@ function siteLogin(){
 	    $newUserName = filter_input(INPUT_POST, "userLogin", FILTER_SANITIZE_STRING);
 	    $newPassword = trim(filter_input(INPUT_POST, "userpassword", FILTER_SANITIZE_STRING));
 	    //pass the values to be found in our database
-	    $phplogin = PhpBBLogin::loginUser($database,$newUserName,$newPassword);
-	    $ourLogin = Login::selectLoginByUserNamePassword($database,$newUserName,$newPassword);
+	    $phplogin = PhpBBLogin::loginUser($database,$newUsername,$newPassword);
+	    $ourLogin = Login::selectLoginByUserNamePassword($database,$newUsername,$newPassword);
 	    //no object
 	    if ($phplogin == true){
 		    if(isset($_SESSION["user"]) === false)
 		    {
 			if ($ourNewLogin->getAuthenticationToken()!=null){
-				$_SESSION["user"] = $newUserName;
+				$_SESSION["user"] = $newUsername;
 				$ourUser = User::getUserByUserId($database, $ourNewLogin->getUserId());
 				$role = $ourUser->getRole();
 				if ($role == 0){
