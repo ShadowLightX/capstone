@@ -6,10 +6,10 @@ require_once("php/cs.php");
 require_once("/etc/apache2/capstone-mysql/net-neutrality.php");
 session_start();
 if ($loginId !== null(session_id !== null)) {
-    $link = "<a href="logout.php">Logout</a>";
+    $link = '<a href="logout.php">Logout</a>';
 }
 else {
-    $link = <a href="#x" class="overlay" id="login_form">Login</a>;
+    $link = '<a href="#x" class="overlay" id="login_form">Login</a>';
 }
 ?>
 <!DOCTYPE html>
