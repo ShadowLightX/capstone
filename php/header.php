@@ -46,6 +46,7 @@ else {
 	<script src="javascript/bootstrap.min.js"></script>
 	<script src="javascript/signup.js"></script>
 	<!-- link type="text/css" rel="stylesheet" href="css/jquery-form.css" /-->
+
     </head>
     <body class="col-xs-offset-1">
 	<div class="container">
@@ -67,7 +68,17 @@ else {
 		    </ul>
 		</li>
 		<li id="forums" class="text-center col-xs-10 col-md-2 forums"><a href="bootcamp-coders.cnm.edu/~mayala/forum"><h2>Forums</h2></a></li>
-		<li id="search" class="text-center col-xs-10 col-md-4 search reverse" ><a href="....html"><h2>Search</h2></a></li>
+		<li id="search" class="text-center col-xs-10 col-md-4 search reverse" ><script>
+		    (function() {
+			var cx = '009791810137793547729:flmkvccfzue';
+			var gcse = document.createElement('script');
+			gcse.type = 'text/javascript';
+			gcse.async = true;
+			gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(gcse, s);
+		    })();
+		</script><gcse:search></gcse:search></li>
 		<li id="register" class="text-center col-xs-10 col-md-2 register reverse"><a href="register.php"><h2>Register</h2></a></li>
 		<li id="login" class="text-center col-xs-10 col-md-2 login reverse"><!--<a href=" "> --> <!--<h2>login</h2>  this goes after the popup code-->
 		    <!-- start, do not delete the comments-->
