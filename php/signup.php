@@ -65,16 +65,26 @@ try {
 	       //create authentication token
 	       $token = bin2hex(openssl_random_pseudo_bytes(16));
 	       
-	       //create classes
+	       //connect to the database
 	       $database = Pointer::getPointer();
 	       $exists = User::getUserByEmail($database,$safeEmail);
 	       if ($exists->getEmail() == $safeEmail){
-		    $exists->update($database);
-		    $loginUpdate = new Login(null,$userId,$token,$passHashed,$salt,$safeUserName);
-		    $loginUpdate->update($database);
+		    $newUser = User($exists->getUserId(), 2, $safeFirstName, $safeLastName, $safeEmail);
+		    $newUser->update($database);
+		    $newLoginExists = Login::selectLoginByUserName($database,$safeUserName);
+		    if ($newLoginExists !== null){
+			 $loginUpdate = new Login($newLoginExists->getLoginId(),$newUser->getUserId(),$token,$passHashed,$salt,$safeUserName);
+			 $loginUpdate->update($database);
+		    }
+		    else
+		    {
+		        $loginUpdate = new Login(null,$newUser->getUserId(), $token,$passHashed,$salt,$safeUserName)
+			$loginUpdate->insert($database); 
+		    
 		    //throw(new RuntimeException ("You have already registered"))
 	       }
 	       else{
+	       //set user and give normal user access
 	       $user = new User(null,2,$safeFirstName,$safeLastName,$safeEmail);
      
 	       //insert into the user table and the login table
@@ -89,7 +99,7 @@ try {
 		    for an account on our site. Your authentication venue is <a href='bootcamp-coders.cnm.edu/net-neutrality/php/auth.php?auth=$token'>here</a>.");
 	       
 	       if ($sent == false){
-		    throw(new RuntimeException("Your email did not complete normally));
+		    throw(new RuntimeException("Your email did not complete normally"));
 	       }
 	       // everything checks out
 	       echo "Welcome" . $user->getUserName() .  "Please confirm your e-mail address" . $user->getEmail() . "to complete your registration.";
