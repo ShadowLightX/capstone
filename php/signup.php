@@ -82,6 +82,7 @@ try {
 			$loginUpdate->insert($database); 
 		    
 		    //throw(new RuntimeException ("You have already registered"))
+		    }
 	       }
 	       else{
 	       //set user and give normal user access
