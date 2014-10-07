@@ -13,15 +13,16 @@ function siteLogin(){
 	    //scrub the incomming stuff from $post using input santization
 	    $newUserName = filter_input(INPUT_POST, "userLogin", FILTER_SANITIZE_STRING);
 	    $newPassword = trim(filter_input(INPUT_POST, "userpassword", FILTER_SANITIZE_STRING));
+	    
 	    //pass the values to be found in our database
 	    $phplogin = PhpBBLogin::loginUser($database,$newUsername,$newPassword);
-	    $ourLogin = Login::selectLoginByUserNamePassword($database,$newUsername,$newPassword);
+	    $ourLogin = Login::selectLoginByUserName($database,$newUsername);
 	    //no object
 	    if ($phplogin == true){
 		    if(isset($_SESSION["user"]) === false)
 		    {
 			if ($ourNewLogin->getAuthenticationToken()!=null){
-				$_SESSION["user"] = $newUsername;
+				$_SESSION["name"] = $newUsername;
 				$ourUser = User::getUserByUserId($database, $ourNewLogin->getUserId());
 				$role = $ourUser->getRole();
 				if ($role == 0){
@@ -41,12 +42,6 @@ function siteLogin(){
 			throw(new RuntimeException("Unable to login as session already exists"));
 		    }
 	    }
-    
-
-	    // compare the sent token and session token
-	    $verified = false;
-	    $token    = $_SESSION[$name];
-
 	}
 	catch (Exception $exception)
 	{
