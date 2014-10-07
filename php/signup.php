@@ -68,7 +68,7 @@ try {
 	       //connect to the database
 	       $database = Pointer::getPointer();
 	       $exists = User::getUserByEmail($database,$safeEmail);
-	       if ($exists === null){
+	       if ($exists !== null){
 		    $newUser = User($exists->getUserId(), 2, $safeFirstName, $safeLastName, $safeEmail);
 		    $newUser->update($database);
 		    $newLoginExists = Login::selectLoginByUserName($database,$safeUserName);
