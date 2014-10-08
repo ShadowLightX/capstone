@@ -1,6 +1,7 @@
 <?php
 require_once("/etc/apache2/capstone-mysql/net-neutrality.php");
 require_once("phpbblogin.php");
+header("Content-type: application/json");
 
 $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
 $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
