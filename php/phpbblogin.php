@@ -202,7 +202,16 @@ class PhpBBLogin {
     
     public function jsonLogin(&$mysqli, $username, $password){
         $this->setAuthenticated($this->loginUser($mysqli, $username, $password));
-        return(json_encode($this));
+        return($this->toJson());
+    }
+
+    public function toJson() {
+        $memberVariables = get_object_vars($this);
+        $jsonObject      = new stdClass();
+        foreach($memberVariables as $name => $value) {
+            $jsonObject->$name = $value;
+        }
+        return(json_encode($jsonObject));
     }
 }
 

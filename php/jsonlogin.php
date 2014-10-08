@@ -8,7 +8,7 @@ $mysqli   = Pointer::getPointer();
 
 if($password === false || $username === false) {
     $phpBbLogin = new PhpBBLogin(false, false, null, null);
-    echo json_encode($phpBbLogin);
+    echo $phpBbLogin->toJson();
 } else {
     $phpBbLogin = new PhpBBLogin(false, false, $username, null);
     echo $phpBbLogin->jsonLogin($mysqli, $username, $password);
