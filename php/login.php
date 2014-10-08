@@ -406,7 +406,7 @@
          }
 
          //prepare the select statement
-         $query = "SELECT loginId, userId, authToken, password, salt FROM login WHERE username= ?";
+         $query = "SELECT loginId, userId, authToken, password, salt, username FROM login WHERE username = ?";
          $statement = $mysqli->prepare($query);
          if ($statement === false) {
              throw(new mysqli_sql_exception("Unable to prepare statement"));
@@ -437,7 +437,7 @@
          // convert the associative array to a User
          if ($row !== null) {
              try {
-                 $login = new Login($row["loginId"], $row["userId"], $row["authToken"], $row["password"], $row["salt"], $row["userName"]);
+                 $login = new Login($row["loginId"], $row["userId"], $row["authToken"], $row["password"], $row["salt"], $row["username"]);
              } catch (Exception $exception) {
                  // if the row couldn't be converted, rethrow it
                  throw(new mysqli_sql_exception("Unable to convert row to Login", 0, $exception));
