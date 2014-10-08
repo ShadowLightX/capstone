@@ -83,7 +83,7 @@
             throw(new RangeException("$newLoginId is not acceptable"));
         }   
         
-        $this->LoginId = $newLoginId;        
+        $this->loginId = $newLoginId;        
     }
     
            //set the getter
@@ -99,14 +99,14 @@
      **/
     public function setuserId($newUserId) {
         if(gettype($newUserId) !== "integer"){
-            throw(new UnexptectedValueException ("Invalid Characters"));
+            throw(new UnexptectedValueException ("Please enter a number"));
         }
     
         if($userId < 0) {
             throw(new RangeException("$newUserId is not acceptable"));
         }    
     
-        $this->LoginId = $newUserId;        
+        $this->userId = $newUserId;        
     }
            
     /**
@@ -114,7 +114,7 @@
      *@return integer the user id of the person associated with this log in
      **/
     public function getUserId() {
-        return($this->UserId);
+        return($this->userId);
     }
     
     /**
@@ -129,20 +129,25 @@
             return;
          }
          
+         // test for string
+         if(gettype($newAuthenticationToken) !== "string"){
+            throw(new UnexptectedValueException ("Not valid"));
+        }
+         
          // first trim the input of excess whitespace
         $newAuthenticationToken = trim($newAuthenticationToken);
-         
-         
+        
+        /**
+        *Sanitize the authenticationToken
+        **/
+        $newAuthenticationToken = filter_var ( $newAuthenticationToken, FILTER_SANITIZE_STRING);
+        
          // second verify this is a string of 32 hexadecimal characters
         $filterOptions = array("option" => array("regexp" => "/^[\da-f] {32}$"));
         if((filter_var($newAuthenticationToken, FILTER_VALIDATE_REGEXP, $filterOptions)) === false) {
             throw(new UnexpectedValueException("$newAuthenticationToken is not hexidecimal"));
         }
         
-        /**
-          *Sanitize the authenticationToken
-        **/
-        $newAuthenticationToken = filter_var ( $newAuthenticationToken, FILTER_SANITIZE_STRING);
 
          // finally, if it passed the regular expresssion, it is clean and can be taken out of the quarentine
         $this->authenticationToken = $newAuthenticationToken;
@@ -224,11 +229,11 @@
             throw(new UnexpectedValueException ("Please provide a regular user name"));
         }
         
-        if(strlen($newUserName <= 0)){
+        if(strlen($newUserName) <= 0){
             throw(new RangeException ("Please enter a user name"));
         }
         
-        if(strlen($newUserName > 30)){
+        if(strlen($newUserName) > 30){
             throw(new RangeException ("Please enter a shorter user name"));
         }
         
@@ -243,7 +248,7 @@
      * @return string The user name of the login we are acceaaing
      **/
     public function getUserName() {
-        return($this->UserName);
+        return $this->userName;
     }
     
     /**
@@ -254,7 +259,7 @@
      **/
      public function insert(&$mysqli) {
         // handle degenerate cases 
-        if(gettype($mysqli) !== "object" && get_class($mysqli) !== "mysqli") {
+        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
             throw(new mysqli_sql_exception("input is not a mysqli object"));
         }
         
@@ -265,7 +270,7 @@
         
         // create query template
         // CUSTOMIZE THE QUERY -- BIGGEST CHANGE
-        $query     = "INSERT INTO login(loginId, userId, authenticationToken, password, salt, userName) VALUES(?, ?, ?, ?, ?)";
+        $query     = "INSERT INTO login(userId, authToken, password, salt, userName) VALUES(?, ?, ?, ?, ?)";
         $statement = $mysqli->prepare($query);
         if($statement === false) {
             throw(new mysqli_sql_exception("Unable to prepare statement"));
@@ -274,7 +279,7 @@
         // bind the member variables to the place holders in the template
         // CHANGE STATE VARIABLE NAMES
         // the first argument states the type: d = double, i = integer, and s = string
-        $wasClean = $statement->bind_param("iss", $this->userId, $this->authenticationToken, $this->password, $this->salt, $this->userName);
+        $wasClean = $statement->bind_param("issss", $this->userId, $this->authenticationToken, $this->password, $this->salt, $this->userName);
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
         }
@@ -343,15 +348,15 @@
         }
         
         // create query template
-        $query     = "UPDATE login SET userId = ?, authenticationToken = ?, password = ?, salt = ?, userName = ?, WHERE loginId = ?";
+        $query     = "UPDATE login SET userId = ?, authToken = ?, password = ?, salt = ?, userName = ?, WHERE loginId = ?";
         $statement = $mysqli->prepare($query);
         if($statement === false) {
             throw(new mysqli_sql_exception("Unable to prepare statement"));
         }
         
         // bind the member variables to the place holders in the template
-        $wasClean = $statement->bind_param("iisss", $this->userId, $this->authenticationToken, $this->password, $this->salt,
-                                           $this->userName);
+        $wasClean = $statement->bind_param("issssi", $this->userId, $this->authenticationToken, $this->password, $this->salt,
+                                           $this->userName, $this->getLoginId);
                                                     
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
@@ -370,18 +375,18 @@
      *@throws mysqli_sql_exception for any database connection problems or issues
      *@return mixed null if no result is found or a login object
      **/
-    public static function selectLoginByUserName(&$mysqli, $newUserName)
+    public static function getLoginByUserName(&$mysqli, $newUserName)
     {
         if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
             throw(new mysqli_sql_exception("input is not a mysqli object"));
         }
         
         //santize and reset
-        $this->setUserName(newUserName);
+        $this->setUserName($newUserName);
         $cleanUser = $this->getUserName();
         
         //prepare the select statement
-        $query     = "SELECT loginId, userId, authenticationToken, password, salt FROM login WHERE username= ?";
+        $query     = "SELECT loginId, userId, authToken, password, salt FROM login WHERE username= ?";
         $statement = $mysqli->prepare($query);
         if($statement === false) {
             throw(new mysqli_sql_exception("Unable to prepare statement"));
@@ -412,17 +417,17 @@
         // convert the associative array to a User
         if($row !== null) {
             try {
-                $login = new Login($row["loginId"], $row["userId"], $row["authenticationToken"], $row["password"], $row["salt"], $row["userName"]);
+                $login = new Login($row["loginId"], $row["userId"], $row["authToken"], $row["password"], $row["salt"], $row["userName"]);
             }
             catch(Exception $exception) {
                 // if the row couldn't be converted, rethrow it
                 throw(new mysqli_sql_exception("Unable to convert row to Login", 0, $exception));
             }
             
-            return($login);
+            return $login;
         } else {
             // 404 Article not found - return null instead
-            return(null);
+            return null;
         }
     }
     
@@ -433,7 +438,7 @@
      *@throws mysqli_sql_exception for any database connection problems or issues
      *@return mixed null if no result is found or a login object
      **/
-    public static function selectLoginByUserId(&$mysqli, $newUserId)
+    public static function getLoginByUserId(&$mysqli, $newUserId)
     {
         if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
             throw(new mysqli_sql_exception("input is not a mysqli object"));
@@ -444,14 +449,14 @@
         $cleanUserId = $this->getUserId();
         
         //prepare the select statement
-        $query     = "SELECT loginId, authenticationToken, password, salt, userName FROM login WHERE userId = ?";
+        $query     = "SELECT loginId, authToken, password, salt, userName FROM login WHERE userId = ?";
         $statement = $mysqli->prepare($query);
         if($statement === false) {
             throw(new mysqli_sql_exception("Unable to prepare statement"));
         }
         
         // bind the member variables to the place holders in the template
-        $wasClean = $statement->bind_param("i", $cleanUser);
+        $wasClean = $statement->bind_param("i", $cleanUserId);
         
         if($wasClean === false) {
             throw(new mysqli_sql_exception("Unable to bind parameters"));
@@ -475,7 +480,7 @@
         // convert the associative array to a User
         if($row !== null) {
             try {
-                $login = new Login($row["loginId"], $cleanUserId , $row["authenticationToken"], $row["password"], $row["salt"], $row["userName"]);                         
+                $login = new Login($row["loginId"], $cleanUserId , $row["authToken"], $row["password"], $row["salt"], $row["userName"]);                         
             }
             catch(Exception $exception) {
                 // if the row couldn't be converted, rethrow it
@@ -496,7 +501,7 @@
      *@throws mysqli_sql_exception for any database connection problems or issues
      *@return mixed null if no result is found or a login object
      **/
-    public static function selectLoginByAuthenticationToken(&$mysqli, $newAuthenticationToken)
+    public static function getLoginByAuthenticationToken(&$mysqli, $newAuthenticationToken)
     {
         if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
             throw(new mysqli_sql_exception("input is not a mysqli object"));
@@ -545,77 +550,10 @@
                 throw(new mysqli_sql_exception("Unable to convert row to Login", 0, $exception));
             }
             
-            return($login);
+            return $login;
         } else {
             // 404 Article not found - return null instead
-            return(null);
+            return null;
         }
     }
-    
-    /**
-     *Selects a login by userName and password and returns one result on success (hash the password before use)
-     *@param resource $mysqli object pointer
-     *@param string $newUserName the user that you want to look for
-     *@param string $newPassword the hash password that was provided
-     *@throws mysqli_sql_exception for any database connection problems or issues
-     *@return mixed null if no result is found (username, password combination does not exist) or a login object
-     **/
-    public static function selectLoginByUserNamePassword(&$mysqli, $newUserName, $newPassword)
-    {
-        if(gettype($mysqli) !== "object" || get_class($mysqli) !== "mysqli") {
-            throw(new mysqli_sql_exception("input is not a mysqli object"));
-        }
-        
-        //santize and reset
-        $this->setUserName($newUserId);
-        $cleanUserName = $this->getUserName();
-        $this->setPassword($newPassword);
-        $cleanPassword =$this->getPassword();
-        
-        //prepare the select statement
-        $query     = "SELECT loginId, userId, authenticationToken FROM login WHERE userName = ? AND password = ?";
-        $statement = $mysqli->prepare($query);
-        if($statement === false) {
-            throw(new mysqli_sql_exception("Unable to prepare statement"));
-        }
-        
-        // bind the member variables to the place holders in the template
-        $wasClean = $statement->bind_param("ss", $cleanUserName, $cleanPassword);
-        
-        if($wasClean === false) {
-            throw(new mysqli_sql_exception("Unable to bind parameters"));
-        }
-        
-        // execute the statement
-        if($statement->execute() === false) {
-            throw(new mysqli_sql_exception("Unable to execute mySQL statement"));
-        }
-        
-        $result = $statement->get_result();
-        if($result === false) {
-            throw(new mysqli_sql_exception("Results are not available"));
-        }
-        
-        // since this is a unique field, this will only return 0 or 1 results. So...
-        // 1) if there's a result, make it into a article object normally
-        // 2) if there's no result, return null
-        $row = $result->fetch_assoc(); // fetch_assoc() returns a row as an associative array
-        
-        // convert the associative array to a User
-        if($row !== null) {
-            try {
-                $login = new Login($row["loginId"], $row["userId"] , $row["authenticationToken"], $cleanPassword, $row["salt"], $cleanUserName);                       
-            }
-            catch(Exception $exception) {
-                // if the row couldn't be converted, rethrow it
-                throw(new mysqli_sql_exception("Unable to convert row to Login", 0, $exception));
-            }
-            
-            return($login);
-        } else {
-            // 404  not found - return null instead
-            return(null);
-        }
-    }
-}
 ?>
