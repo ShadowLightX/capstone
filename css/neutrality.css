@@ -314,7 +314,7 @@ top: 0;
 
 .panel a#login_pop, .panel a#join_pop {
     border: 2px solid #aaa;
-    color: #fff;
+    color: transparent;
     display: block;
     float: right;
     margin-right: 10px;
