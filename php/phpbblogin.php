@@ -37,9 +37,9 @@ class PhpBBLogin {
      * @throws UnexpectedValueException when bad types are passed into the constructor 
      * @throws RangeException when a value passed is not in an acceptable range of values
      **/
-    public function __construct($newLoginId, $newUserId, $newAuthenticationToken, $newPassword, $newSalt, $newUserName) {    
+    public function __construct($newAdmin, $newAuthenticated, $newEmail, $newUsername) {
         try {
-            $this->setAdmin($newadmin);
+            $this->setAdmin($newAdmin);
             $this->setAuthenticated($newAuthenticated);
             $this->setEmail($newEmail);
             $this->setUsername($newUsername);
@@ -66,12 +66,11 @@ class PhpBBLogin {
     /**
      * sets the value of admin
      * 
-     * @param bool admin
-     * @throws Exception if there is no true or false
+     * @param bool $newAdmin admin
      **/
     public function setAdmin($newAdmin) {
         $true = array(1, "true", "T", "yes", "Y", "on", true);
-        else if(in_array($newAdmin, $true) === true) {
+        if(in_array($newAdmin, $true) === true) {
             $this->admin = true;
         }
         else {
@@ -90,12 +89,11 @@ class PhpBBLogin {
     /**
      * sets value of authenticated
      *
-     * @param bool authenticated
-     * @throws Exception if the user is not autheticated
+     * @param bool $newAuthenticated authenticated
      **/
     public function setAuthenticated($newAuthenticated) {   
         $true = array(1, "true", "T", "yes", "Y", "on", true);
-        else if(in_array($newAuthenticated, $true) === true) {
+        if(in_array($newAuthenticated, $true) === true) {
             $this->authenticated = true;
         }
         else {
@@ -119,6 +117,12 @@ class PhpBBLogin {
      * @throws UnexpectedValueException if the input doesn't appear to be an Email
      **/
     public function setEmail($newEmail) {
+        // allow email to be null
+        if($newEmail === null) {
+            $this->email = null;
+            return;
+        }
+
         // sanitize the Email as a likely Email
         $newEmail = trim($newEmail);
         if(($newEmail = filter_var($newEmail, FILTER_SANITIZE_EMAIL)) == false) {
@@ -144,6 +148,12 @@ class PhpBBLogin {
      * @throws UnexpectedValueException if the input doesn't appear to be an Email
      **/
     public function setUsername($newUsername) {
+        // allow the username to be null
+        if($newUsername === null) {
+            $this->username = null;
+            return;
+        }
+
         // sanitize the username as a likely username
         $newUsername = trim($newUsername);
         if(($newUsername = filter_var($newUsername, FILTER_SANITIZE_STRING)) == false) {
@@ -164,7 +174,7 @@ class PhpBBLogin {
      * @throws mysqli_sql_exception if a mySQL error occurs
      **/
     public function loginUser(&$mysqli, $username, $password) {
-        $userLogin = Login::selectLoginByUsername($mysqli, $username);
+        $userLogin = Login::getLoginByUsername($mysqli, $username);
         
         if($userLogin === null) {
             return(false);
@@ -182,7 +192,7 @@ class PhpBBLogin {
                 $this->setAdmin(false);
             }
             
-            $this->setUserName($user->getUserName());
+            $this->setUserName($userLogin->getUserName());
             $this->setEmail($user->getEmail());
             return(true);
         } else {
