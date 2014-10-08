@@ -179,8 +179,11 @@
              throw(new UnexpectedValueException ("Please retype password"));
          }
 
-         // sanitize it and forget it
-         $newPassword = filter_var($newPassword, FILTER_SANITIZE_STRING);
+         // second verify this is a string of 64 hexadecimal characters
+         $filterOptions = array("options" => array("regexp" => "/^[\da-f]{128}$/i"));
+         if ((filter_var($newPassword, FILTER_VALIDATE_REGEXP, $filterOptions)) === false) {
+             throw(new UnexpectedValueException("$newPassword is not hexadecimal"));
+         }
 
          $this->password = $newPassword;
      }
@@ -207,7 +210,7 @@
 
 
          // second verify this is a string of 64 hexadecimal characters
-         $filterOptions = array("options" => array("regexp" => "/^[\da-f] {64} $/i"));
+         $filterOptions = array("options" => array("regexp" => "/^[\da-f]{64}$/i"));
          if ((filter_var($newSalt, FILTER_VALIDATE_REGEXP, $filterOptions)) === false) {
              throw(new UnexpectedValueException("$newSalt is not hexidecimal"));
          }
