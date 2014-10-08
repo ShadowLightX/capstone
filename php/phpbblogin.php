@@ -186,7 +186,7 @@ class PhpBBLogin {
         if ($hash === $getPassword) {
             $user = User::getUserByUserId($mysqli, $userLogin->getUserId());
             $role = $user->getRole();
-            if($role === "admin") {
+            if($role === 2) {
                 $this->setAdmin(true);
             } else {
                 $this->setAdmin(false);
