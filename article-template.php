@@ -7,11 +7,11 @@ require_once("header.html");
 	    </section>
 	    <!--date-->
 	    <section id="date" class="col-xs-10 col-md-3 date text-center">
-		<h2>2014-10-10</h2>
+		<h4>2014-10-10</h4>
 	    </section>
 	    <!--author-->
 	    <section id="author" class="col-xs-10 col-md-3 author text-center">
-		<h5>Matthew Call</h5>
+		<h4>Matthew Call</h4>
 	    </section>
 	    <!--content-->
 	    <section id="content" class="col-xs-10 content">
