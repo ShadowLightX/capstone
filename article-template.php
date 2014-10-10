@@ -6,11 +6,11 @@ require_once("header.html");
 		<h1>The Comcast and Time Warner Merger</h1>
 	    </section>
 	    <!--date-->
-	    <section id="date" class="col-xs-10 col-md-3 date text-center">
+	    <section id="date" class="col-xs-10 col-md-5 date text-center">
 		<h4>2014-10-10</h4>
 	    </section>
 	    <!--author-->
-	    <section id="author" class="col-xs-10 col-md-3 author text-center">
+	    <section id="author" class="col-xs-10 col-md-5 author text-center">
 		<h4>Matthew Call</h4>
 	    </section>
 	    <!--content-->
