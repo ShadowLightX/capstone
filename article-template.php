@@ -11,7 +11,7 @@ require_once("header.html");
 	    </section>
 	    <!--author-->
 	    <section id="author" class="col-xs-10 col-md-5 author text-center">
-		<h4>Matthew Call</h4>
+		<h4>By Matthew Call</h4>
 	    </section>
 	    <!--content-->
 	    <section id="content" class="col-xs-10 content">
